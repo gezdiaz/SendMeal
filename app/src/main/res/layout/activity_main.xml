@@ -1,18 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/nameLbl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nameLbl"
+            android:textColor="@color/colorLabel" />
+
+        <EditText
+            android:id="@+id/nameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoText="false"
+            android:ems="10"
+            android:hint="@string/enterName"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/passwordLbl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/passwordLbl"
+            android:textColor="@color/colorLabel" />
+
+        <EditText
+            android:id="@+id/passwordEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enterPassword"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/repeatPaswordLbl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/repeatPassword"
+            android:textColor="@color/colorLabel" />
+
+        <EditText
+            android:id="@+id/repeatPasswordEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/repeatPassword"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/emailLbl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/emailLbl"
+            android:textColor="@color/colorLabel" />
+
+        <EditText
+            android:id="@+id/emailEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enterEmail"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/cardNumberLbl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cardNumberLbl"
+            android:textColor="@color/colorLabel" />
+
+        <EditText
+            android:id="@+id/cardNumberEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enterCardNumber"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/ccvLbl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/CCVLbl"
+            android:textColor="@color/colorLabel" />
+
+        <EditText
+            android:id="@+id/ccvEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enterCCV"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/dateLbl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@color/colorLabel"
+            tools:text="@string/dateLbl" />
+
+        <EditText
+            android:id="@+id/dateEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enterDate"
+            android:inputType="date" />
+
+        <RadioGroup
+            android:id="@+id/accountRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/accountLbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="@string/selectAccountLbl"
+                android:textColor="@color/colorLabel" />
+
+            <RadioButton
+                android:id="@+id/basicAccountRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/basicAccount" />
+
+            <RadioButton
+                android:id="@+id/premiumAccountRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/premiumAccount" />
+
+            <RadioButton
+                android:id="@+id/fullAccountRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/fullAccount" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/initialCredit"
+                android:textColor="@color/colorLabel" />
+
+            <SeekBar
+                android:id="@+id/maxCreditSlider"
+                android:layout_width="277dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="1400"
+                android:progress="0" />
+
+            <TextView
+                android:id="@+id/showAmount"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="100"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <ToggleButton
+            android:id="@+id/sendNotifButoon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textOff="@string/notSendNotifBtn"
+            android:textOn="@string/sendNotifBtn" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/isSeller" />
+
+        <LinearLayout
+            android:id="@+id/layoutAccount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/CBUAlias"
+                android:textColor="@color/colorLabel" />
+
+            <EditText
+                android:id="@+id/editText9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="@string/CBUAlias" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/CBU"
+                android:textColor="@color/colorLabel" />
+
+            <EditText
+                android:id="@+id/editText10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:text="@string/CBU" />
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/termsLbl" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/registerBtn" />
+
+    </LinearLayout>
+</ScrollView>
