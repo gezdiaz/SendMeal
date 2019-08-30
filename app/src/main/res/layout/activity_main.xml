@@ -107,9 +107,8 @@
             android:id="@+id/dateLbl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@color/colorLabel"
-            tools:text="@string/dateLbl" />
+            android:text="@string/dateLbl"
+            android:textColor="@color/colorLabel" />
 
         <EditText
             android:id="@+id/dateEdit"
@@ -122,7 +121,7 @@
         <RadioGroup
             android:id="@+id/accountRadioGroup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:orientation="horizontal">
 
 
@@ -154,15 +153,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/fullAccount" />
+
         </RadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="35dp">
 
             <TextView
                 android:id="@+id/textView9"
-                android:layout_width="114dp"
+                android:layout_width="118dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/initialCredit"
