@@ -25,5 +25,8 @@
     <string name="CBU">CBU</string>
     <string name="termsLbl">Acepta términos y condiciones</string>
     <string name="registerBtn">Registrar</string>
+    <string name="errorEmptyField">Este campo no puede estar vacío</string>
+    <string name="errorEmptyPassword">Debe ingresar una contraseña</string>
+    <string name="errorRepeatPassword">Las contraseñas deben ser iguales</string>
 
 </resources>

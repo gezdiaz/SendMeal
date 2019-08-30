@@ -86,7 +86,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/enterCardNumber"
-            android:inputType="number" />
+            android:inputType="number"
+            android:maxLength="16" />
 
         <TextView
             android:id="@+id/ccvLbl"
@@ -122,6 +123,7 @@
             android:id="@+id/accountRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:checkedButton="@id/basicAccountRadio"
             android:orientation="horizontal">
 
 
@@ -157,20 +159,21 @@
         </RadioGroup>
 
         <LinearLayout
+            android:id="@+id/layoutInitialCredit"
             android:layout_width="match_parent"
             android:layout_height="35dp">
 
             <TextView
                 android:id="@+id/textView9"
-                android:layout_width="118dp"
+                android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/initialCredit"
                 android:textColor="@color/colorLabel" />
 
             <SeekBar
-                android:id="@+id/maxCreditSlider"
-                android:layout_width="277dp"
+                android:id="@+id/initialCreditSlider"
+                android:layout_width="195dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:max="1400"
@@ -178,7 +181,7 @@
 
             <TextView
                 android:id="@+id/showAmount"
-                android:layout_width="60dp"
+                android:layout_width="5dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="100"
@@ -186,14 +189,14 @@
         </LinearLayout>
 
         <ToggleButton
-            android:id="@+id/sendNotifButoon"
+            android:id="@+id/sendNotifBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textOff="@string/notSendNotifBtn"
             android:textOn="@string/sendNotifBtn" />
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/isSellerSw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -204,48 +207,49 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/CBUaliasLbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/CBUAlias"
                 android:textColor="@color/colorLabel" />
 
             <EditText
-                android:id="@+id/editText9"
+                android:id="@+id/CBUAliasEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="@string/CBUAlias" />
+                android:hint="@string/CBUAlias"
+                android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/CBULbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/CBU"
                 android:textColor="@color/colorLabel" />
 
             <EditText
-                android:id="@+id/editText10"
+                android:id="@+id/CBUNumberEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="@string/CBU"
                 android:inputType="number"
-                android:text="@string/CBU" />
+                android:textColor="#80000000" />
 
         </LinearLayout>
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/acceptTermsCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/termsLbl" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/registerBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
