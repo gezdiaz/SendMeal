@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/nameLbl"
-            android:textColor="@color/colorLabel" />
+            android:textColor="@color/colorLabel"
+            android:textSize="@dimen/tags" />
 
         <EditText
             android:id="@+id/nameEdit"
@@ -33,7 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/passwordLbl"
-            android:textColor="@color/colorLabel" />
+            android:textColor="@color/colorLabel"
+            android:textSize="@dimen/tags" />
 
         <EditText
             android:id="@+id/passwordEdit"
@@ -48,7 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/repeatPassword"
-            android:textColor="@color/colorLabel" />
+            android:textColor="@color/colorLabel"
+            android:textSize="@dimen/tags" />
 
         <EditText
             android:id="@+id/repeatPasswordEdit"
@@ -63,7 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/emailLbl"
-            android:textColor="@color/colorLabel" />
+            android:textColor="@color/colorLabel"
+            android:textSize="@dimen/tags" />
 
         <EditText
             android:id="@+id/emailEdit"
@@ -78,7 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/cardNumberLbl"
-            android:textColor="@color/colorLabel" />
+            android:textColor="@color/colorLabel"
+            android:textSize="@dimen/tags" />
 
         <EditText
             android:id="@+id/cardNumberEdit"
@@ -94,7 +99,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/CCVLbl"
-            android:textColor="@color/colorLabel" />
+            android:textColor="@color/colorLabel"
+            android:textSize="@dimen/tags" />
 
         <EditText
             android:id="@+id/ccvEdit"
@@ -110,7 +116,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/dateLbl"
-            android:textColor="@color/colorLabel" />
+            android:textColor="@color/colorLabel"
+            android:textSize="@dimen/tags" />
 
         <EditText
             android:id="@+id/dateEdit"
@@ -134,7 +141,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:text="@string/selectAccountLbl"
-                android:textColor="@color/colorLabel" />
+                android:textColor="@color/colorLabel"
+                android:textSize="@dimen/tags" />
 
             <RadioButton
                 android:id="@+id/basicAccountRadio"
@@ -170,7 +178,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/initialCredit"
-                android:textColor="@color/colorLabel" />
+                android:textColor="@color/colorLabel"
+                android:textSize="@dimen/tags" />
 
             <SeekBar
                 android:id="@+id/initialCreditSlider"
@@ -215,7 +224,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/CBUAlias"
-                android:textColor="@color/colorLabel" />
+                android:textColor="@color/colorLabel"
+                android:textSize="@dimen/tags" />
 
             <EditText
                 android:id="@+id/CBUAliasEdit"
@@ -230,7 +240,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/CBU"
-                android:textColor="@color/colorLabel" />
+                android:textColor="@color/colorLabel"
+                android:textSize="@dimen/tags"
+                android:visibility="visible" />
 
             <EditText
                 android:id="@+id/CBUNumberEdit"
