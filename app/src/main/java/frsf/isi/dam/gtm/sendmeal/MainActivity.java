@@ -2,6 +2,7 @@ package frsf.isi.dam.gtm.sendmeal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Switch isSellerSw;
     CheckBox acceptTermsCheck;
     LinearLayout layoutAccount;
+    boolean validations[];
 
 
     @Override
@@ -50,7 +53,10 @@ public class MainActivity extends AppCompatActivity {
         cbuAliasEdit = findViewById(R.id.CBUAliasEdit);
         cbuNumberEdit = findViewById(R.id.CBUNumberEdit);
         layoutAccount = findViewById(R.id.layoutAccount);
-        Boolean validations[] = new Boolean[9];
+
+        validations = new boolean[9];
+
+        //Integer validations = 0; //Va a ser 9 si todos son válidos.
 
 
         nameEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -59,9 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 if(!hasFocus){
                     if(nameEdit.getText().toString().isEmpty()){
                         nameEdit.setError(getString(R.string.errorEmptyField));
-                        //no válido
+                        validations[0] = false;
                     }else{
                         //Válido
+                        validations[0] = true;
                     }
                 }
             }
@@ -73,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
                 if(!hasFocus){
                     if(passwordEdit.getText().toString().isEmpty()){
                         passwordEdit.setError(getString(R.string.errorEmptyPassword));
+                        validations[1]=false;
+                    }else{
+                        //Válido
+                        validations[1]=true;
                     }
                 }
             }
@@ -83,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
                 if(!hasFocus){
                     if(!repeatPasswordEdit.getText().toString().equals(passwordEdit.getText().toString())){
                         repeatPasswordEdit.setError(getString(R.string.errorRepeatPassword));
+                        validations[2]=false;
+                    }else{
+                        //Válido
+                        validations[2]=true;
                     }
                 }
             }
@@ -93,6 +108,10 @@ public class MainActivity extends AppCompatActivity {
                 if(!hasFocus){
                     if(emailEdit.getText().toString().isEmpty()){
                         emailEdit.setError(getString(R.string.errorEmptyField));
+                        validations[3]=false;
+                    }else{
+                        //Válido
+                        validations[3]=true;
                     }
                 }
             }
@@ -103,6 +122,10 @@ public class MainActivity extends AppCompatActivity {
                 if(!hasFocus){
                     if(cardNumberEdit.getText().toString().isEmpty()){
                         cardNumberEdit.setError(getString(R.string.errorEmptyField));
+                        validations[4]=false;
+                    }else{
+                        //Válido
+                        validations[4]=true;
                     }
                 }
             }
@@ -113,6 +136,10 @@ public class MainActivity extends AppCompatActivity {
                 if(!hasFocus){
                     if(ccvEdit.getText().toString().isEmpty()){
                         ccvEdit.setError(getString(R.string.errorEmptyField));
+                        validations[5]=false;
+                    }else{
+                        //Válido
+                        validations[5]=true;
                     }
                 }
             }
@@ -123,6 +150,10 @@ public class MainActivity extends AppCompatActivity {
                 if(!hasFocus){
                     if(dateEdit.getText().toString().isEmpty()){
                         dateEdit.setError(getString(R.string.errorEmptyField));
+                        validations[6]=false;
+                    }else{
+                        //Válido
+                        validations[6]=true;
                     }
                 }
             }
@@ -132,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                showAmountView.setText("" + (100+progress));
+                showAmountView.setText("$ " + (100+progress));
             }
 
             @Override
@@ -146,16 +177,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        emailEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if(!hasFocus){
-                    if(emailEdit.getText().toString().isEmpty()){
-                        emailEdit.setError(getString(R.string.errorEmptyField));
-                    }
-                }
-            }
-        });
         isSellerSw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChk) {
@@ -169,9 +190,14 @@ public class MainActivity extends AppCompatActivity {
         cbuAliasEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                if(!hasFocus){
-                    if(cbuAliasEdit.getText().toString().isEmpty()){
+                if(!hasFocus) {
+                    if (cbuAliasEdit.getText().toString().isEmpty()) {
                         cbuAliasEdit.setError(getString(R.string.errorEmptyField));
+
+                        validations[7] = false;
+                    } else {
+                        //Válido
+                        validations[7] = true;
                     }
                 }
             }
@@ -182,6 +208,10 @@ public class MainActivity extends AppCompatActivity {
                 if(!hasFocus){
                     if(cbuNumberEdit.getText().toString().isEmpty()){
                         cbuNumberEdit.setError(getString(R.string.errorEmptyField));
+                        validations[8]=false;
+                    }else{
+                        //Válido
+                        validations[8]=true;
                     }
                 }
             }
@@ -199,7 +229,35 @@ public class MainActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                nameEdit.clearFocus();
+                passwordEdit.clearFocus();
+                repeatPasswordEdit.clearFocus();
+                emailEdit.clearFocus();
+                cardNumberEdit.clearFocus();
+                ccvEdit.clearFocus();
+                dateEdit.clearFocus();
+                cbuAliasEdit.clearFocus();
+                cbuNumberEdit.clearFocus();
 
+                registerBtn.requestFocus();
+                boolean valid = true;
+                Context context = getApplicationContext();
+                Toast toast;
+
+                for(int i = 0; i < validations.length; i++){
+                    if(!validations[i]){
+                        if(!isSellerSw.isChecked() && (i == 7 || i == 8)){
+                            continue;
+                        }
+                        valid = false;
+                    }
+                }
+                if(valid){
+                    toast = Toast.makeText(context,getString(R.string.successToast),Toast.LENGTH_SHORT);
+                }else{
+                    toast = Toast.makeText(context,getString(R.string.errorToast),Toast.LENGTH_SHORT);
+                }
+                toast.show();
             }
         });
 

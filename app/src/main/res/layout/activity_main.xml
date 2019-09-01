@@ -182,7 +182,7 @@
 
             <TextView
                 android:id="@+id/showAmount"
-                android:layout_width="5dp"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/initialCreditAmount"
@@ -208,7 +208,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/CBUaliasLbl"
@@ -238,8 +238,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/CBU"
-                android:inputType="number"
-                android:textColor="#80000000" />
+                android:inputType="number" />
 
         </LinearLayout>
 
