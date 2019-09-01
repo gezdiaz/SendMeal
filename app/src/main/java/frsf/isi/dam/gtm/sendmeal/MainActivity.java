@@ -17,6 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.time.Year;
+import java.util.Calendar;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     Button registerBtn;
@@ -110,8 +114,14 @@ public class MainActivity extends AppCompatActivity {
                         emailEdit.setError(getString(R.string.errorEmptyField));
                         validations[3]=false;
                     }else{
-                        //Válido
-                        validations[3]=true;
+
+                        if(!emailIsValid(emailEdit.getText().toString())){
+                            emailEdit.setError(getString(R.string.emailInvalid));
+                        }
+                        else {
+                            //Válido
+                            validations[3] = true;
+                        }
                     }
                 }
             }
@@ -138,12 +148,13 @@ public class MainActivity extends AppCompatActivity {
                         ccvEdit.setError(getString(R.string.errorEmptyField));
                         validations[5]=false;
                     }else{
-                        //Válido
-                        validations[5]=true;
+                            //Válido
+                            validations[5] = true;
+                        }
                     }
                 }
-            }
         });
+
         dateEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -152,8 +163,32 @@ public class MainActivity extends AppCompatActivity {
                         dateEdit.setError(getString(R.string.errorEmptyField));
                         validations[6]=false;
                     }else{
-                        //Válido
-                        validations[6]=true;
+                        if(dateEdit.getText().toString().length() == 5) {
+                            if (dateEdit.getText().toString().charAt(0) != '/' && dateEdit.getText().toString().contains("/") && !dateEdit.getText().toString().endsWith("/")) {
+                                Integer month = Integer.valueOf(dateEdit.getText().toString().substring(0, dateEdit.getText().toString().indexOf("/")));
+                                Integer year = Integer.valueOf(dateEdit.getText().toString().substring(dateEdit.getText().toString().indexOf("/") + 1));
+
+                                if (month >= 1 && month <= 12 && year >= 19 && year <= 99) {
+                                    if (!dateIsValid(month, year)) {
+                                        dateEdit.setError(getString(R.string.errorInvalidCardDate));
+                                        validations[6] = false;
+                                    } else {
+                                        //Válido
+                                        validations[6] = true;
+                                    }
+                                } else {
+                                    dateEdit.setError(getString(R.string.errorInvalidCardDate));
+                                    validations[6] = false;
+                                }
+                            } else {
+                                dateEdit.setError(getString(R.string.errorInvalidCardDate));
+                                validations[6] = false;
+                            }
+                        }
+                        else{
+                            dateEdit.setError(getString(R.string.errorInvalidCardDate));
+                            validations[6] = false;
+                        }
                     }
                 }
             }
@@ -263,5 +298,37 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+    Boolean emailIsValid(String email){
+        if(email.contains("@") && (email.indexOf("@") != 0) && (email.substring(email.indexOf("@")).length() > 3)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    Boolean dateIsValid(Integer month, Integer year) {
+
+        if (((year + 2000) == Calendar.getInstance().get(Calendar.YEAR))) {
+            if ((month - (Calendar.getInstance().get(Calendar.MONTH) + 1)) >= 3) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            if (year + 2000 > Calendar.getInstance().get(Calendar.YEAR)) {
+
+                if ((month == 1 && ((Calendar.getInstance().get(Calendar.MONTH) + 1) > 10)) || (month == 2 && ((Calendar.getInstance().get(Calendar.MONTH) + 1) > 11))) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            else {
+                return false;
+            }
+        }
     }
 }

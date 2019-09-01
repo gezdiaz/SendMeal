@@ -31,5 +31,8 @@
     <string name="initialCreditAmount">$ 100</string>
     <string name="errorToast">Datos incorrectos.</string>
     <string name="successToast">Datos ingresados correctamente</string>
+    <string name="emailInvalid">Ingrese un email válido</string>
+    <string name="errorInvalidCardDate">Ingrese una fecha valida</string>
+    <string name="errorInvalidCCV">Ingrese un CCV valido</string>
 
 </resources>
