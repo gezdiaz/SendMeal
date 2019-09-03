@@ -1,3 +1,38 @@
 <resources>
     <string name="app_name">SendMeal</string>
+    <string name="nameLbl">Nombre</string>
+    <string name="enterName">Ingrese su nombre</string>
+    <string name="passwordLbl">Contraseña</string>
+    <string name="repeatPassword">Repita la contraseña</string>
+    <string name="emailLbl">Correo Electrónico</string>
+    <string name="cardNumberLbl">Número de tarjeta de crédito</string>
+    <string name="CCVLbl">CCV</string>
+    <string name="dateLbl">Fecha de vencimiento</string>
+    <string name="enterPassword">Ingrese la contraseña</string>
+    <string name="enterEmail">Ingrese su e-mail</string>
+    <string name="enterCardNumber">Ingrese el número de tarjeta de crédito</string>
+    <string name="enterCCV">Ingrese el código de seguridad</string>
+    <string name="enterDate">MM/AA</string>
+    <string name="selectAccountLbl">Tipo de cuenta</string>
+    <string name="basicAccount">Básica</string>
+    <string name="premiumAccount">Premium</string>
+    <string name="fullAccount">Full</string>
+    <string name="initialCredit">Crédito Inicial</string>
+    <string name="notSendNotifBtn">No enviar notificacoines al mail</string>
+    <string name="sendNotifBtn">Enviar notificacoines al mail</string>
+    <string name="isSeller">Es vendedor</string>
+    <string name="CBUAlias">Alias CBU</string>
+    <string name="CBU">CBU</string>
+    <string name="termsLbl">Acepta términos y condiciones</string>
+    <string name="registerBtn">Registrar</string>
+    <string name="errorEmptyField">Este campo no puede estar vacío</string>
+    <string name="errorEmptyPassword">Debe ingresar una contraseña</string>
+    <string name="errorRepeatPassword">Las contraseñas deben ser iguales</string>
+    <string name="initialCreditAmount">$ 100</string>
+    <string name="errorToast">Datos incorrectos.</string>
+    <string name="successToast">Datos ingresados correctamente</string>
+    <string name="emailInvalid">Ingrese un email válido</string>
+    <string name="errorInvalidCardDate">Ingrese una fecha valida</string>
+    <string name="errorInvalidCCV">Ingrese un CCV valido</string>
+
 </resources>
