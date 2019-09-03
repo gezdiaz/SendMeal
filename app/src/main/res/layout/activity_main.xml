@@ -174,7 +174,7 @@
 
             <TextView
                 android:id="@+id/textView9"
-                android:layout_width="55dp"
+                android:layout_width="86dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/initialCredit"
@@ -191,7 +191,7 @@
 
             <TextView
                 android:id="@+id/showAmount"
-                android:layout_width="10dp"
+                android:layout_width="44dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/initialCreditAmount"
