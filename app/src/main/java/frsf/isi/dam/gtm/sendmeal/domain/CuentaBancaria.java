@@ -1,9 +1,9 @@
 package frsf.isi.dam.gtm.sendmeal.domain;
 
 public class CuentaBancaria {
-    Integer id;
-    String alias;
-    String cbu;
+    private Integer id;
+    private String alias;
+    private String cbu;
 
     public CuentaBancaria() {
 

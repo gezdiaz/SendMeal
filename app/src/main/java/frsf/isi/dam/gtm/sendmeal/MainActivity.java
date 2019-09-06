@@ -306,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }
-     private Boolean dateIsValid(Integer month, Integer year) {
+    private Boolean dateIsValid(Integer month, Integer year) {
 
         if (((year + 2000) == Calendar.getInstance().get(Calendar.YEAR))) {
             if ((month - (Calendar.getInstance().get(Calendar.MONTH) + 1)) >= 3) {
