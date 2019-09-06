@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                         validations[6]=false;
                     }else{
                         if(dateEdit.getText().toString().length() == 5) {
-                            if (dateEdit.getText().toString().charAt(0) != '/' && dateEdit.getText().toString().contains("/") && !dateEdit.getText().toString().endsWith("/")) {
+                            if (dateEdit.getText().toString().charAt(0) != '/' && dateEdit.getText().toString().contains("/") && !dateEdit.getText().toString().endsWith("/") && (dateEdit.getText().toString().indexOf('/') == 2)){
                                 Integer month = Integer.valueOf(dateEdit.getText().toString().substring(0, dateEdit.getText().toString().indexOf("/")));
                                 Integer year = Integer.valueOf(dateEdit.getText().toString().substring(dateEdit.getText().toString().indexOf("/") + 1));
 
@@ -299,14 +299,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    Boolean emailIsValid(String email){
+    private Boolean emailIsValid(String email){
         if(email.contains("@") && (email.indexOf("@") != 0) && (email.substring(email.indexOf("@")).length() > 3)){
             return true;
         }else{
             return false;
         }
     }
-    Boolean dateIsValid(Integer month, Integer year) {
+     private Boolean dateIsValid(Integer month, Integer year) {
 
         if (((year + 2000) == Calendar.getInstance().get(Calendar.YEAR))) {
             if ((month - (Calendar.getInstance().get(Calendar.MONTH) + 1)) >= 3) {
