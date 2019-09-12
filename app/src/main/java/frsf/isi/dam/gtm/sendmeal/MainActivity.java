@@ -171,28 +171,13 @@ public class MainActivity extends AppCompatActivity {
                                 Integer month = Integer.valueOf(dateEdit.getText().toString().substring(0, 2));
                                 Integer year = Integer.valueOf(dateEdit.getText().toString().substring(3));
                                 if (month >= 1 && month <= 12 && year >= 19 && year <= 99) {
-                        //Si ingreso aca, year tiene que ser menor a 39 porque sino tira fechas desde 1939 y no 2039
-
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yy");
-                            Date enteredDate;
-
-                                  enteredDate = dateFormat.parse(dateEdit.getText().toString());
-                                  if(dateIsValid(enteredDate, currentDate)){
-                                      validations[6] = true;
-                                  }
-                                  else{
-                                      dateEdit.setError(getString(R.string.errorInvalidCardDate));
-                                      validations[6] = false;
-                                  }
-                        //Si ingreso aca Year va a ser menor que 99 para llergar al  anio 2099
-                                  /*
                                         if (!dateIsValid(month, year, currentDate)) {
                                             dateEdit.setError(getString(R.string.errorInvalidCardDate));
                                             validations[6] = false;
                                         } else {
                                             //Válido
                                             validations[6] = true;
-                                        }*/
+                                        }
                                 } else {
                                         dateEdit.setError(getString(R.string.errorInvalidCardDate));
                                         validations[6] = false;
@@ -323,30 +308,6 @@ public class MainActivity extends AppCompatActivity {
         }else{
             return false;
         }
-    }
-    //Metodo para validar fechas de la tarjeta parseando el dato ingresado a Date
-    private Boolean dateIsValid(Date enteredDate, Calendar currentDate ) {
-        Boolean result = false;
-        //Fecha ingresada en milisegundos
-        Long enteredDateInMs = enteredDate.getTime();
-
-        //Fecha actual en milisegundos
-        Long currentDateInMs = currentDate.getTime().getTime();
-
-        //Fecha a comparar en milisegundos
-        Long finalDateInMs = enteredDateInMs - currentDateInMs;
-
-        //Tres meses en milisegundo
-        Long threeMonthsInMs = Long.valueOf("7776000000");
-
-        //Comparo que la fecha de vencimiento sea mayor a tres meses
-        if(finalDateInMs >= threeMonthsInMs){
-            result = true;
-        }
-        else{
-            result = false;
-        }
-        return  result;
     }
 
     //Metodo para validar la fecha de la tarjeta con el dato directo del editText
