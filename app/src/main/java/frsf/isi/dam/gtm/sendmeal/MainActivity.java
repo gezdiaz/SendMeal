@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,21 +18,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import java.time.Year;
+import java.text.SimpleDateFormat;;
 import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button registerBtn;
-    EditText nameEdit, passwordEdit, repeatPasswordEdit, emailEdit, cardNumberEdit, ccvEdit, dateEdit, cbuAliasEdit, cbuNumberEdit;
-    TextView showAmountView;
-    RadioGroup accountRadioGroup;
-    SeekBar initialCreditSlider;
-    ToggleButton sendNotfBtn;
-    Switch isSellerSw;
-    CheckBox acceptTermsCheck;
-    LinearLayout layoutAccount;
+    private Button registerBtn;
+    private EditText nameEdit, passwordEdit, repeatPasswordEdit, emailEdit, cardNumberEdit, ccvEdit, dateEdit, cbuAliasEdit, cbuNumberEdit;
+    private TextView showAmountView;
+    private RadioGroup accountRadioGroup;
+    private SeekBar initialCreditSlider;
+    private ToggleButton sendNotfBtn;
+    private Switch isSellerSw;
+    private  CheckBox acceptTermsCheck;
+    private LinearLayout layoutAccount;
     boolean validations[];
 
 
@@ -163,35 +164,37 @@ public class MainActivity extends AppCompatActivity {
                         dateEdit.setError(getString(R.string.errorEmptyField));
                         validations[6]=false;
                     }else{
-                        if(dateEdit.getText().toString().length() == 5) {
-                            if (dateEdit.getText().toString().charAt(0) != '/' && dateEdit.getText().toString().contains("/") && !dateEdit.getText().toString().endsWith("/")) {
-                                Integer month = Integer.valueOf(dateEdit.getText().toString().substring(0, dateEdit.getText().toString().indexOf("/")));
-                                Integer year = Integer.valueOf(dateEdit.getText().toString().substring(dateEdit.getText().toString().indexOf("/") + 1));
-
+                        //Si o si tengo que validar que la longitud sea cinco porque tambien acepta fechas del tipo dd/mm/aaaaa
+                        if(dateEdit.getText().toString().length() == 5 && dateEdit.getText().toString().charAt(2) == '/') {
+                            Calendar currentDate = Calendar.getInstance();
+                            try {
+                                Integer month = Integer.valueOf(dateEdit.getText().toString().substring(0, 2));
+                                Integer year = Integer.valueOf(dateEdit.getText().toString().substring(3));
                                 if (month >= 1 && month <= 12 && year >= 19 && year <= 99) {
-                                    if (!dateIsValid(month, year)) {
+                                        if (!dateIsValid(month, year, currentDate)) {
+                                            dateEdit.setError(getString(R.string.errorInvalidCardDate));
+                                            validations[6] = false;
+                                        } else {
+                                            //Válido
+                                            validations[6] = true;
+                                        }
+                                } else {
                                         dateEdit.setError(getString(R.string.errorInvalidCardDate));
                                         validations[6] = false;
-                                    } else {
-                                        //Válido
-                                        validations[6] = true;
                                     }
-                                } else {
-                                    dateEdit.setError(getString(R.string.errorInvalidCardDate));
-                                    validations[6] = false;
-                                }
+                                    } catch (Exception e){
+                                   dateEdit.setError(getString(R.string.errorInvalidCardDate));
+                                   validations[6] = false;
+                                    }
+
                             } else {
                                 dateEdit.setError(getString(R.string.errorInvalidCardDate));
                                 validations[6] = false;
                             }
                         }
-                        else{
-                            dateEdit.setError(getString(R.string.errorInvalidCardDate));
-                            validations[6] = false;
-                        }
                     }
                 }
-            }
+           // }
         });
 
         initialCreditSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -299,36 +302,41 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    Boolean emailIsValid(String email){
+    private Boolean emailIsValid(String email){
         if(email.contains("@") && (email.indexOf("@") != 0) && (email.substring(email.indexOf("@")).length() > 3)){
             return true;
         }else{
             return false;
         }
     }
-    Boolean dateIsValid(Integer month, Integer year) {
 
-        if (((year + 2000) == Calendar.getInstance().get(Calendar.YEAR))) {
-            if ((month - (Calendar.getInstance().get(Calendar.MONTH) + 1)) >= 3) {
-                return true;
+    //Metodo para validar la fecha de la tarjeta con el dato directo del editText
+    private Boolean dateIsValid(Integer enteredMonth, Integer enteredYear, Calendar currentDate){
+        Boolean result = false;
+
+        if (((enteredYear + 2000) == currentDate.get(Calendar.YEAR))) {
+            if ((enteredMonth - (currentDate.get(Calendar.MONTH) + 1)) >= 3) {
+                result = true;
             }
             else {
-                return false;
+                result = false;
             }
         }
         else {
-            if (year + 2000 > Calendar.getInstance().get(Calendar.YEAR)) {
+            if (enteredYear + 2000 > currentDate.get(Calendar.YEAR)) {
 
-                if ((month == 1 && ((Calendar.getInstance().get(Calendar.MONTH) + 1) > 10)) || (month == 2 && ((Calendar.getInstance().get(Calendar.MONTH) + 1) > 11))) {
-                    return false;
+                if ((enteredMonth == 1 && ((currentDate.get(Calendar.YEAR) + 1) > 10)) || (enteredMonth == 2 && ((currentDate.get(Calendar.YEAR) + 1) > 11))) {
+                    result = false;
                 }
                 else {
-                    return true;
+                    result = true;
                 }
             }
             else {
-                return false;
+                result = false;
             }
         }
+        return result;
     }
+
 }

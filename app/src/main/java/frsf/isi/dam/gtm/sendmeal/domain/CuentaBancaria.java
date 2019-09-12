@@ -1,12 +1,13 @@
 package frsf.isi.dam.gtm.sendmeal.domain;
 
-import java.util.Objects;
-
 public class CuentaBancaria {
     private Integer id;
     private String alias;
     private String cbu;
 
+    public CuentaBancaria() {
+
+    }
     public CuentaBancaria(Integer id, String alias, String cbu) {
         this.id = id;
         this.alias = alias;
@@ -17,24 +18,44 @@ public class CuentaBancaria {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getAlias() {
         return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
     }
 
     public String getCbu() {
         return cbu;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
     public void setCbu(String cbu) {
         this.cbu = cbu;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CuentaBancaria that = (CuentaBancaria) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (alias != null ? !alias.equals(that.alias) : that.alias != null) return false;
+        return cbu != null ? cbu.equals(that.cbu) : that.cbu == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (alias != null ? alias.hashCode() : 0);
+        result = 31 * result + (cbu != null ? cbu.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -46,18 +67,4 @@ public class CuentaBancaria {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CuentaBancaria that = (CuentaBancaria) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(alias, that.alias) &&
-                Objects.equals(cbu, that.cbu);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, alias, cbu);
-    }
 }
