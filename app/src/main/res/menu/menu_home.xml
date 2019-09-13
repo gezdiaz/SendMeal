@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/registerOptionItem"
+        android:title="@string/registerOption" />
+    <item
+        android:id="@+id/createItemOptionItem"
+        android:title="@string/createItemOption" />
+    <item
+        android:id="@+id/itemListOptionItem"
+        android:title="@string/itemListOption" />
+</menu>

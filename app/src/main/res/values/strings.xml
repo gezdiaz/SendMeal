@@ -34,5 +34,20 @@
     <string name="emailInvalid">Ingrese un email válido</string>
     <string name="errorInvalidCardDate">Ingrese una fecha valida</string>
     <string name="errorInvalidCCV">Ingrese un CCV valido</string>
+    <string name="registerOption">Registrarme</string>
+    <string name="createItemOption">Crear Item</string>
+    <string name="itemListOption">Lista de Items</string>
+    <string name="idDishLbl">ID Plato</string>
+    <string name="enterIdDish">Ingrese el ID</string>
+    <string name="dishNameLbl">Nombre del plato</string>
+    <string name="enterDishName">Ingrese el nombre</string>
+    <string name="dishDescriptionLbl">Descripción del plato</string>
+    <string name="enterDishDescription">Ingrese la descripción</string>
+    <string name="dishPriceLbl">Precio del plato</string>
+    <string name="enterDishPrice">Ingrese el precio</string>
+    <string name="dishCaloriesLbl">Calorías del plato</string>
+    <string name="enterDishCalories">Ingrese las calorías</string>
+    <string name="saveDishBtn">Guardar</string>
+    <string name="back">Atrás</string>
 
 </resources>
