@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
+import frsf.isi.dam.gtm.sendmeal.domain.Plato;
+
 public class CreateActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -141,14 +143,21 @@ public class CreateActivity extends AppCompatActivity {
 
                 if(!valid){
                     toast = Toast.makeText(context,getString(R.string.errorToast),Toast.LENGTH_SHORT);
+                    toast.show();
                 }else {
                     toast = Toast.makeText(context,getString(R.string.successToast),Toast.LENGTH_SHORT);
+                    toast.show();
+                    Plato plato = new Plato(
+                            Integer.parseInt(idDishEdit.getText().toString()),
+                            dishNameEdit.getText().toString(),
+                            dishDescriptionEdit.getText().toString(),
+                            Double.parseDouble(dishPriceEdit.getText().toString()),
+                            Integer.parseInt(dishCaloriesEdit.getText().toString())
+                    );
+                    CreateActivity.this.finish();
                 }
-                toast.show();
             }
         });
-
-
     }
 
 
