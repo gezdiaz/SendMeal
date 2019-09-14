@@ -49,5 +49,9 @@
     <string name="enterDishCalories">Ingrese las calorías</string>
     <string name="saveDishBtn">Guardar</string>
     <string name="back">Atrás</string>
+    <string name="invalidDishId">Ingrese un ID válido</string>
+    <string name="emptyFieldCreateActivity">Este campo no puede estar vacío</string>
+    <string name="invalidDishPrice">Ingrese un precio válido</string>
+    <string name="invalidDishCalories">Ingrese un valor válido</string>
 
 </resources>

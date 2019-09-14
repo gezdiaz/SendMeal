@@ -31,7 +31,8 @@
         android:layout_weight="0"
         android:ems="10"
         android:hint="@string/enterIdDish"
-        android:inputType="number" />
+        android:inputType="number"
+        android:maxLength="10" />
 
     <TextView
         android:id="@+id/dishNameLbl"
@@ -48,7 +49,8 @@
         android:layout_weight="0"
         android:ems="10"
         android:hint="@string/enterDishName"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:maxLength="50" />
 
     <TextView
         android:id="@+id/dishDescriptionLbl"
@@ -65,7 +67,8 @@
         android:layout_weight="0"
         android:ems="10"
         android:hint="@string/enterDishDescription"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:maxLength="140" />
 
     <TextView
         android:id="@+id/dishPriceLbl"
@@ -82,7 +85,8 @@
         android:layout_weight="0"
         android:ems="10"
         android:hint="@string/enterDishPrice"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:maxLength="10" />
 
     <TextView
         android:id="@+id/dishCaloriesLbl"
@@ -99,7 +103,8 @@
         android:layout_weight="0"
         android:ems="10"
         android:hint="@string/enterDishCalories"
-        android:inputType="number" />
+        android:inputType="number"
+        android:maxLength="8" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
