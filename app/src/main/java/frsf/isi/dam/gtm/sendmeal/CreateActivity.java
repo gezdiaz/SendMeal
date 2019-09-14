@@ -20,25 +20,25 @@ public class CreateActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private EditText idDishEdit, dishNameEdit, dishDescriptionEdit, dishPriceEdit, dishCaloriesEdit;
     private Button saveDishBtn;
-    DecimalFormat precission;
-    private Boolean[] validations;
+    private boolean[] validations;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
 
-        toolbar = findViewById(R.id.homeToolbar);
+        toolbar = findViewById(R.id.createToolbar);
         setSupportActionBar(toolbar);
 
-        validations = new Boolean[5];
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_24px);// set drawable icon
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        validations = new boolean[5];
         idDishEdit = findViewById(R.id.idDishEdit);
         dishNameEdit = findViewById(R.id.dishNameEdit);
         dishDescriptionEdit = findViewById(R.id.dishDescriptionEdit);
         dishPriceEdit = findViewById(R.id.dishPriceEdit);
         dishCaloriesEdit = findViewById(R.id.dishCaloriesEdit);
         saveDishBtn = findViewById(R.id.saveDishBtn);
-
-        precission = new DecimalFormat("0.00");
 
         idDishEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -91,7 +91,6 @@ public class CreateActivity extends AppCompatActivity {
             public void onFocusChange(View view, boolean hasFocus) {
                 if (!hasFocus){
                     try {
-                        dishPriceEdit.setText(precission.format(dishPriceEdit.getText().toString()));
                         Double.valueOf(dishPriceEdit.getText().toString());
                         validations[3] = true;
                     }
@@ -122,7 +121,7 @@ public class CreateActivity extends AppCompatActivity {
         saveDishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Boolean valid = true;
+                boolean valid = true;
                 Context context = getApplicationContext();
                 Toast toast;
 
@@ -134,7 +133,7 @@ public class CreateActivity extends AppCompatActivity {
 
                 saveDishBtn.requestFocus();
 
-                for (Boolean b: validations){
+                for (boolean b: validations){
                     if(!b){
                         valid = false;
                     }
@@ -145,26 +144,24 @@ public class CreateActivity extends AppCompatActivity {
                 }else {
                     toast = Toast.makeText(context,getString(R.string.successToast),Toast.LENGTH_SHORT);
                 }
+                toast.show();
             }
         });
 
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_return, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.backMenuItem:
+            case android.R.id.home:
                 finish();
+                break;
             default:
                 Toast.makeText(this, "....", Toast.LENGTH_LONG).show();
                 return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -5,16 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateActivity">
+    tools:context=".CreateActivity"
+    android:id="@+id/linearLayout2">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/createToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme"
+        app:title="@string/createTitle"
+        tools:layout_conversion_absoluteHeight="56dp"
+        tools:layout_conversion_absoluteWidth="393dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <TextView
         android:id="@+id/idDishLbl"
@@ -22,7 +28,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:text="@string/idDishLbl"
-        android:textColor="@color/colorLabel" />
+        android:textColor="@color/colorLabel"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="393dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="56dp" />
 
     <EditText
         android:id="@+id/idDishEdit"
@@ -33,6 +43,11 @@
         android:hint="@string/enterIdDish"
         android:inputType="number"
         android:maxLength="10" />
+        android:inputType="number"
+        tools:layout_conversion_absoluteHeight="45dp"
+        tools:layout_conversion_absoluteWidth="393dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="75dp" />
 
     <TextView
         android:id="@+id/dishNameLbl"
@@ -40,7 +55,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:text="@string/dishNameLbl"
-        android:textColor="@color/colorLabel" />
+        android:textColor="@color/colorLabel"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="393dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="121dp" />
 
     <EditText
         android:id="@+id/dishNameEdit"
@@ -51,6 +70,11 @@
         android:hint="@string/enterDishName"
         android:inputType="textPersonName"
         android:maxLength="50" />
+        android:inputType="textPersonName"
+        tools:layout_conversion_absoluteHeight="45dp"
+        tools:layout_conversion_absoluteWidth="393dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="140dp" />
 
     <TextView
         android:id="@+id/dishDescriptionLbl"
@@ -58,7 +82,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:text="@string/dishDescriptionLbl"
-        android:textColor="@color/colorLabel" />
+        android:textColor="@color/colorLabel"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="393dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="185dp" />
 
     <EditText
         android:id="@+id/dishDescriptionEdit"
@@ -69,6 +97,11 @@
         android:hint="@string/enterDishDescription"
         android:inputType="textPersonName"
         android:maxLength="140" />
+        android:inputType="textPersonName"
+        tools:layout_conversion_absoluteHeight="45dp"
+        tools:layout_conversion_absoluteWidth="393dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="205dp" />
 
     <TextView
         android:id="@+id/dishPriceLbl"
@@ -76,7 +109,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:text="@string/dishPriceLbl"
-        android:textColor="@color/colorLabel" />
+        android:textColor="@color/colorLabel"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="393dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="250dp" />
 
     <EditText
         android:id="@+id/dishPriceEdit"
@@ -87,6 +124,11 @@
         android:hint="@string/enterDishPrice"
         android:inputType="numberDecimal"
         android:maxLength="10" />
+        android:inputType="numberDecimal"
+        tools:layout_conversion_absoluteHeight="45dp"
+        tools:layout_conversion_absoluteWidth="393dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="269dp" />
 
     <TextView
         android:id="@+id/dishCaloriesLbl"
@@ -94,7 +136,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:text="@string/dishCaloriesLbl"
-        android:textColor="@color/colorLabel" />
+        android:textColor="@color/colorLabel"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="393dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="315dp" />
 
     <EditText
         android:id="@+id/dishCaloriesEdit"
@@ -104,14 +150,22 @@
         android:ems="10"
         android:hint="@string/enterDishCalories"
         android:inputType="number"
+        tools:layout_conversion_absoluteHeight="45dp"
+        tools:layout_conversion_absoluteWidth="393dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="334dp" />
+        android:inputType="number"
         android:maxLength="8" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:layout_conversion_absoluteHeight="406dp"
+        tools:layout_conversion_absoluteWidth="393dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="380dp">
 
         <Button
             android:id="@+id/saveDishBtn"
@@ -124,7 +178,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_conversion_absoluteHeight="48dp"
-            tools:layout_conversion_absoluteWidth="88dp" />
+            tools:layout_conversion_absoluteWidth="107dp"
+            tools:layout_editor_absoluteX="143dp"
+            tools:layout_editor_absoluteY="559dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

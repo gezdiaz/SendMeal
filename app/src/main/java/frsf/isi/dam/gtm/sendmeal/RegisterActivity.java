@@ -1,9 +1,11 @@
 package frsf.isi.dam.gtm.sendmeal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -31,7 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
     private Switch isSellerSw;
     private  CheckBox acceptTermsCheck;
     private LinearLayout layoutAccount;
-    boolean validations[];
+    private boolean validations[];
+    private Toolbar toolbar;
 
 
     @Override
@@ -61,6 +64,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Integer validations = 0; //Va a ser 9 si todos son válidos.
 
+        toolbar = findViewById(R.id.registerToolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_24px);// set drawable icon
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nameEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -290,6 +298,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 if(valid){
                     toast = Toast.makeText(context,getString(R.string.successToast),Toast.LENGTH_SHORT);
+                    //TODO registrar usuario
                 }else{
                     toast = Toast.makeText(context,getString(R.string.errorToast),Toast.LENGTH_SHORT);
                 }
@@ -335,6 +344,19 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
         return result;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                Toast.makeText(this, "....", Toast.LENGTH_LONG).show();
+                return super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
