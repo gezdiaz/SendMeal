@@ -42,7 +42,8 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(i2);
                 break;
             case R.id.itemListOptionItem:
-
+                Intent i3 = new Intent(this, DishViewActivity.class);
+                startActivity(i3);
                 break;
             default:
                 Toast.makeText(this, "....", Toast.LENGTH_LONG).show();
