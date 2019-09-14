@@ -2,6 +2,7 @@ package frsf.isi.dam.gtm.sendmeal.domain;
 
 import android.content.Intent;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Plato {
@@ -11,6 +12,7 @@ public class Plato {
     private String descripcion;
     private Double precio;
     private Integer calorias;
+    public static ArrayList<Plato> platos = new ArrayList<Plato>();
 
     public Plato() {
     }
@@ -21,6 +23,7 @@ public class Plato {
         this.descripcion = descripcion;
         this.precio = precio;
         this.calorias = calorias;
+        platos.add(this);
     }
 
     public Integer getId() {

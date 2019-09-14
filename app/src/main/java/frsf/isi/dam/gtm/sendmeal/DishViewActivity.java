@@ -2,11 +2,14 @@ package frsf.isi.dam.gtm.sendmeal;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import frsf.isi.dam.gtm.sendmeal.domain.Plato;
 
 public class DishViewActivity extends AppCompatActivity {
 
@@ -14,6 +17,7 @@ public class DishViewActivity extends AppCompatActivity {
     private RecyclerView dishRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.ViewHolder viewHolder;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,12 @@ public class DishViewActivity extends AppCompatActivity {
 
         dishRecyclerView = findViewById(R.id.dishRecyclerView);
         dishRecyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        dishRecyclerView.setLayoutManager(layoutManager);
+
+        adapter = new PlatoAdapter(Plato.platos);
+        dishRecyclerView.setAdapter(adapter);
 
     }
 
