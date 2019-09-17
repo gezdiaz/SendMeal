@@ -1,20 +1,16 @@
 package frsf.isi.dam.gtm.sendmeal;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.icu.text.DecimalFormat;
-import android.icu.text.NumberFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.util.List;
+import java.util.Random;
 
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
 
@@ -34,8 +30,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
     public PlatoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         View v = (View) LayoutInflater.from(context).inflate(R.layout.fila_plato, parent,false);
-        PlatoViewHolder platoViewHolder = new PlatoViewHolder(v);
-        return platoViewHolder;
+        return new PlatoViewHolder(v);
     }
 
     @Override
@@ -47,7 +42,10 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
 
         holder.dishNameView.setText(plato.getTitulo());
         holder.dishPriceView.setText(context.getString(R.string.dishPriceListLabel)+format.format(plato.getPrecio()));
-        holder.dishImageView.setImageResource(R.drawable.plato_de_comida);
+
+        int[] images = {R.drawable.milanesa, R.drawable.hamburger, R.drawable.papas_cheddar, R.drawable.pizza, R.drawable.tarta, R.drawable.tarta_vertical};
+        Random rand = new Random();
+        holder.dishImageView.setImageResource(images[rand.nextInt(images.length)]);
 
 
     }

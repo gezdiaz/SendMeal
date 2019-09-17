@@ -16,7 +16,7 @@
             android:id="@+id/dishImageView"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            app:srcCompat="@drawable/plato_de_comida" />
+            app:srcCompat="@drawable/hamburger" />
 
         <LinearLayout
             android:layout_width="match_parent"
