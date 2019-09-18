@@ -26,7 +26,7 @@ public class DishViewActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.dishViewToolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_24px);// set drawable icon
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);// set drawable icon
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         dishRecyclerView = findViewById(R.id.dishRecyclerView);

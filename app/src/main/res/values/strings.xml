@@ -56,5 +56,5 @@
     <string name="invalidDishPrice">Ingrese un precio válido</string>
     <string name="invalidDishCalories">Ingrese un valor válido</string>
     <string name="dishPriceListLabel">Precio: $ </string>
-
+    <string name="dishViewTitle">Platos disponibles</string>
 </resources>

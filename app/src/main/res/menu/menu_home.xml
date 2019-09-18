@@ -4,11 +4,14 @@
 
     <item
         android:id="@+id/registerOptionItem"
+        android:icon="@drawable/ic_register_icon"
         android:title="@string/registerOption" />
     <item
         android:id="@+id/createItemOptionItem"
-        android:title="@string/createItemOption" />
+        android:title="@string/createItemOption"
+        android:icon="@drawable/ic_new_item_icon"/>
     <item
         android:id="@+id/itemListOptionItem"
-        android:title="@string/itemListOption" />
+        android:title="@string/itemListOption"
+        android:icon="@drawable/ic_list_icon"/>
 </menu>

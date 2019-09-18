@@ -213,6 +213,7 @@
 
             <ToggleButton
                 android:id="@+id/sendNotifBtn"
+                style="@android:style/Widget.Material.Light.Button.Toggle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textOff="@string/notSendNotifBtn"

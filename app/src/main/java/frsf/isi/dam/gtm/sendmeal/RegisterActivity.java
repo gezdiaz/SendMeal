@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.registerToolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_24px);// set drawable icon
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);// set drawable icon
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nameEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {

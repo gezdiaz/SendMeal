@@ -6,7 +6,20 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-<!--        <item name="android:textColorPrimary">@color/titleColor</item>-->
+        <item name="toolbarStyle">@style/toolBarStyle</item>
+        <item name="android:actionOverflowButtonStyle">@style/overflowButtonStyle</item>
+    </style>
+
+    <style name="toolBarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="titleTextAppearance">@style/titleAppearance</item>
+    </style>
+
+    <style name="titleAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="overflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">#FFFFFF</item>
     </style>
 
 </resources>

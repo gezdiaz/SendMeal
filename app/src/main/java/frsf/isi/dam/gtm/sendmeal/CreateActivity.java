@@ -4,16 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.text.DecimalFormat;
 
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
 
@@ -31,7 +27,7 @@ public class CreateActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.createToolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_24px);// set drawable icon
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);// set drawable icon
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         validations = new boolean[5];
