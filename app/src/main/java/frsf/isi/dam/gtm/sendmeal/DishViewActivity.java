@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
@@ -18,6 +20,8 @@ public class DishViewActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.ViewHolder viewHolder;
     private RecyclerView.LayoutManager layoutManager;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

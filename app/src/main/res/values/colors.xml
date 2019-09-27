@@ -7,4 +7,5 @@
     <color name="titleColor">#FFFFFF</color>
     <color name="menuTextColor">#000000</color>
     <color name="backgroundDishView">#F0F0F0</color>
+    <color name="textCardView">#E6E7E7E7</color>
 </resources>

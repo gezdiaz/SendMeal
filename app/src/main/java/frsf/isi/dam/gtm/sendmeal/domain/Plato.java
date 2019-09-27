@@ -12,6 +12,7 @@ public class Plato {
     private String descripcion;
     private Double precio;
     private Integer calorias;
+    private boolean inOffer;
     public static ArrayList<Plato> platos = new ArrayList<Plato>();
 
     public Plato() {
@@ -23,7 +24,13 @@ public class Plato {
         this.descripcion = descripcion;
         this.precio = precio;
         this.calorias = calorias;
+        this.inOffer = false;
         platos.add(this);
+    }
+
+    public boolean switchInOffer(){
+        this.inOffer=!inOffer;
+        return inOffer;
     }
 
     public Integer getId() {
@@ -32,6 +39,14 @@ public class Plato {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public boolean getInOffer() {
+        return inOffer;
+    }
+
+    public void setInOffer(boolean inOffer) {
+        this.inOffer = inOffer;
     }
 
     public String getTitulo() {

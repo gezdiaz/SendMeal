@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="125dp"
             android:layout_alignBottom="@id/dishImageView"
             android:background="@drawable/gradiet_overlay"
             android:orientation="vertical">
@@ -28,18 +28,52 @@
                 android:id="@+id/dishName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="2"
+                android:maxLines="1"
                 android:text="Name"
-                android:textColor="#E6ADADAD"
+                android:textColor="@color/textCardView"
                 android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/dishPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:text="Price: $ 50.50"
-                android:textColor="#E6ADADAD"
+                android:textColor="@color/textCardView"
                 android:textSize="25dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/offerBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00000000"
+                    android:text="@string/offerBtn"
+                    android:textColor="@color/textCardView" />
+
+                <Button
+                    android:id="@+id/editBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00FFFFFF"
+                    android:text="@string/editBtn"
+                    android:textColor="@color/textCardView" />
+
+                <Button
+                    android:id="@+id/removeBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00FFFFFF"
+                    android:text="@string/removeBtn"
+                    android:textColor="@color/textCardView" />
+            </LinearLayout>
         </LinearLayout>
 
     </RelativeLayout>

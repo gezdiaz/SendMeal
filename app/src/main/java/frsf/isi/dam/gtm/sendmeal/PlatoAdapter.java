@@ -1,10 +1,12 @@
 package frsf.isi.dam.gtm.sendmeal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.icu.text.DecimalFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +21,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
     private List<Plato> platoViewDataSet;
 
 
+
     public PlatoAdapter (List<Plato> myPlatosDataSet) {
         platoViewDataSet = myPlatosDataSet;
     }
@@ -31,10 +34,11 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
         context = parent.getContext();
         View v = (View) LayoutInflater.from(context).inflate(R.layout.fila_plato, parent,false);
         return new PlatoViewHolder(v);
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlatoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final PlatoViewHolder holder, int position) {
 
         Plato plato = platoViewDataSet.get(position);
 
@@ -46,7 +50,33 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
         int[] images = {R.drawable.milanesa, R.drawable.hamburger, R.drawable.papas_cheddar, R.drawable.pizza, R.drawable.tarta, R.drawable.tarta_vertical};
         Random rand = new Random();
         holder.dishImageView.setImageResource(images[rand.nextInt(images.length)]);
+        holder.offerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Integer pos = (Integer) holder.getAdapterPosition();
+                platoViewDataSet.get(pos).switchInOffer();
+                //TODO Falta crear hilo secundario.
+            }
+        });
 
+        holder.editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO falta editar el plato en RegisterActivity
+                Integer pos = (Integer) holder.getAdapterPosition();
+                Intent i1 = new Intent(context, RegisterActivity.class);
+                i1.putExtra(String.valueOf(R.string.dishPositionKey), pos);
+                context.startActivity(i1);
+
+            }
+        });
+
+        holder.removeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            //TODO falta todo
+            }
+        });
 
     }
 
