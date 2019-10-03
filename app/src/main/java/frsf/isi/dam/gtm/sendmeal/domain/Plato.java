@@ -25,7 +25,6 @@ public class Plato {
         this.precio = precio;
         this.calorias = calorias;
         this.inOffer = false;
-        platos.add(this);
     }
 
     public boolean switchInOffer(){

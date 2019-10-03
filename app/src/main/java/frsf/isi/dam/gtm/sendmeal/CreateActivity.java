@@ -19,6 +19,8 @@ public class CreateActivity extends AppCompatActivity {
     private EditText idDishEdit, dishNameEdit, dishDescriptionEdit, dishPriceEdit, dishCaloriesEdit;
     private Button saveDishBtn;
     private boolean[] validations;
+    private int pos = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,21 @@ public class CreateActivity extends AppCompatActivity {
         dishPriceEdit = findViewById(R.id.dishPriceEdit);
         dishCaloriesEdit = findViewById(R.id.dishCaloriesEdit);
         saveDishBtn = findViewById(R.id.saveDishBtn);
+
+        pos = getIntent().getIntExtra("position", -1);
+
+        if(pos >= 0){
+            Plato plato = Plato.platos.get(pos);
+            idDishEdit.setText(plato.getId().toString());
+            dishNameEdit.setText(plato.getTitulo());
+            dishDescriptionEdit.setText(plato.getDescripcion());
+            dishPriceEdit.setText(plato.getPrecio().toString());
+            dishCaloriesEdit.setText(plato.getCalorias().toString());
+            for(int i=0 ; i<validations.length; i++){
+                validations[i] = true;
+            }
+        }
+
 
         idDishEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -150,6 +167,11 @@ public class CreateActivity extends AppCompatActivity {
                             Double.parseDouble(dishPriceEdit.getText().toString()),
                             Integer.parseInt(dishCaloriesEdit.getText().toString())
                     );
+                    if(pos >=0){
+                        Plato.platos.set(pos,plato);
+                    }else{
+                        Plato.platos.add(plato);
+                    }
                     CreateActivity.this.finish();
                 }
             }

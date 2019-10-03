@@ -21,5 +21,6 @@ public class PlatoViewHolder extends RecyclerView.ViewHolder {
         offerBtn = itemView.findViewById(R.id.offerBtn);
         editBtn = itemView.findViewById(R.id.editBtn);
         removeBtn = itemView.findViewById(R.id.removeBtn);
+
     }
 }

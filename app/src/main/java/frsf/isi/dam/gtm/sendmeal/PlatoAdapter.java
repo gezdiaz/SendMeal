@@ -62,10 +62,10 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
         holder.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO falta editar el plato en RegisterActivity
+                //TODO falta actualizar lista.
                 Integer pos = (Integer) holder.getAdapterPosition();
-                Intent i1 = new Intent(context, RegisterActivity.class);
-                i1.putExtra(String.valueOf(R.string.dishPositionKey), pos);
+                Intent i1 = new Intent(context, CreateActivity.class);
+                i1.putExtra("position", pos);
                 context.startActivity(i1);
 
             }

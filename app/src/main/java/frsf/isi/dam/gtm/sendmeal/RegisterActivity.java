@@ -33,7 +33,6 @@ public class RegisterActivity extends AppCompatActivity {
     private ToggleButton sendNotfBtn;
     private Switch isSellerSw;
     private  CheckBox acceptTermsCheck;
-    private Integer dishPositionSelected;
     private LinearLayout layoutAccount;
     private boolean validations[];
     private Toolbar toolbar;
@@ -43,7 +42,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        dishPositionSelected = savedInstanceState.getInt(String.valueOf(R.string.dishPositionKey));
         registerBtn = findViewById(R.id.registerBtn);
         nameEdit = findViewById(R.id.nameEdit);
         passwordEdit = findViewById(R.id.passwordEdit);
