@@ -1,11 +1,10 @@
 package frsf.isi.dam.gtm.sendmeal.domain;
 
-import android.content.Intent;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Plato {
+public class Plato implements Serializable {
 
     private Integer id;
     private String titulo;

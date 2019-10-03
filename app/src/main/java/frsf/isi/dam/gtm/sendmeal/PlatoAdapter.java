@@ -19,14 +19,19 @@ import frsf.isi.dam.gtm.sendmeal.domain.Plato;
 public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
 
     private List<Plato> platoViewDataSet;
+    DishViewActivity activity;
+    private Context context;
 
 
-
-    public PlatoAdapter (List<Plato> myPlatosDataSet) {
+    public PlatoAdapter (List<Plato> myPlatosDataSet, DishViewActivity activity) {
         platoViewDataSet = myPlatosDataSet;
+        this.activity = activity;
     }
 
-    private Context context;
+    public void updatePaltos(List<Plato> newPlatos){
+        platoViewDataSet = newPlatos;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -64,10 +69,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
             public void onClick(View view) {
                 //TODO falta actualizar lista.
                 Integer pos = (Integer) holder.getAdapterPosition();
-                Intent i1 = new Intent(context, CreateActivity.class);
-                i1.putExtra("position", pos);
-                context.startActivity(i1);
-
+                activity.editDish(pos);
             }
         });
 

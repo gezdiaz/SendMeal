@@ -3,7 +3,9 @@ package frsf.isi.dam.gtm.sendmeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -169,6 +171,9 @@ public class CreateActivity extends AppCompatActivity {
                     );
                     if(pos >=0){
                         Plato.platos.set(pos,plato);
+                        Intent res = new Intent();
+                        res.putExtra("platos", Plato.platos);
+                        setResult(Activity.RESULT_OK, res);
                     }else{
                         Plato.platos.add(plato);
                     }

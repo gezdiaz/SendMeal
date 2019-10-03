@@ -1,15 +1,20 @@
 package frsf.isi.dam.gtm.sendmeal;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
 
@@ -39,7 +44,7 @@ public class DishViewActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         dishRecyclerView.setLayoutManager(layoutManager);
 
-        adapter = new PlatoAdapter(Plato.platos);
+        adapter = new PlatoAdapter(Plato.platos, this);
         dishRecyclerView.setAdapter(adapter);
 
     }
@@ -55,5 +60,21 @@ public class DishViewActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void editDish(int pos){
+        Intent i1 = new Intent(this, CreateActivity.class);
+        i1.putExtra("position", pos);
+        startActivityForResult(i1, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        List<Plato> platos = (ArrayList<Plato>) data.getExtras().get("platos");
+        if(platos != null){
+            ((PlatoAdapter)adapter).updatePaltos(platos);
+        }
     }
 }
