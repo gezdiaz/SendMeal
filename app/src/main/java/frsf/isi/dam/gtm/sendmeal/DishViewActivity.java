@@ -1,11 +1,13 @@
 package frsf.isi.dam.gtm.sendmeal;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -66,6 +68,30 @@ public class DishViewActivity extends AppCompatActivity {
         Intent i1 = new Intent(this, CreateActivity.class);
         i1.putExtra("position", pos);
         startActivityForResult(i1, 1);
+    }
+
+    public void removeDish(final int pos){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(R.string.removeDishQuestion);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //TODO eliminar plato dela base de datos
+                Plato.platos.remove(pos);
+                ((PlatoAdapter) adapter).updatePaltos(Plato.platos);
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                return;
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 
     @Override

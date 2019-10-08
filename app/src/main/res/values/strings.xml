@@ -60,4 +60,7 @@
     <string name="offerBtn">OFERTA</string>
     <string name="editBtn">EDITAR</string>
     <string name="removeBtn">QUITAR</string>
+    <string name="removeDishQuestion">¿ESTÁ SEGURO QUE DESEA ELIMINAR EL PLATO SELECCIONADO?</string>
+    <string name="ok">Sí</string>
+    <string name="cancel">Cancelar</string>
 </resources>

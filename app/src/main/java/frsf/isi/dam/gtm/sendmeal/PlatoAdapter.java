@@ -77,6 +77,8 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
             @Override
             public void onClick(View view) {
             //TODO falta todo
+                Integer pos = (Integer) holder.getAdapterPosition();
+                activity.removeDish(pos);
             }
         });
 
