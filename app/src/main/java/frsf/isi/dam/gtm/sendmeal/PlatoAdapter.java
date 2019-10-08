@@ -28,7 +28,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
         this.activity = activity;
     }
 
-    public void updatePaltos(List<Plato> newPlatos){
+    public void updatePlatos(List<Plato> newPlatos){
         platoViewDataSet = newPlatos;
         notifyDataSetChanged();
     }

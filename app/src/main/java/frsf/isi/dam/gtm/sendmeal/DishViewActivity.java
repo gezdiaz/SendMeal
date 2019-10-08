@@ -11,8 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -77,15 +75,15 @@ public class DishViewActivity extends AppCompatActivity {
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //TODO eliminar plato dela base de datos
+                //TODO eliminar plato de la base de datos
                 Plato.platos.remove(pos);
-                ((PlatoAdapter) adapter).updatePaltos(Plato.platos);
+                ((PlatoAdapter) adapter).updatePlatos(Plato.platos);
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                return;
+
             }
         });
 
@@ -100,7 +98,7 @@ public class DishViewActivity extends AppCompatActivity {
 
         List<Plato> platos = (ArrayList<Plato>) data.getExtras().get("platos");
         if(platos != null){
-            ((PlatoAdapter)adapter).updatePaltos(platos);
+            ((PlatoAdapter)adapter).updatePlatos(platos);
         }
     }
 }
