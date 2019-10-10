@@ -3,6 +3,7 @@ package frsf.isi.dam.gtm.sendmeal;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.DecimalFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,15 +53,37 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
         holder.dishNameView.setText(plato.getTitulo());
         holder.dishPriceView.setText(context.getString(R.string.dishPriceListLabel)+format.format(plato.getPrecio()));
 
-        int[] images = {R.drawable.milanesa, R.drawable.hamburger, R.drawable.papas_cheddar, R.drawable.pizza, R.drawable.tarta, R.drawable.tarta_vertical};
-        Random rand = new Random();
-        holder.dishImageView.setImageResource(images[rand.nextInt(images.length)]);
+        holder.dishImageView.setImageResource(R.drawable.hamburger);
+
+        if(plato.getInOffer()){
+            holder.offerImage.setVisibility(View.VISIBLE);
+        }else{
+            holder.offerImage.setVisibility(View.INVISIBLE);
+        }
+
         holder.offerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Integer pos = (Integer) holder.getAdapterPosition();
                 platoViewDataSet.get(pos).switchInOffer();
-                //TODO Falta crear hilo secundario.
+                updatePlatos(Plato.platos);
+
+                if(platoViewDataSet.get(pos).getInOffer()){
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            try{
+                                sleep(10000);
+                                Intent i = new Intent();
+                                i.setAction(NotificationReceiver.OFFERNOTIFICATION);
+                                activity.sendBroadcast(i);
+                            }catch (Exception e){
+                                Log.e("exeption", "Se capturo una exepción en el hilo secundario");
+                            }
+                        }
+                    }.start();
+                }
+
             }
         });
 
@@ -81,9 +104,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
                 activity.removeDish(pos);
             }
         });
-
     }
-
     @Override
     public int getItemCount() {
         return platoViewDataSet.size();

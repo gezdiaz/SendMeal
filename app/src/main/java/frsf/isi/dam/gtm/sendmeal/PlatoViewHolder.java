@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class PlatoViewHolder extends RecyclerView.ViewHolder {
-    public ImageView dishImageView;
+    public ImageView dishImageView, offerImage;
     public TextView dishNameView, dishPriceView;
     public Button offerBtn, editBtn, removeBtn;
 
@@ -21,6 +21,6 @@ public class PlatoViewHolder extends RecyclerView.ViewHolder {
         offerBtn = itemView.findViewById(R.id.offerBtn);
         editBtn = itemView.findViewById(R.id.editBtn);
         removeBtn = itemView.findViewById(R.id.removeBtn);
-
+        offerImage = itemView.findViewById(R.id.offerImage);
     }
 }
