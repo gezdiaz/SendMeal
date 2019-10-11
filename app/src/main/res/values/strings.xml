@@ -55,7 +55,7 @@
     <string name="emptyFieldCreateActivity">Este campo no puede estar vacío</string>
     <string name="invalidDishPrice">Ingrese un precio válido</string>
     <string name="invalidDishCalories">Ingrese un valor válido</string>
-    <string name="dishPriceListLabel">Precio: $ </string>
+    <string name="dishPriceListLabel">Precio: </string>
     <string name="dishViewTitle">Platos disponibles</string>
     <string name="offerBtn">OFERTA</string>
     <string name="editBtn">EDITAR</string>
@@ -65,5 +65,9 @@
     <string name="cancel">Cancelar</string>
     <string name="accept">Aceptar</string>
     <string name="selectOffer">Seleccione un porcentaje de oferta</string>
-    <string name="price">Precio: </string>
+    <string name="percentageOver100">El porcentaje no puede ser mayor a 100%</string>
+    <string name="offer100p">¿Está seguro de que desea poner una oferta de 100%?</string>
+    <string name="offer0p">No puede poner una oferta de 0%</string>
+    <string name="no">No</string>
+    <string name="noPercentage">Debe ingresar un porcentaje</string>
 </resources>

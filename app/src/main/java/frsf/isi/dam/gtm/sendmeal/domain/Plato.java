@@ -28,7 +28,7 @@ public class Plato implements Serializable {
     }
 
     public boolean switchInOffer(Double off){
-        this.inOffer=!inOffer;
+        inOffer=!inOffer;
         if(inOffer){
             oferta = off;
         }else{
@@ -104,5 +104,9 @@ public class Plato implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, titulo, descripcion, precio, calorias);
+    }
+
+    public Integer getOferta() {
+        return ((Double) (oferta*100)).intValue();
     }
 }

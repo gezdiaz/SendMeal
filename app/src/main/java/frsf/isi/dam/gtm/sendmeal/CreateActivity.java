@@ -162,19 +162,25 @@ public class CreateActivity extends AppCompatActivity {
                 }else {
                     toast = Toast.makeText(context,getString(R.string.successToast),Toast.LENGTH_SHORT);
                     toast.show();
-                    Plato plato = new Plato(
-                            Integer.parseInt(idDishEdit.getText().toString()),
-                            dishNameEdit.getText().toString(),
-                            dishDescriptionEdit.getText().toString(),
-                            Double.parseDouble(dishPriceEdit.getText().toString()),
-                            Integer.parseInt(dishCaloriesEdit.getText().toString())
-                    );
+
                     if(pos >=0){
-                        Plato.platos.set(pos,plato);
+                        Plato plato = Plato.platos.get(pos);
+                        plato.setId(Integer.parseInt(idDishEdit.getText().toString()));
+                        plato.setTitulo(dishNameEdit.getText().toString());
+                        plato.setDescripcion(dishDescriptionEdit.getText().toString());
+                        plato.setPrecio(Double.parseDouble(dishPriceEdit.getText().toString()));
+                        plato.setCalorias(Integer.parseInt(dishCaloriesEdit.getText().toString()));
                         Intent res = new Intent();
                         res.putExtra("platos", Plato.platos);
                         setResult(Activity.RESULT_OK, res);
                     }else{
+                        Plato plato = new Plato(
+                                Integer.parseInt(idDishEdit.getText().toString()),
+                                dishNameEdit.getText().toString(),
+                                dishDescriptionEdit.getText().toString(),
+                                Double.parseDouble(dishPriceEdit.getText().toString()),
+                                Integer.parseInt(dishCaloriesEdit.getText().toString())
+                        );
                         Plato.platos.add(plato);
                     }
                     CreateActivity.this.finish();
