@@ -63,4 +63,7 @@
     <string name="removeDishQuestion">¿ESTÁ SEGURO QUE DESEA ELIMINAR EL PLATO SELECCIONADO?</string>
     <string name="ok">Sí</string>
     <string name="cancel">Cancelar</string>
+    <string name="accept">Aceptar</string>
+    <string name="selectOffer">Seleccione un porcentaje de oferta</string>
+    <string name="price">Precio: </string>
 </resources>
