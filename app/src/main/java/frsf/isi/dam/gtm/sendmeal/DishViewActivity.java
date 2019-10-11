@@ -96,9 +96,14 @@ public class DishViewActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        List<Plato> platos = (ArrayList<Plato>) data.getExtras().get("platos");
-        if(platos != null){
-            ((PlatoAdapter)adapter).updatePlatos(platos);
+        try {
+            List<Plato> platos = (ArrayList<Plato>) data.getExtras().get("platos");
+            if(platos != null){
+                ((PlatoAdapter)adapter).updatePlatos(platos);
+            }
+        } catch (Exception e) {
+            //No tiene extras, probablemente porque apretó back.
+            e.printStackTrace();
         }
     }
 }
