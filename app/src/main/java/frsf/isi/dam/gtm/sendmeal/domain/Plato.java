@@ -9,7 +9,7 @@ public class Plato implements Serializable {
     private Integer id;
     private String titulo;
     private String descripcion;
-    private Double precio;
+    private Double precio, oferta;
     private Integer calorias;
     private boolean inOffer;
     public static ArrayList<Plato> platos = new ArrayList<Plato>();
@@ -24,11 +24,21 @@ public class Plato implements Serializable {
         this.precio = precio;
         this.calorias = calorias;
         this.inOffer = false;
+        this.oferta = 0.0;
     }
 
-    public boolean switchInOffer(){
-        this.inOffer=!inOffer;
+    public boolean switchInOffer(Double off){
+        inOffer=!inOffer;
+        if(inOffer){
+            oferta = off;
+        }else{
+            oferta = 0.0;
+        }
         return inOffer;
+    }
+
+    public Double getPrecioOferta(){
+        return precio - (oferta * precio);
     }
 
     public Integer getId() {
@@ -94,5 +104,9 @@ public class Plato implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, titulo, descripcion, precio, calorias);
+    }
+
+    public Integer getOferta() {
+        return ((Double) (oferta*100)).intValue();
     }
 }
