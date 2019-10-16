@@ -197,6 +197,29 @@ public class MainActivity extends AppCompatActivity {
            // }
         });
 
+        accountRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int radioBtnSelectedId) {
+               switch(radioBtnSelectedId){
+                   case (R.id.basicAccountRadio):{
+                       initialCreditSlider.setProgress(0);
+                       break;
+                   }
+                   case (R.id.premiumAccountRadio):{
+                       initialCreditSlider.setProgress(150);
+                       break;
+                   }
+                   case  (R.id.fullAccountRadio):{
+                       initialCreditSlider.setProgress(400);
+                       break;
+                   }
+                   default:{
+                       break;
+                   }
+               }
+            }
+        });
+
         initialCreditSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
