@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
@@ -89,27 +90,11 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
 
                 if(platoViewDataSet.get(pos).getInOffer()){
                     platoViewDataSet.get(pos).switchInOffer(0.0);
+                    Plato.platos = (ArrayList<Plato>)platoViewDataSet;
                     updatePlatos(Plato.platos);
                 }else{
                     createOfferDialog(pos);
                 }
-
-                if(platoViewDataSet.get(pos).getInOffer()){
-                    new Thread(){
-                        @Override
-                        public void run() {
-                            try{
-                                sleep(10000);
-                                Intent i = new Intent();
-                                i.setAction(NotificationReceiver.OFFERNOTIFICATION);
-                                activity.sendBroadcast(i);
-                            }catch (Exception e){
-                                Log.e("exeption", "Se capturo una exepción en el hilo secundario");
-                            }
-                        }
-                    }.start();
-                }
-
             }
         });
 
@@ -160,7 +145,10 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         platoViewDataSet.get(pos).switchInOffer(percentage / 100.0);
+                                        //TODO base de datos
+                                        Plato.platos = (ArrayList<Plato>)platoViewDataSet;
                                         updatePlatos(Plato.platos);
+                                        createThread(pos);
                                     }
                                 });
                                 b.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -173,7 +161,10 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
                                 dial.show();
                             } else {
                                 platoViewDataSet.get(pos).switchInOffer(percentage / 100.0);
+                                //TODO base de datos
+                                Plato.platos = (ArrayList<Plato>)platoViewDataSet;
                                 updatePlatos(Plato.platos);
+                                createThread(pos);
                             }
                         }
                     }
@@ -200,5 +191,23 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
         return platoViewDataSet.size();
     }
 
+    private void createThread(final Integer pos) {
+        System.out.println("Antes de crear el hilo");
+        new Thread(){
+            @Override
+            public void run() {
+                try{
+                    sleep(10000);
+                    Intent i = new Intent();
+                    i.setAction(NotificationReceiver.OFFERNOTIFICATION);
+                    i.putExtra("plato", platoViewDataSet.get(pos));
+                    context.sendBroadcast(i);
+                }catch (Exception e){
+                    Log.e("exeption", "Se capturo una exepción en el hilo secundario");
+                }
+            }
+        }.start();
+
+    }
 
 }

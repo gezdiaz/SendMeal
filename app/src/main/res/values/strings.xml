@@ -70,4 +70,7 @@
     <string name="offer0p">No puede poner una oferta de 0%</string>
     <string name="no">No</string>
     <string name="noPercentage">Debe ingresar un porcentaje</string>
+    <string name="CHANNEL_ID">idDeCanal</string>
+    <string name="notification_title">¡Hay una nueva oferta!</string>
+    <string name="notification_content">Toca para ver qué plato está en oferta</string>
 </resources>
