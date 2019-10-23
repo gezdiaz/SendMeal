@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import frsf.isi.dam.gtm.sendmeal.dao.RetrofitRepository;
+
 public class Plato implements Serializable {
 
     private Integer id;
@@ -12,7 +14,7 @@ public class Plato implements Serializable {
     private Double precio, oferta;
     private Integer calorias;
     private boolean inOffer;
-    public static ArrayList<Plato> platos = new ArrayList<Plato>();
+    public static ArrayList<Plato> platos;
 
     public Plato() {
     }

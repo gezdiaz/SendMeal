@@ -19,10 +19,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import frsf.isi.dam.gtm.sendmeal.dao.RetrofitRepository;
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
 
@@ -31,14 +36,32 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
     private Context context;
 
 
-    public PlatoAdapter (List<Plato> myPlatosDataSet, DishViewActivity activity) {
-        platoViewDataSet = myPlatosDataSet;
+    public PlatoAdapter (DishViewActivity activity) {
         this.activity = activity;
     }
 
-    public void updatePlatos(List<Plato> newPlatos){
-        platoViewDataSet = newPlatos;
-        notifyDataSetChanged();
+    public void setPlatoViewDataSet(List<Plato> platoViewDataSet) {
+        this.platoViewDataSet = platoViewDataSet;
+    }
+
+    public void updatePlatos(){
+        final Call<List<Plato>> c = RetrofitRepository.getInstance().getPlatos();
+        new Thread(){
+            @Override
+            public void run() {
+                Response<List<Plato>> response;
+                try {
+                    response = c.execute();
+                    PlatoAdapter.this.platoViewDataSet = response.body();
+                    PlatoAdapter.this.notifyDataSetChanged();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("Error en updatePlatos del Adapter");
+                }
+
+            }
+        }.start();
+
     }
 
     @NonNull
@@ -91,7 +114,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
                 if(platoViewDataSet.get(pos).getInOffer()){
                     platoViewDataSet.get(pos).switchInOffer(0.0);
                     Plato.platos = (ArrayList<Plato>)platoViewDataSet;
-                    updatePlatos(Plato.platos);
+                    updatePlatos();
                 }else{
                     createOfferDialog(pos);
                 }
@@ -101,16 +124,14 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
         holder.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO falta actualizar lista.
                 Integer pos = (Integer) holder.getAdapterPosition();
-                activity.editDish(pos);
+                activity.editDish(platoViewDataSet.get(pos).getId());
             }
         });
 
         holder.removeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            //TODO falta todo
                 Integer pos = (Integer) holder.getAdapterPosition();
                 activity.removeDish(pos);
             }
@@ -147,7 +168,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
                                         platoViewDataSet.get(pos).switchInOffer(percentage / 100.0);
                                         //TODO base de datos
                                         Plato.platos = (ArrayList<Plato>)platoViewDataSet;
-                                        updatePlatos(Plato.platos);
+                                        updatePlatos();
                                         createThread(pos);
                                     }
                                 });
@@ -163,7 +184,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
                                 platoViewDataSet.get(pos).switchInOffer(percentage / 100.0);
                                 //TODO base de datos
                                 Plato.platos = (ArrayList<Plato>)platoViewDataSet;
-                                updatePlatos(Plato.platos);
+                                updatePlatos();
                                 createThread(pos);
                             }
                         }

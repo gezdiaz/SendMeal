@@ -16,7 +16,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import frsf.isi.dam.gtm.sendmeal.dao.RetrofitRepository;
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DishViewActivity extends AppCompatActivity {
 
@@ -44,7 +48,24 @@ public class DishViewActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         dishRecyclerView.setLayoutManager(layoutManager);
 
-        adapter = new PlatoAdapter(Plato.platos, this);
+        adapter = new PlatoAdapter(this);
+        ((PlatoAdapter)adapter).setPlatoViewDataSet(new ArrayList<Plato>());
+
+        RetrofitRepository.getInstance().getPlatos().enqueue(new Callback<List<Plato>>() {
+            @Override
+            public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
+                if(response.isSuccessful()){
+                    ((PlatoAdapter) adapter).setPlatoViewDataSet(response.body());
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Plato>> call, Throwable t) {
+
+            }
+        });
+
         dishRecyclerView.setAdapter(adapter);
 
     }
@@ -64,7 +85,7 @@ public class DishViewActivity extends AppCompatActivity {
 
     public void editDish(int pos){
         Intent i1 = new Intent(this, CreateActivity.class);
-        i1.putExtra("position", pos);
+        i1.putExtra("platoId", pos);
         startActivityForResult(i1, 1);
     }
 
@@ -77,7 +98,7 @@ public class DishViewActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 //TODO eliminar plato de la base de datos
                 Plato.platos.remove(pos);
-                ((PlatoAdapter) adapter).updatePlatos(Plato.platos);
+                ((PlatoAdapter) adapter).updatePlatos();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -99,7 +120,7 @@ public class DishViewActivity extends AppCompatActivity {
         try {
             List<Plato> platos = (ArrayList<Plato>) data.getExtras().get("platos");
             if(platos != null){
-                ((PlatoAdapter)adapter).updatePlatos(platos);
+                ((PlatoAdapter)adapter).updatePlatos();
             }
         } catch (Exception e) {
             //No tiene extras, probablemente porque apretó back.

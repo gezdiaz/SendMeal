@@ -1,0 +1,68 @@
+{
+  "platos": [
+    {
+      "calorias": 646,
+      "descripcion": "jdud",
+      "id": 7664,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 6464,
+      "titulo": "NOMBRE"
+    },
+    {
+      "calorias": 64,
+      "descripcion": "ud",
+      "id": 644,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 34,
+      "titulo": "js"
+    },
+    {
+      "calorias": 68,
+      "descripcion": "ud",
+      "id": 31,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 64,
+      "titulo": "sj"
+    },
+    {
+      "calorias": 64,
+      "descripcion": "jjdjd",
+      "id": 16,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 6464,
+      "titulo": "hsj"
+    },
+    {
+      "calorias": 64,
+      "descripcion": "la mejor descripción posible",
+      "id": 1,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 200,
+      "titulo": "nuevo nombre"
+    },
+    {
+      "calorias": 646,
+      "descripcion": "jduudud",
+      "id": 64,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 6464,
+      "titulo": "ussus"
+    },
+    {
+      "calorias": 15,
+      "descripcion": "ghh",
+      "id": 23,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 25,
+      "titulo": "plato tomy"
+    }
+  ],
+  "pedidos": []
+}

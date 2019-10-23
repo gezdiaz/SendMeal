@@ -13,7 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import frsf.isi.dam.gtm.sendmeal.dao.RetrofitRepository;
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateActivity extends AppCompatActivity {
 
@@ -21,7 +25,7 @@ public class CreateActivity extends AppCompatActivity {
     private EditText idDishEdit, dishNameEdit, dishDescriptionEdit, dishPriceEdit, dishCaloriesEdit;
     private Button saveDishBtn;
     private boolean[] validations;
-    private int pos = -1;
+    private int id = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +46,31 @@ public class CreateActivity extends AppCompatActivity {
         dishCaloriesEdit = findViewById(R.id.dishCaloriesEdit);
         saveDishBtn = findViewById(R.id.saveDishBtn);
 
-        pos = getIntent().getIntExtra("position", -1);
+        id = getIntent().getIntExtra("platoId", -1);
 
-        if(pos >= 0){
-            Plato plato = Plato.platos.get(pos);
-            idDishEdit.setText(plato.getId().toString());
-            dishNameEdit.setText(plato.getTitulo());
-            dishDescriptionEdit.setText(plato.getDescripcion());
-            dishPriceEdit.setText(plato.getPrecio().toString());
-            dishCaloriesEdit.setText(plato.getCalorias().toString());
-            for(int i=0 ; i<validations.length; i++){
-                validations[i] = true;
-            }
+        if(id >= 0){
+            Call<Plato> c = RetrofitRepository.getInstance().getPlatoById(id);
+            c.enqueue(new Callback<Plato>() {
+                @Override
+                public void onResponse(Call<Plato> call, Response<Plato> response) {
+                    if(response.isSuccessful()){
+                        Plato plato = response.body();
+                        idDishEdit.setText(plato.getId().toString());
+                        dishNameEdit.setText(plato.getTitulo());
+                        dishDescriptionEdit.setText(plato.getDescripcion());
+                        dishPriceEdit.setText(plato.getPrecio().toString());
+                        dishCaloriesEdit.setText(plato.getCalorias().toString());
+                        for(int i=0 ; i<validations.length; i++){
+                            validations[i] = true;
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Plato> call, Throwable t) {
+                    System.out.println("Se produjo un error al cargar el plato: "+t.toString());
+                }
+            });
         }
 
 
@@ -163,25 +180,40 @@ public class CreateActivity extends AppCompatActivity {
                     toast = Toast.makeText(context,getString(R.string.successToast),Toast.LENGTH_SHORT);
                     toast.show();
 
-                    if(pos >=0){
-                        Plato plato = Plato.platos.get(pos);
-                        plato.setId(Integer.parseInt(idDishEdit.getText().toString()));
-                        plato.setTitulo(dishNameEdit.getText().toString());
-                        plato.setDescripcion(dishDescriptionEdit.getText().toString());
-                        plato.setPrecio(Double.parseDouble(dishPriceEdit.getText().toString()));
-                        plato.setCalorias(Integer.parseInt(dishCaloriesEdit.getText().toString()));
-                        Intent res = new Intent();
-                        res.putExtra("platos", Plato.platos);
-                        setResult(Activity.RESULT_OK, res);
+                    if(id >=0){
+                        Call<Plato> c = RetrofitRepository.getInstance().getPlatoById(id);
+                        c.enqueue(new Callback<Plato>() {
+                            @Override
+                            public void onResponse(Call<Plato> call, Response<Plato> response) {
+                                if(response.isSuccessful()){
+                                    Plato plato = response.body();
+                                    plato.setId(Integer.parseInt(idDishEdit.getText().toString()));
+                                    plato.setTitulo(dishNameEdit.getText().toString());
+                                    plato.setDescripcion(dishDescriptionEdit.getText().toString());
+                                    plato.setPrecio(Double.parseDouble(dishPriceEdit.getText().toString()));
+                                    plato.setCalorias(Integer.parseInt(dishCaloriesEdit.getText().toString()));
+                                    Intent res = new Intent();
+                                    RetrofitRepository.getInstance().updatePlato(plato);
+                                    //res.putExtra("platos", Plato.platos);
+                                    setResult(Activity.RESULT_OK, res);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Plato> call, Throwable t) {
+
+                            }
+                        });
                     }else{
-                        Plato plato = new Plato(
+                        final Plato plato = new Plato(
                                 Integer.parseInt(idDishEdit.getText().toString()),
                                 dishNameEdit.getText().toString(),
                                 dishDescriptionEdit.getText().toString(),
                                 Double.parseDouble(dishPriceEdit.getText().toString()),
                                 Integer.parseInt(dishCaloriesEdit.getText().toString())
                         );
-                        Plato.platos.add(plato);
+                        //Plato.platos.add(plato);
+                        RetrofitRepository.getInstance().savePlato(plato);
                     }
                     CreateActivity.this.finish();
                 }

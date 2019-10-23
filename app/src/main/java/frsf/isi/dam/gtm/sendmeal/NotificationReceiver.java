@@ -24,8 +24,6 @@ public class NotificationReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
        Log.i("info","Se recibió el mensaje");
-        //TODO enviar notificación
-//        try{
             Plato plato = (Plato)intent.getExtras().get("plato");
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context,context.getResources().getString(R.string.CHANNEL_ID));
             builder.setSmallIcon(R.drawable.ic_fastfood);
@@ -42,9 +40,6 @@ public class NotificationReceiver extends BroadcastReceiver {
             builder.setContentText(text);
             Notification notif = builder.build();
             NotificationManagerCompat.from(context).notify(4,notif);
-//        }catch(Exception e){
-//            Log.e("Exeption","Se produjo un error en el NotificationReceiver");
-//        }
 
     }
 }
