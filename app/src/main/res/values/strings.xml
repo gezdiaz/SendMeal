@@ -74,4 +74,5 @@
     <string name="notification_title">¡Hay una nueva oferta!</string>
     <string name="notification_content">Toca para ver qué plato está en oferta</string>
     <string name="welcomeLbl">BIENVENIDO</string>
+    <string name="toolbarTitleOfferNotificationActivity">Oferta</string>
 </resources>
