@@ -3,7 +3,9 @@ package frsf.isi.dam.gtm.sendmeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +23,7 @@ public class ShowDishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create);
         toolbar = findViewById(R.id.createToolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.toolbarTitleOfferNotificationActivity);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);// set drawable icon
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -53,5 +56,16 @@ public class ShowDishActivity extends AppCompatActivity {
         dishPriceEdit.setEnabled(false);
         dishCaloriesEdit.setEnabled(false);
         saveDishBtn.setVisibility(View.GONE);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent goToHomeActivity = new Intent(this,HomeActivity.class);
+                startActivity(goToHomeActivity);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

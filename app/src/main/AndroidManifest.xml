@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ShowDishActivity"></activity>
+        <activity android:name=".ShowDishActivity"
+            android:parentActivityName=".HomeActivity"></activity>
         <activity android:name=".DishViewActivity" />
         <activity android:name=".CreateActivity" />
         <activity android:name=".HomeActivity">
