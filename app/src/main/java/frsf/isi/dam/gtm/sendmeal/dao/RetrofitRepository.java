@@ -86,20 +86,21 @@ public class RetrofitRepository {
         }.start();
     }
 
-    public void updatePlato(Plato plato){
+    public Call<Plato> updatePlato(Plato plato){
         final Call<Plato> call = platoRest.updatePlato(plato.getId(),plato);
-        new Thread(){
-            @Override
-            public void run() {
-                Response<Plato> resp = null;
-                try{
-                    resp = call.execute();
-                    System.out.println("Ejecuto correctamente updatePlato en repository");
-                }catch (Exception e){
-                    System.out.println(e.toString());
-                }
-            }
-        }.start();
+//        new Thread(){
+//            @Override
+//            public void run() {
+//                Response<Plato> resp = null;
+//                try{
+//                    resp = call.execute();
+//                    System.out.println("Ejecuto correctamente updatePlato en repository");
+//                }catch (Exception e){
+//                    System.out.println(e.toString());
+//                }
+//            }
+//        }.start();
+        return call;
     }
 
 }

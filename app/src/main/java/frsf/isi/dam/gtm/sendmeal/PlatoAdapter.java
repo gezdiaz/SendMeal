@@ -46,21 +46,40 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
 
     public void updatePlatos(){
         final Call<List<Plato>> c = RetrofitRepository.getInstance().getPlatos();
-        new Thread(){
+
+        c.enqueue(new Callback<List<Plato>>() {
             @Override
-            public void run() {
-                Response<List<Plato>> response;
-                try {
-                    response = c.execute();
+            public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
+                if(response.isSuccessful()) {
                     PlatoAdapter.this.platoViewDataSet = response.body();
                     PlatoAdapter.this.notifyDataSetChanged();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println("Error en updatePlatos del Adapter");
                 }
-
             }
-        }.start();
+
+            @Override
+            public void onFailure(Call<List<Plato>> call, Throwable t) {
+                System.out.println("onFailure");
+            }
+        });
+
+//        new Thread(){
+//            @Override
+//            public void run() {
+//                Response<List<Plato>> response;
+//                System.out.println("Hilo secundario en update platos");
+//                try {
+//                    System.out.println("Antes del execute");
+//                    response = c.execute();
+//                    System.out.println("Después del execute");
+//                    PlatoAdapter.this.platoViewDataSet = response.body();
+//                    PlatoAdapter.this.notifyDataSetChanged();
+//                    System.out.println("Terminó todo bien");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    System.out.println("Error en updatePlatos del Adapter");
+//                }
+//            }
+//        }.start();
 
     }
 
@@ -165,11 +184,28 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
                                 b.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        platoViewDataSet.get(pos).switchInOffer(percentage / 100.0);
+                                        Plato plato = platoViewDataSet.get(pos);
+                                        plato.switchInOffer(percentage / 100.0);
                                         //TODO base de datos
-                                        Plato.platos = (ArrayList<Plato>)platoViewDataSet;
-                                        updatePlatos();
-                                        createThread(pos);
+                                        //Plato.platos = (ArrayList<Plato>)platoViewDataSet;
+                                        Call<Plato> call = RetrofitRepository.getInstance().updatePlato(plato);
+                                        call.enqueue(new Callback<Plato>() {
+                                            @Override
+                                            public void onResponse(Call<Plato> call, Response<Plato> response) {
+                                                if (response.isSuccessful()) {
+                                                    System.out.println("Se actualiza el plato en oferta");
+                                                    updatePlatos();
+                                                    createThread(pos);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<Plato> call, Throwable t) {
+                                                //TODO falla actualización de platos en DB
+                                                System.out.println("Falla la actualización del plato");
+                                            }
+                                        });
+
                                     }
                                 });
                                 b.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {

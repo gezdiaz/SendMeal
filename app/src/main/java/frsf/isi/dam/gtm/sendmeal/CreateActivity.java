@@ -156,8 +156,8 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boolean valid = true;
-                Context context = getApplicationContext();
-                Toast toast;
+                final Context context = getApplicationContext();
+                final Toast toast;
 
                 idDishEdit.clearFocus();
                 dishCaloriesEdit.clearFocus();
@@ -178,8 +178,6 @@ public class CreateActivity extends AppCompatActivity {
                     toast.show();
                 }else {
                     toast = Toast.makeText(context,getString(R.string.successToast),Toast.LENGTH_SHORT);
-                    toast.show();
-
                     if(id >=0){
                         Call<Plato> c = RetrofitRepository.getInstance().getPlatoById(id);
                         c.enqueue(new Callback<Plato>() {
@@ -192,13 +190,29 @@ public class CreateActivity extends AppCompatActivity {
                                     plato.setDescripcion(dishDescriptionEdit.getText().toString());
                                     plato.setPrecio(Double.parseDouble(dishPriceEdit.getText().toString()));
                                     plato.setCalorias(Integer.parseInt(dishCaloriesEdit.getText().toString()));
-                                    Intent res = new Intent();
-                                    RetrofitRepository.getInstance().updatePlato(plato);
+                                    Call<Plato> c = RetrofitRepository.getInstance().updatePlato(plato);
+                                    c.enqueue(new Callback<Plato>() {
+                                        @Override
+                                        public void onResponse(Call<Plato> call, Response<Plato> response) {
+                                            if(response.isSuccessful()) {
+                                                Intent res = new Intent();
+                                                System.out.println("Se setea el resultado de la actividad editar");
+                                                toast.show();
+                                                CreateActivity.this.setResult(Activity.RESULT_OK, res);
+                                                CreateActivity.this.finish();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Plato> call, Throwable thro) {
+                                            Toast t = Toast.makeText(context,"Se produjo un error", Toast.LENGTH_LONG);
+                                            t.show();
+                                        }
+                                    });
                                     //res.putExtra("platos", Plato.platos);
-                                    setResult(Activity.RESULT_OK, res);
+
                                 }
                             }
-
                             @Override
                             public void onFailure(Call<Plato> call, Throwable t) {
 
@@ -214,8 +228,10 @@ public class CreateActivity extends AppCompatActivity {
                         );
                         //Plato.platos.add(plato);
                         RetrofitRepository.getInstance().savePlato(plato);
+                        toast.show();
+                        CreateActivity.this.finish();
                     }
-                    CreateActivity.this.finish();
+
                 }
             }
         });

@@ -116,15 +116,13 @@ public class DishViewActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        ((PlatoAdapter)adapter).updatePlatos();
+    }
 
-        try {
-            List<Plato> platos = (ArrayList<Plato>) data.getExtras().get("platos");
-            if(platos != null){
-                ((PlatoAdapter)adapter).updatePlatos();
-            }
-        } catch (Exception e) {
-            //No tiene extras, probablemente porque apretó back.
-            e.printStackTrace();
-        }
+    @Override
+    protected void onResume() {
+        System.out.println("Se ejecuta onResume");
+        adapter.notifyDataSetChanged();
+        super.onResume();
     }
 }
