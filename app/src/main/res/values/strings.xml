@@ -73,4 +73,5 @@
     <string name="CHANNEL_ID">idDeCanal</string>
     <string name="notification_title">¡Hay una nueva oferta!</string>
     <string name="notification_content">Toca para ver qué plato está en oferta</string>
+    <string name="dish_update_success">Se actualizó el plato correctamente</string>
 </resources>

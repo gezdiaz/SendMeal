@@ -1,5 +1,6 @@
 package frsf.isi.dam.gtm.sendmeal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -7,6 +8,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +31,36 @@ public class CreateActivity extends AppCompatActivity {
     private Button saveDishBtn;
     private boolean[] validations;
     private int id = -1;
+
+    private Handler handler = new Handler(Looper.myLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what){
+                case RetrofitRepository.ALTA_PLATO: {
+                    System.out.println("Se recibió el mensaje ALTA_PLATO");
+                    Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.successToast), Toast.LENGTH_SHORT);
+                    toast.show();
+                    CreateActivity.this.finish();
+                    break;
+                }
+                case RetrofitRepository.UPDATE_PLATO:{
+                    System.out.println("Se recibió el mensaje UPDATE_PLATO");
+                    Toast toast = Toast.makeText(getApplicationContext(),R.string.dish_update_success,Toast.LENGTH_SHORT);
+                    toast.show();
+                    CreateActivity.this.finish();
+                    break;
+                }
+                case RetrofitRepository.ERROR_UPDATE_PLATO:
+                case RetrofitRepository.ERROR_ALTA_PLATO:{
+                    System.out.println("Se recibió un mensaje de error");
+                    Toast toast = Toast.makeText(getApplicationContext(),"Error al guardar el plato en la base de datos",Toast.LENGTH_SHORT);
+                    toast.show();
+                    break;
+                }
+
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,7 +212,6 @@ public class CreateActivity extends AppCompatActivity {
                     toast = Toast.makeText(context,getString(R.string.errorToast),Toast.LENGTH_SHORT);
                     toast.show();
                 }else {
-                    toast = Toast.makeText(context,getString(R.string.successToast),Toast.LENGTH_SHORT);
                     if(id >=0){
                         Call<Plato> c = RetrofitRepository.getInstance().getPlatoById(id);
                         c.enqueue(new Callback<Plato>() {
@@ -185,32 +219,11 @@ public class CreateActivity extends AppCompatActivity {
                             public void onResponse(Call<Plato> call, Response<Plato> response) {
                                 if(response.isSuccessful()){
                                     Plato plato = response.body();
-                                    plato.setId(Integer.parseInt(idDishEdit.getText().toString()));
                                     plato.setTitulo(dishNameEdit.getText().toString());
                                     plato.setDescripcion(dishDescriptionEdit.getText().toString());
                                     plato.setPrecio(Double.parseDouble(dishPriceEdit.getText().toString()));
                                     plato.setCalorias(Integer.parseInt(dishCaloriesEdit.getText().toString()));
-                                    Call<Plato> c = RetrofitRepository.getInstance().updatePlato(plato);
-                                    c.enqueue(new Callback<Plato>() {
-                                        @Override
-                                        public void onResponse(Call<Plato> call, Response<Plato> response) {
-                                            if(response.isSuccessful()) {
-                                                Intent res = new Intent();
-                                                System.out.println("Se setea el resultado de la actividad editar");
-                                                toast.show();
-                                                CreateActivity.this.setResult(Activity.RESULT_OK, res);
-                                                CreateActivity.this.finish();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<Plato> call, Throwable thro) {
-                                            Toast t = Toast.makeText(context,"Se produjo un error", Toast.LENGTH_LONG);
-                                            t.show();
-                                        }
-                                    });
-                                    //res.putExtra("platos", Plato.platos);
-
+                                    RetrofitRepository.getInstance().updatePlato(plato, handler);
                                 }
                             }
                             @Override
@@ -219,17 +232,19 @@ public class CreateActivity extends AppCompatActivity {
                             }
                         });
                     }else{
+                        //El id se ignora porque lo pone la base de datos.
                         final Plato plato = new Plato(
-                                Integer.parseInt(idDishEdit.getText().toString()),
                                 dishNameEdit.getText().toString(),
                                 dishDescriptionEdit.getText().toString(),
                                 Double.parseDouble(dishPriceEdit.getText().toString()),
                                 Integer.parseInt(dishCaloriesEdit.getText().toString())
                         );
                         //Plato.platos.add(plato);
-                        RetrofitRepository.getInstance().savePlato(plato);
-                        toast.show();
-                        CreateActivity.this.finish();
+                        plato.setId(null);
+                        RetrofitRepository.getInstance().savePlato(plato, handler);
+                        //se recibe la respuesta en el Handler
+//                        toast.show();
+//                        CreateActivity.this.finish();
                     }
 
                 }

@@ -4,10 +4,10 @@
       "calorias": 646,
       "descripcion": "jdud",
       "id": 7664,
-      "inOffer": false,
-      "oferta": 0,
+      "inOffer": true,
+      "oferta": 0.6,
       "precio": 6464,
-      "titulo": "nombre"
+      "titulo": "nombre👀🤙"
     },
     {
       "calorias": 64,
@@ -62,6 +62,69 @@
       "oferta": 0,
       "precio": 25,
       "titulo": "plato tomy"
+    },
+    {
+      "calorias": 91,
+      "descripcion": "descripción del plato creado con holder",
+      "id": 2,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 35,
+      "titulo": "plato creado con Holder"
+    },
+    {
+      "calorias": 64,
+      "descripcion": "kd",
+      "id": 3,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 64,
+      "titulo": "no"
+    },
+    {
+      "calorias": 580,
+      "descripcion": "jeje",
+      "id": 256,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 123,
+      "titulo": "🤣👍🤘hh"
+    },
+    {
+      "calorias": 67,
+      "descripcion": "kilgelman",
+      "id": 4,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 34,
+      "titulo": "jk"
+    },
+    {
+      "calorias": 64,
+      "descripcion": "udjd",
+      "id": 5,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 646,
+      "titulo": "fueu"
+    },
+    {
+      "calorias": 64,
+      "descripcion": "us",
+      "id": 6,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 34,
+      "titulo": "us"
+    },
+    {
+      "calorias": 64,
+      "descripcion": "jdjd",
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 35,
+      "titulo": "djjd",
+      "id": 7665
     }
   ],
   "pedidos": []

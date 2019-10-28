@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.icu.text.DecimalFormat;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +37,22 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
     private List<Plato> platoViewDataSet;
     DishViewActivity activity;
     private Context context;
+    private Integer globalPos;
+
+    Handler handler = new Handler(Looper.myLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what){
+                case RetrofitRepository.UPDATE_PLATO:
+                    System.out.println("Se recibió el mensaje UPDATE_PLATO");
+                    Toast toast = Toast.makeText(activity.getApplicationContext(),R.string.dish_update_success,Toast.LENGTH_SHORT);
+                    toast.show();
+                    updatePlatos();
+                    createThread(globalPos);
+                    break;
+            }
+        }
+    };
 
 
     public PlatoAdapter (DishViewActivity activity) {
@@ -188,24 +207,8 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
                                         plato.switchInOffer(percentage / 100.0);
                                         //TODO base de datos
                                         //Plato.platos = (ArrayList<Plato>)platoViewDataSet;
-                                        Call<Plato> call = RetrofitRepository.getInstance().updatePlato(plato);
-                                        call.enqueue(new Callback<Plato>() {
-                                            @Override
-                                            public void onResponse(Call<Plato> call, Response<Plato> response) {
-                                                if (response.isSuccessful()) {
-                                                    System.out.println("Se actualiza el plato en oferta");
-                                                    updatePlatos();
-                                                    createThread(pos);
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<Plato> call, Throwable t) {
-                                                //TODO falla actualización de platos en DB
-                                                System.out.println("Falla la actualización del plato");
-                                            }
-                                        });
-
+                                        RetrofitRepository.getInstance().updatePlato(plato, handler);
+                                        globalPos = pos;
                                     }
                                 });
                                 b.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -217,11 +220,11 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
                                 AlertDialog dial = b.create();
                                 dial.show();
                             } else {
-                                platoViewDataSet.get(pos).switchInOffer(percentage / 100.0);
+                                Plato plato = platoViewDataSet.get(pos);
+                                plato.switchInOffer(percentage / 100.0);
                                 //TODO base de datos
-                                Plato.platos = (ArrayList<Plato>)platoViewDataSet;
-                                updatePlatos();
-                                createThread(pos);
+                                RetrofitRepository.getInstance().updatePlato(plato, handler);
+                                globalPos = pos;
                             }
                         }
                     }
