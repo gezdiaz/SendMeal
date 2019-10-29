@@ -9,6 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface PlatoRest {
     @GET("platos/")
@@ -16,6 +17,16 @@ public interface PlatoRest {
 
     @GET("platos/{id}")
     Call<Plato> getPlatoById(@Path("id") int id);
+
+    @GET("platos/")
+    Call<List<Plato>> getPlatosSearchResult(@Query("titulo") String titulo,  @Query("precio_gte") int priceMin, @Query("precio_lte") int priceMax);
+
+    @GET("platos/")
+    Call<List<Plato>> getPlatosSearchResult(@Query("titulo") String titulo);
+
+    @GET("platos/")
+    Call<List<Plato>> getPlatosSearchResult(@Query("precio_gte") int priceMin, @Query("precio_lte") int priceMax);
+
 
     @POST("platos/")
     Call<Plato> savePlato(@Body Plato p);

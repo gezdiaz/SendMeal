@@ -62,6 +62,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
             }
         });
 
+
 //        new Thread(){
 //            @Override
 //            public void run() {
@@ -265,6 +266,27 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
             }
         }.start();
 
+    }
+
+
+    //TODO hecho por Tomy. arreglar
+    public void getPlatosBySearchResults(String title, int priceMin, int priceMax){
+        final Call<List<Plato>> c = RetrofitRepository.getInstance().getPlatosBySearchResults(title, priceMin, priceMax);
+
+        c.enqueue(new Callback<List<Plato>>() {
+            @Override
+            public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
+                if(response.isSuccessful()) {
+                    PlatoAdapter.this.platoViewDataSet = response.body();
+                    PlatoAdapter.this.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Plato>> call, Throwable t) {
+                System.out.println("onFailure");
+            }
+        });
     }
 
 }

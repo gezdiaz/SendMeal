@@ -40,7 +40,7 @@ public class CreateActivity extends AppCompatActivity {
 
         validations = new boolean[5];
         idDishEdit = findViewById(R.id.idDishEdit);
-        dishNameEdit = findViewById(R.id.dishNameEdit);
+        dishNameEdit = findViewById(R.id.dishNameSearchEdit);
         dishDescriptionEdit = findViewById(R.id.dishDescriptionEdit);
         dishPriceEdit = findViewById(R.id.dishPriceEdit);
         dishCaloriesEdit = findViewById(R.id.dishCaloriesEdit);

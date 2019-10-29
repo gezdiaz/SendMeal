@@ -73,4 +73,9 @@
     <string name="CHANNEL_ID">idDeCanal</string>
     <string name="notification_title">¡Hay una nueva oferta!</string>
     <string name="notification_content">Toca para ver qué plato está en oferta</string>
+    <string name="separatorLbl"> - </string>
+    <string name="minPriceEdit">Min</string>
+    <string name="maxPriceEdit">Max</string>
+    <string name="search">Buscar</string>
+    <string name="errorEmptyFields">Debes llenar al menos un campo.</string>
 </resources>

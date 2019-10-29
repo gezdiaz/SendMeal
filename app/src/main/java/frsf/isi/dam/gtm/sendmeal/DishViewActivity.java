@@ -10,7 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,7 +34,6 @@ public class DishViewActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.ViewHolder viewHolder;
     private RecyclerView.LayoutManager layoutManager;
-
 
 
     @Override
@@ -71,10 +75,22 @@ public class DishViewActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        return true;
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
+
+            case R.id.menu_search:
+                createBusquedaDialog();
                 break;
             default:
                 Toast.makeText(this, "....", Toast.LENGTH_LONG).show();
@@ -125,4 +141,40 @@ public class DishViewActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         super.onResume();
     }
+
+    private void createBusquedaDialog(){
+        LayoutInflater inflater = this.getLayoutInflater();
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        final View dialogView = inflater.inflate(R.layout.search_dish_options, null);
+        builder.setView(dialogView);
+        builder.setPositiveButton(R.string.search, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                EditText nameDishEdit = dialogView.findViewById(R.id.dishNameSearchEdit);
+                EditText minPriceEdit = dialogView.findViewById(R.id.minPriceEdit);
+                EditText maxPriceEdit = dialogView.findViewById(R.id.maxPriceEdit);
+
+                if(nameDishEdit.getText().toString().isEmpty() && minPriceEdit.getText().toString().isEmpty() && maxPriceEdit.getText().toString().isEmpty()){
+                    Toast t = Toast.makeText(getApplicationContext(),R.string.errorEmptyFields, Toast.LENGTH_LONG);
+                    t.show();
+                }else{
+                    //TODO acomodarlo bien
+                  ((PlatoAdapter) adapter).getPlatosBySearchResults(nameDishEdit.getText().toString(), Integer.valueOf(minPriceEdit.getText().toString()), Integer.valueOf(maxPriceEdit.getText().toString()));
+
+                }
+
+
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        android.app.AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
 }

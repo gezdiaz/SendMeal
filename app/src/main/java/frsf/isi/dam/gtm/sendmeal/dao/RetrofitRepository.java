@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitRepository {
 
     private static RetrofitRepository instance;
-    private static String SERVER = "http://10.15.158.59:5000";
+    private static String SERVER = "http://10.15.153.240:5000";
 
 
 
@@ -100,6 +100,23 @@ public class RetrofitRepository {
 //                }
 //            }
 //        }.start();
+        return call;
+    }
+
+
+    //TODO prueba hecha por Tomas
+    public Call<List<Plato>> getPlatosBySearchResults(String title, int priceMin, int priceMax){
+        Call<List<Plato>> call = platoRest.getPlatosSearchResult(title, priceMin,priceMax);
+//        Response<List<Plato>> resp = null;
+//        List<Plato> platos = null;
+//        try{
+//            resp = call.execute();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        if(resp != null){
+//            platos= resp.body();
+//        }
         return call;
     }
 

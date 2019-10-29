@@ -33,7 +33,7 @@ public class ShowDishActivity extends AppCompatActivity {
         }
 
         idDishEdit = findViewById(R.id.idDishEdit);
-        dishNameEdit = findViewById(R.id.dishNameEdit);
+        dishNameEdit = findViewById(R.id.dishNameSearchEdit);
         dishDescriptionEdit = findViewById(R.id.dishDescriptionEdit);
         dishPriceEdit = findViewById(R.id.dishPriceEdit);
         dishCaloriesEdit = findViewById(R.id.dishCaloriesEdit);
