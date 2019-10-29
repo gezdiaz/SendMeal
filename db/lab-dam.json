@@ -4,10 +4,10 @@
       "calorias": 646,
       "descripcion": "jdud",
       "id": 7664,
-      "inOffer": true,
-      "oferta": 0.6,
+      "inOffer": false,
+      "oferta": 0,
       "precio": 6464,
-      "titulo": "nombre👀🤙"
+      "titulo": "nombre👀🤙😝"
     },
     {
       "calorias": 64,
@@ -24,7 +24,7 @@
       "id": 31,
       "inOffer": false,
       "oferta": 0,
-      "precio": 64,
+      "precio": 164,
       "titulo": "sj"
     },
     {
@@ -125,6 +125,15 @@
       "precio": 35,
       "titulo": "djjd",
       "id": 7665
+    },
+    {
+      "calorias": 64,
+      "descripcion": "jdjd",
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 646,
+      "titulo": "jdus",
+      "id": 7666
     }
   ],
   "pedidos": []

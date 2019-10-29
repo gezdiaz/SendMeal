@@ -1,7 +1,6 @@
 package frsf.isi.dam.gtm.sendmeal;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,13 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,21 +36,38 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
     private Context context;
     private Integer globalPos;
 
-    Handler handler = new Handler(Looper.myLooper()){
+    private Handler handler = new Handler(Looper.myLooper()){
         @Override
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what){
-                case RetrofitRepository.UPDATE_PLATO:
-                    System.out.println("Se recibió el mensaje UPDATE_PLATO");
-                    Toast toast = Toast.makeText(activity.getApplicationContext(),R.string.dish_update_success,Toast.LENGTH_SHORT);
+                case RetrofitRepository.UPDATE_PLATO: {
+                    Plato updatedPlato = (Plato) msg.obj;
+                    Toast toast = Toast.makeText(activity.getApplicationContext(), R.string.dishUpdateSuccess, Toast.LENGTH_SHORT);
                     toast.show();
+                    if (updatedPlato.getInOffer()) {
+                        createThread(globalPos);
+                    }
                     updatePlatos();
-                    createThread(globalPos);
                     break;
+                }
+                case RetrofitRepository.GETALL_PLATOS:{
+                    platoViewDataSet = (List<Plato>) msg.obj;
+                    notifyDataSetChanged();
+                    break;
+                }
+                case RetrofitRepository.ERROR_GETALL_PLATOS:{
+                    Toast t = Toast.makeText(activity, R.string.databaseGetAllDishesError, Toast.LENGTH_LONG);
+                    t.show();
+                    break;
+                }
+                case RetrofitRepository.ERROR_UPDATE_PLATO:{
+                    Toast t = Toast.makeText(activity, R.string.databaseSaveDishError, Toast.LENGTH_LONG);
+                    t.show();
+                    break;
+                }
             }
         }
     };
-
 
     public PlatoAdapter (DishViewActivity activity) {
         this.activity = activity;
@@ -64,51 +78,15 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
     }
 
     public void updatePlatos(){
-        final Call<List<Plato>> c = RetrofitRepository.getInstance().getPlatos();
-
-        c.enqueue(new Callback<List<Plato>>() {
-            @Override
-            public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
-                if(response.isSuccessful()) {
-                    PlatoAdapter.this.platoViewDataSet = response.body();
-                    PlatoAdapter.this.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Plato>> call, Throwable t) {
-                System.out.println("onFailure");
-            }
-        });
-
-//        new Thread(){
-//            @Override
-//            public void run() {
-//                Response<List<Plato>> response;
-//                System.out.println("Hilo secundario en update platos");
-//                try {
-//                    System.out.println("Antes del execute");
-//                    response = c.execute();
-//                    System.out.println("Después del execute");
-//                    PlatoAdapter.this.platoViewDataSet = response.body();
-//                    PlatoAdapter.this.notifyDataSetChanged();
-//                    System.out.println("Terminó todo bien");
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    System.out.println("Error en updatePlatos del Adapter");
-//                }
-//            }
-//        }.start();
-
+        RetrofitRepository.getInstance().getPlatos(handler);
     }
 
     @NonNull
     @Override
     public PlatoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View v = (View) LayoutInflater.from(context).inflate(R.layout.fila_plato, parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.fila_plato, parent,false);
         return new PlatoViewHolder(v);
-
     }
 
     @Override
@@ -151,8 +129,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
 
                 if(platoViewDataSet.get(pos).getInOffer()){
                     platoViewDataSet.get(pos).switchInOffer(0.0);
-                    Plato.platos = (ArrayList<Plato>)platoViewDataSet;
-                    updatePlatos();
+                    RetrofitRepository.getInstance().updatePlato(platoViewDataSet.get(pos), handler);
                 }else{
                     createOfferDialog(pos);
                 }

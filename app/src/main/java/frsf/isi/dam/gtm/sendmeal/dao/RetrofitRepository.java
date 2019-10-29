@@ -52,35 +52,48 @@ public class RetrofitRepository {
         return instance;
     }
 
-    public Call<Plato> getPlatoById(int id){
+    public void getPlatoById(int id, final Handler handler){
         Call<Plato> call = platoRest.getPlatoById(id);
-        return call;
-//        Response<Plato> resp = null;
-//        Plato plato = null;
-//        try{
-//            resp = call.execute();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        if(resp != null){
-//            plato = resp.body();
-//        }
-//        return plato;
+        call.enqueue(new Callback<Plato>() {
+            @Override
+            public void onResponse(Call<Plato> call, Response<Plato> response) {
+                if (response.isSuccessful()) {
+                    Message m = Message.obtain();
+                    m.what = GET_PLATO;
+                    m.obj = response.body();
+                    handler.sendMessage(m);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Plato> call, Throwable t) {
+                Message m = new Message();
+                m.what = ERROR_GET_PLATO;
+                handler.sendMessage(m);
+            }
+        });
     }
 
-    public Call<List<Plato>> getPlatos(){
+    public void getPlatos(final Handler handler){
         Call<List<Plato>> call = platoRest.getPlatos();
-//        Response<List<Plato>> resp = null;
-//        List<Plato> platos = null;
-//        try{
-//            resp = call.execute();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        if(resp != null){
-//            platos= resp.body();
-//        }
-        return call;
+        call.enqueue(new Callback<List<Plato>>() {
+            @Override
+            public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
+                if(response.isSuccessful()){
+                    Message m = Message.obtain();
+                    m.what = GETALL_PLATOS;
+                    m.obj = response.body();
+                    handler.sendMessage(m);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Plato>> call, Throwable t) {
+                Message m = Message.obtain();
+                m.what = ERROR_GETALL_PLATOS;
+                handler.sendMessage(m);
+            }
+        });
     }
 
     public void savePlato(Plato plato, final Handler handler){
@@ -90,21 +103,17 @@ public class RetrofitRepository {
             @Override
             public void onResponse(Call<Plato> call, Response<Plato> response) {
                 if(response.isSuccessful()){
-                    System.out.println("Se guardó el plato correctamente");
                     Message m = Message.obtain();
                     m.what = ALTA_PLATO;
                     m.obj = response.body();
-                    System.out.println("Se envía el mensaje ALTA_PLATO");
                     handler.sendMessage(m);
                 }
             }
 
             @Override
             public void onFailure(Call<Plato> call, Throwable t) {
-                System.out.println("Se produjo un error al guardar el plato");
                 Message m = new Message();
                 m.what = ERROR_ALTA_PLATO;
-                System.out.println("Se envía el mensaje ERROR_ALTA_PLATO");
                 handler.sendMessage(m);
             }
         });
@@ -112,26 +121,21 @@ public class RetrofitRepository {
 
     public void updatePlato(Plato plato, final Handler handler){
         final Call<Plato> call = platoRest.updatePlato(plato.getId(),plato);
-        System.out.println("Ejecuta updatePlato en Retrofit");
         call.enqueue(new Callback<Plato>() {
             @Override
             public void onResponse(Call<Plato> call, Response<Plato> response) {
                 if(response.isSuccessful()){
-                    System.out.println("Se actualizó el plato correctamente");
                     Message m = new Message();
                     m.what = UPDATE_PLATO;
                     m.obj = response.body();
-                    System.out.println("Se envía el mensaje UPDATE_PLATO");
                     handler.sendMessage(m);
                 }
             }
 
             @Override
             public void onFailure(Call<Plato> call, Throwable t) {
-                System.out.println("Se produjo un error al guardar el plato");
                 Message m = new Message();
                 m.what = ERROR_UPDATE_PLATO;
-                System.out.println("Se envía el mensaje ERROR_UPDATE_PLATO");
                 handler.sendMessage(m);
             }
         });

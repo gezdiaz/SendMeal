@@ -73,5 +73,11 @@
     <string name="CHANNEL_ID">idDeCanal</string>
     <string name="notification_title">¡Hay una nueva oferta!</string>
     <string name="notification_content">Toca para ver qué plato está en oferta</string>
-    <string name="dish_update_success">Se actualizó el plato correctamente</string>
+    <string name="dishUpdateSuccess">Se actualizó el plato correctamente</string>
+    <string name="databaseSaveDishError">Se produjo un error al intentar guardar el plato en la base de datos</string>
+    <string name="pleaseWait">Por favor espere</string>
+    <string name="loadingDishData">Cargando datos del plato seleccionado</string>
+    <string name="databaseGetDishError">Se produjo un error al obtener el plato de la base de datos</string>
+    <string name="databaseGetAllDishesError">Se produjo un error al obtener los platos de la base de datos</string>
+    <string name="loadingDishListFromDatabase">Cargando lista de platos de la base de datos</string>
 </resources>
