@@ -51,6 +51,10 @@ public class HomeActivity extends AppCompatActivity {
                 Intent i3 = new Intent(this, DishViewActivity.class);
                 startActivity(i3);
                 break;
+            case R.id.newOrderOptionItem:
+                Intent i4 = new Intent(this, PedidoCreateActivity.class);
+                startActivity(i4);
+                break;
             default:
                 Toast.makeText(this, "....", Toast.LENGTH_LONG).show();
                 return super.onOptionsItemSelected(item);

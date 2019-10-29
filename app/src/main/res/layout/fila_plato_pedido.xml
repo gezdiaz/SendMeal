@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/dishImageViewPedido"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:srcCompat="@drawable/hamburger" />
+
+        <ImageView
+            android:id="@+id/offerImagePedido"
+            android:layout_width="120dp"
+            android:layout_height="90dp"
+            android:layout_alignLeft="@id/dishImageViewPedido"
+            android:layout_alignTop="@id/dishImageViewPedido"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/oferta" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:layout_alignBottom="@id/dishImageViewPedido"
+            android:background="@drawable/gradiet_overlay"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dishNameLblPedido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="Name"
+                android:textColor="@color/textCardView"
+                android:textSize="30dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/priceLblPedido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dishPriceListLabel"
+                    android:textColor="@color/textCardView"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/dishPricePedido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:maxLines="1"
+                    android:text="$ 2000.50"
+                    android:textColor="@color/textCardView"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/offerPricePedido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="$ 1000.25"
+                    android:textColor="@color/textCardView"
+                    android:textSize="25dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/decreaseBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00000000"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="-"
+                    android:textAlignment="center"
+                    android:textColor="@color/textCardView"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/quantityPedido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textAlignment="center"
+                    android:textColor="@color/textCardView"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/increaseBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00FFFFFF"
+                    android:text="+"
+                    android:textColor="@color/textCardView"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

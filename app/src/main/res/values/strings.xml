@@ -87,4 +87,7 @@
     <string name="loadingDishListFromDatabase">Cargando lista de platos de la base de datos.</string>
     <string name="databaseDeleteDishError">Se produjo un error al intentar eleiminar el plato de la base de datos.</string>
     <string name="dishDeleteSuccess">El plato fue eliminado correctamente de la base de datos.</string>
+    <string name="newOrderOptionItem">Nuevo pedido</string>
+    <string name="createOrderBtn">Crear pedido</string>
+    <string name="sendOrderBtn">Enviar pedido</string>
 </resources>
