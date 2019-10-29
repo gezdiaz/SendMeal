@@ -10,60 +10,6 @@
       "titulo": "nombre👀🤙😝"
     },
     {
-      "calorias": 64,
-      "descripcion": "ud",
-      "id": 644,
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 34,
-      "titulo": "js"
-    },
-    {
-      "calorias": 68,
-      "descripcion": "ud",
-      "id": 31,
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 164,
-      "titulo": "sj"
-    },
-    {
-      "calorias": 64,
-      "descripcion": "jjdjd",
-      "id": 16,
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 6464,
-      "titulo": "hsj"
-    },
-    {
-      "calorias": 64,
-      "descripcion": "la mejor descripción posible",
-      "id": 1,
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 200,
-      "titulo": "nuevo nombre"
-    },
-    {
-      "calorias": 646,
-      "descripcion": "jduudud",
-      "id": 64,
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 6464,
-      "titulo": "ussus"
-    },
-    {
-      "calorias": 15,
-      "descripcion": "ghh",
-      "id": 23,
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 25,
-      "titulo": "plato tomy"
-    },
-    {
       "calorias": 91,
       "descripcion": "descripción del plato creado con holder",
       "id": 2,
@@ -71,24 +17,6 @@
       "oferta": 0,
       "precio": 35,
       "titulo": "plato creado con Holder"
-    },
-    {
-      "calorias": 64,
-      "descripcion": "kd",
-      "id": 3,
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 64,
-      "titulo": "no"
-    },
-    {
-      "calorias": 580,
-      "descripcion": "jeje",
-      "id": 256,
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 123,
-      "titulo": "🤣👍🤘hh"
     },
     {
       "calorias": 67,
@@ -110,15 +38,6 @@
     },
     {
       "calorias": 64,
-      "descripcion": "us",
-      "id": 6,
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 34,
-      "titulo": "us"
-    },
-    {
-      "calorias": 64,
       "descripcion": "jdjd",
       "inOffer": false,
       "oferta": 0,
@@ -129,11 +48,11 @@
     {
       "calorias": 64,
       "descripcion": "jdjd",
-      "inOffer": false,
-      "oferta": 0,
+      "id": 7666,
+      "inOffer": true,
+      "oferta": 1,
       "precio": 646,
-      "titulo": "jdus",
-      "id": 7666
+      "titulo": "jdus"
     }
   ],
   "pedidos": []

@@ -107,40 +107,10 @@ public class DishViewActivity extends AppCompatActivity {
         startActivityForResult(i1, 1);
     }
 
-    public void removeDish(final int pos){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(R.string.removeDishQuestion);
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //TODO eliminar plato de la base de datos
-                Plato.platos.remove(pos);
-                ((PlatoAdapter) adapter).updatePlatos();
-            }
-        });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ((PlatoAdapter)adapter).updatePlatos();
     }
 
-    @Override
-    protected void onResume() {
-        System.out.println("Se ejecuta onResume");
-        adapter.notifyDataSetChanged();
-        super.onResume();
-    }
 }

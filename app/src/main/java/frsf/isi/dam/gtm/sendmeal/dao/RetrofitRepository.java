@@ -30,6 +30,8 @@ public class RetrofitRepository {
     public static final int GETALL_PLATOS = 6;
     public static final int ERROR_GET_PLATO = 7;
     public static final int ERROR_GETALL_PLATOS = 8;
+    public static final int DELETE_PLATO = 9;
+    public static final int ERROR_DELETE_PLATO = 10;
 
 
     private PlatoRest platoRest;
@@ -136,6 +138,30 @@ public class RetrofitRepository {
             public void onFailure(Call<Plato> call, Throwable t) {
                 Message m = new Message();
                 m.what = ERROR_UPDATE_PLATO;
+                handler.sendMessage(m);
+            }
+        });
+    }
+
+    public void deletePlato(Plato plato, final Handler handler){
+        Call<Plato> call = platoRest.deletePlato(plato.getId());
+        final int id = plato.getId();
+        call.enqueue(new Callback<Plato>() {
+            @Override
+            public void onResponse(Call<Plato> call, Response<Plato> response) {
+                if(response.isSuccessful()){
+                    Message m = new Message();
+                    m.what = DELETE_PLATO;
+                    m.obj = response.body();
+                    m.arg1 = id;
+                    handler.sendMessage(m);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Plato> call, Throwable t) {
+                Message m = new Message();
+                m.what = ERROR_DELETE_PLATO;
                 handler.sendMessage(m);
             }
         });
