@@ -19,8 +19,7 @@ public class Plato implements Serializable {
     public Plato() {
     }
 
-    public Plato(Integer id, String titulo, String descripcion, Double precio, Integer calorias) {
-        this.id = id;
+    public Plato(String titulo, String descripcion, Double precio, Integer calorias) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -110,5 +109,18 @@ public class Plato implements Serializable {
 
     public Integer getOferta() {
         return ((Double) (oferta*100)).intValue();
+    }
+
+    @Override
+    public String toString() {
+        return "Plato{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", precio=" + precio +
+                ", oferta=" + oferta +
+                ", calorias=" + calorias +
+                ", inOffer=" + inOffer +
+                '}';
     }
 }

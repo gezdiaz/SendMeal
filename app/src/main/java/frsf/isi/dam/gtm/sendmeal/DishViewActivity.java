@@ -1,5 +1,6 @@
 package frsf.isi.dam.gtm.sendmeal;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,11 +8,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -35,11 +40,38 @@ public class DishViewActivity extends AppCompatActivity {
     private RecyclerView.ViewHolder viewHolder;
     private RecyclerView.LayoutManager layoutManager;
 
+    private ProgressDialog progressDialog;
+
+    private Handler handler = new Handler(Looper.myLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what){
+                case RetrofitRepository.GETALL_PLATOS:{
+                    List<Plato> platosRecibidos = (List<Plato>) msg.obj;
+                    ((PlatoAdapter) adapter).setPlatoViewDataSet(platosRecibidos);
+                    adapter.notifyDataSetChanged();
+                    if(progressDialog.isShowing()){
+                        progressDialog.cancel();
+                    }
+                    break;
+                }
+                case RetrofitRepository.ERROR_GETALL_PLATOS:{
+                    Toast t = Toast.makeText(DishViewActivity.this, R.string.databaseGetAllDishesError, Toast.LENGTH_LONG);
+                    t.show();
+                    finish();
+                    break;
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dish_view);
+
+        progressDialog = ProgressDialog.show(this,getString(R.string.pleaseWait),getString(R.string.loadingDishListFromDatabase));
+        progressDialog.setCancelable(false);
 
         toolbar = findViewById(R.id.dishViewToolbar);
         setSupportActionBar(toolbar);
@@ -55,20 +87,7 @@ public class DishViewActivity extends AppCompatActivity {
         adapter = new PlatoAdapter(this);
         ((PlatoAdapter)adapter).setPlatoViewDataSet(new ArrayList<Plato>());
 
-        RetrofitRepository.getInstance().getPlatos().enqueue(new Callback<List<Plato>>() {
-            @Override
-            public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
-                if(response.isSuccessful()){
-                    ((PlatoAdapter) adapter).setPlatoViewDataSet(response.body());
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Plato>> call, Throwable t) {
-
-            }
-        });
+        RetrofitRepository.getInstance().getPlatos(handler);
 
         dishRecyclerView.setAdapter(adapter);
 
@@ -105,41 +124,10 @@ public class DishViewActivity extends AppCompatActivity {
         startActivityForResult(i1, 1);
     }
 
-    public void removeDish(final int pos){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(R.string.removeDishQuestion);
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //TODO eliminar plato de la base de datos
-                Plato.platos.remove(pos);
-                ((PlatoAdapter) adapter).updatePlatos();
-            }
-        });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ((PlatoAdapter)adapter).updatePlatos();
-    }
-
-    @Override
-    protected void onResume() {
-        System.out.println("Se ejecuta onResume");
-        adapter.notifyDataSetChanged();
-        super.onResume();
     }
 
     private void createBusquedaDialog(){
