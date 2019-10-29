@@ -49,6 +49,14 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
                     updatePlatos();
                     break;
                 }
+                case RetrofitRepository.GET_SEARCH_PLATO:{
+
+                    List<Plato> platosEncontrados = (List<Plato>) msg.obj;
+                    platoViewDataSet = platosEncontrados;
+                    notifyDataSetChanged();
+
+                    break;
+                }
                 case RetrofitRepository.GETALL_PLATOS:{
                     platoViewDataSet = (List<Plato>) msg.obj;
                     notifyDataSetChanged();
@@ -72,6 +80,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
                     t.show();
                     break;
                 }
+                case RetrofitRepository.ERROR_SEARCH_PLATO:
                 case RetrofitRepository.ERROR_GETALL_PLATOS:{
                     Toast t = Toast.makeText(activity, R.string.databaseGetAllDishesError, Toast.LENGTH_LONG);
                     t.show();
@@ -263,23 +272,10 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
 
 
     //TODO hecho por Tomy. arreglar
-    public void getPlatosBySearchResults(String title, int priceMin, int priceMax){
-        final Call<List<Plato>> c = RetrofitRepository.getInstance().getPlatosBySearchResults(title, priceMin, priceMax);
+    public void getPlatosBySearchResults(String title, double priceMin, double priceMax){
 
-        c.enqueue(new Callback<List<Plato>>() {
-            @Override
-            public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
-                if(response.isSuccessful()) {
-                    PlatoAdapter.this.platoViewDataSet = response.body();
-                    PlatoAdapter.this.notifyDataSetChanged();
-                }
-            }
+        RetrofitRepository.getInstance().getPlatosBySearchResults(title, priceMin, priceMax, handler);
 
-            @Override
-            public void onFailure(Call<List<Plato>> call, Throwable t) {
-                System.out.println("onFailure");
-            }
-        });
     }
 
     public void removeDish(final int pos){

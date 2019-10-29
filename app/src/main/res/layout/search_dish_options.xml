@@ -16,6 +16,7 @@
         android:ems="10"
         android:hint="@string/enterDishName"
         android:inputType="textPersonName"
+        android:maxLength="50"
         android:textSize="18sp" />
 
     <TextView
@@ -39,6 +40,7 @@
             android:ems="10"
             android:hint="@string/minPriceEdit"
             android:inputType="numberDecimal"
+            android:maxLength="10"
             android:textSize="18sp" />
 
         <EditText
@@ -49,6 +51,7 @@
             android:ems="10"
             android:hint="@string/maxPriceEdit"
             android:inputType="numberDecimal"
+            android:maxLength="10"
             android:textSize="18sp" />
 
     </LinearLayout>

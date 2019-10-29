@@ -147,8 +147,17 @@ public class DishViewActivity extends AppCompatActivity {
                     t.show();
                 }else{
                     //TODO acomodarlo bien
-                  ((PlatoAdapter) adapter).getPlatosBySearchResults(nameDishEdit.getText().toString(), Integer.valueOf(minPriceEdit.getText().toString()), Integer.valueOf(maxPriceEdit.getText().toString()));
 
+                    double minPrice = 0, maxPrice = Double.MAX_VALUE;
+
+                   if(!minPriceEdit.getText().toString().isEmpty()) {
+                       minPrice = Double.valueOf(minPriceEdit.getText().toString());
+                   }
+                   if(!maxPriceEdit.getText().toString().isEmpty()){
+                       maxPrice = Double.valueOf(maxPriceEdit.getText().toString());
+                   }
+
+                    ((PlatoAdapter) adapter).getPlatosBySearchResults(nameDishEdit.getText().toString(), minPrice, maxPrice);
                 }
 
 

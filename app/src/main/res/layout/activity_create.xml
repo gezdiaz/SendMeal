@@ -64,7 +64,7 @@
                 tools:layout_editor_absoluteY="121dp" />
 
             <EditText
-                android:id="@+id/dishNameSearchEdit"
+                android:id="@+id/dishNameEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"

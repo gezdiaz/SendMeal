@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitRepository {
 
     private static RetrofitRepository instance;
-    private static String SERVER = "http://10.15.158.59:5000";
+    private static String SERVER = "http://10.15.153.240:5000";
 
     public static final int ALTA_PLATO = 1;
     public static final int UPDATE_PLATO = 2;
@@ -31,6 +31,8 @@ public class RetrofitRepository {
     public static final int ERROR_GETALL_PLATOS = 8;
     public static final int DELETE_PLATO = 9;
     public static final int ERROR_DELETE_PLATO = 10;
+    public static final int GET_SEARCH_PLATO = 11;
+    public static final int ERROR_SEARCH_PLATO = 12;
 
 
     private PlatoRest platoRest;
@@ -167,19 +169,32 @@ public class RetrofitRepository {
     }
 
     //TODO prueba hecha por Tomas
-    public Call<List<Plato>> getPlatosBySearchResults(String title, int priceMin, int priceMax){
+    public void getPlatosBySearchResults(String title, double priceMin, double  priceMax, final Handler handler){
         Call<List<Plato>> call = platoRest.getPlatosSearchResult(title, priceMin,priceMax);
-//        Response<List<Plato>> resp = null;
-//        List<Plato> platos = null;
-//        try{
-//            resp = call.execute();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        if(resp != null){
-//            platos= resp.body();
-//        }
-        return call;
+
+        call.enqueue(new Callback<List<Plato>>() {
+            @Override
+            public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
+
+                if(response.isSuccessful()){
+                    Message m = Message.obtain();
+                    m.what = GET_SEARCH_PLATO;
+                    m.obj = response.body();
+                    handler.sendMessage(m);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Plato>> call, Throwable t) {
+
+                Message m = Message.obtain();
+                m.what = ERROR_SEARCH_PLATO;
+                handler.sendMessage(m);
+            }
+        });
+
+
     }
 
 }

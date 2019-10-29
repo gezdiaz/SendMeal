@@ -24,7 +24,7 @@
       "id": 4,
       "inOffer": false,
       "oferta": 0,
-      "precio": 34,
+      "precio": 34.5,
       "titulo": "jk"
     },
     {
@@ -41,9 +41,17 @@
       "descripcion": "jdjd",
       "inOffer": false,
       "oferta": 0,
-      "precio": 35,
-      "titulo": "djjd",
-      "id": 7665
+      "precio": 25,
+      "titulo": "plato tomy"
+    },
+    {
+      "calorias": 879,
+      "descripcion": "ksja",
+      "id": 25,
+      "inOffer": false,
+      "oferta": 0,
+      "precio": 64,
+      "titulo": "plato 25"
     },
     {
       "calorias": 64,
