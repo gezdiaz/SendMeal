@@ -24,9 +24,6 @@ import java.util.List;
 
 import frsf.isi.dam.gtm.sendmeal.dao.RetrofitRepository;
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
 
@@ -285,6 +282,8 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                System.out.println("Plato a aliminar"+platoViewDataSet.get(pos));
+                System.out.println("En la posición: "+pos);
                 RetrofitRepository.getInstance().deletePlato(platoViewDataSet.get(pos), handler);
             }
         });

@@ -1,27 +1,42 @@
 package frsf.isi.dam.gtm.sendmeal.domain;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.Relation;
+
 import java.util.Date;
 import java.util.List;
 
+@Entity()
 public class Pedido {
-
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "ID_PEDIDO")
     private int id;
+
     private Date fecha;
     private EstadoPedido estado;
     private double latitud;
     private double longitud;
+    @Relation(parentColumn = "ID_PEDIDO", entityColumn = "ITEM_ITEMS_PEDIDO", entity = ItemsPedido.class)
     private List<ItemsPedido> itemsPedido;
 
 
     public Pedido() {
 
     }
-    public Pedido(int id, Date fecha, EstadoPedido estado, double latitud, double longitud) {
-        this.id = id;
+    public Pedido(Date fecha, EstadoPedido estado, double latitud, double longitud) {
         this.fecha = fecha;
         this.estado = estado;
         this.latitud = latitud;
         this.longitud = longitud;
+    }
+
+    public double getPrecioTotal(){
+        double precio = 0.0;
+        for(ItemsPedido i: itemsPedido){
+            precio = precio + i.getPrecio();
+        }
+        return precio;
     }
 
     public int getId() {
@@ -70,6 +85,7 @@ public class Pedido {
 
     public void setItemsPedido(List<ItemsPedido> itemsPedido) {
         this.itemsPedido = itemsPedido;
+
     }
 
     @Override

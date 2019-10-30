@@ -16,13 +16,18 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import frsf.isi.dam.gtm.sendmeal.dao.RetrofitRepository;
+import frsf.isi.dam.gtm.sendmeal.domain.EstadoPedido;
+import frsf.isi.dam.gtm.sendmeal.domain.ItemsPedido;
+import frsf.isi.dam.gtm.sendmeal.domain.Pedido;
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
 
 public class PedidoCreateActivity extends AppCompatActivity {
@@ -33,6 +38,7 @@ public class PedidoCreateActivity extends AppCompatActivity {
     private RecyclerView.ViewHolder viewHolder;
     private RecyclerView.LayoutManager layoutManager;
     private ProgressDialog progressDialog;
+    private Button createOrderBtn, sendOrderBtn;
 
     private Handler handler = new Handler(Looper.myLooper()){
         @Override
@@ -82,6 +88,34 @@ public class PedidoCreateActivity extends AppCompatActivity {
         RetrofitRepository.getInstance().getPlatos(handler);
 
         recyclerViewPedido.setAdapter(adapter);
+
+        createOrderBtn = findViewById(R.id.createOrderBtn);
+        createOrderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<ItemsPedido> listItemsPedido = ((PlatoPedidoAdapter) adapter).getItems();
+                Toast t;
+                if(listItemsPedido.isEmpty()){
+                    t = Toast.makeText(PedidoCreateActivity.this, R.string.noItemSelected, Toast.LENGTH_LONG);
+                    t.show();
+                }else{
+                    Pedido pedido = new Pedido(new Date(), EstadoPedido.PENDIENTE, 0,0);
+                    pedido.setItemsPedido(listItemsPedido);
+                    System.out.println("Se creó el pedido:" + pedido.toString());
+                    t = Toast.makeText(PedidoCreateActivity.this,R.string.orderCreated,Toast.LENGTH_LONG);
+                    t.show();
+                    //TODO guardar pedido en ROOM/SQLite.
+                }
+            }
+        });
+
+        sendOrderBtn = findViewById(R.id.sendOrderBtn);
+        sendOrderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO hacer lo del mapa y guardar en retrofit (hay que ver si se puede enviar un pedido que todavía no se "creó"
+            }
+        });
     }
 
     @Override

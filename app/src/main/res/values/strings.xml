@@ -90,4 +90,6 @@
     <string name="newOrderOptionItem">Nuevo pedido</string>
     <string name="createOrderBtn">Crear pedido</string>
     <string name="sendOrderBtn">Enviar pedido</string>
+    <string name="noItemSelected">Debe seleccionar al menos un plato para crear un pedido</string>
+    <string name="orderCreated">El pedido ha sido creado exitosamente 😁</string>
 </resources>

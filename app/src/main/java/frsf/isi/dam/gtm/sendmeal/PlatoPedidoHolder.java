@@ -22,7 +22,7 @@ public class PlatoPedidoHolder extends RecyclerView.ViewHolder {
         offerPricePedido = itemView.findViewById(R.id.offerPricePedido);
         quantityPedido = itemView.findViewById(R.id.quantityPedido);
         decreaseBtn = itemView.findViewById(R.id.decreaseBtn);
-        increaseBtn = itemView.findViewById(R.id.decreaseBtn);
+        increaseBtn = itemView.findViewById(R.id.increaseBtn);
     }
 
 }

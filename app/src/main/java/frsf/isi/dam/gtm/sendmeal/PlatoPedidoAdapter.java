@@ -5,6 +5,7 @@ import android.icu.text.DecimalFormat;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +15,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import frsf.isi.dam.gtm.sendmeal.dao.RetrofitRepository;
+import frsf.isi.dam.gtm.sendmeal.domain.ItemsPedido;
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
 
 public class PlatoPedidoAdapter extends RecyclerView.Adapter<PlatoPedidoHolder> {
 
-    List<Plato> platoDataSet;
-    PedidoCreateActivity activity;
+    private HashSet<Plato> selectedPlatos = new HashSet<>();
+    private SparseIntArray selectedPlatosQuantity = new SparseIntArray();
+
+    private List<Plato> platoDataSet;
+    private PedidoCreateActivity activity;
+
+
     Handler handler = new Handler(Looper.myLooper()){
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -36,7 +44,6 @@ public class PlatoPedidoAdapter extends RecyclerView.Adapter<PlatoPedidoHolder> 
 
                     break;
                 }
-
                 case RetrofitRepository.ERROR_SEARCH_PLATO:{
                     Toast t = Toast.makeText(activity, R.string.databaseGetAllDishesError, Toast.LENGTH_LONG);
                     t.show();
@@ -58,7 +65,7 @@ public class PlatoPedidoAdapter extends RecyclerView.Adapter<PlatoPedidoHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlatoPedidoHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final PlatoPedidoHolder holder, int position) {
         final Plato plato = platoDataSet.get(position);
 
         DecimalFormat format = new DecimalFormat("0.00");
@@ -87,20 +94,50 @@ public class PlatoPedidoAdapter extends RecyclerView.Adapter<PlatoPedidoHolder> 
         }else{
             holder.offerImagePedido.setVisibility(View.INVISIBLE);
         }
+        Plato p = platoDataSet.get(holder.getAdapterPosition());
+        if(selectedPlatos.contains(p)){
+            holder.quantityPedido.setText(String.valueOf(selectedPlatosQuantity.get(p.getId())));
+        }else{
+            holder.quantityPedido.setText("0");
+        }
 
-        holder.quantityPedido.setText("0");
         //TODO actualizar lista
-
         holder.decreaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO restar cantidad
+                int pos = holder.getAdapterPosition();
+                Plato plato = platoDataSet.get(pos);
+                if(selectedPlatos.contains(plato)){
+                    Integer quantity = selectedPlatosQuantity.get(plato.getId());
+                    quantity--;
+                    if(quantity<=0){
+                        selectedPlatos.remove(plato);
+                        selectedPlatosQuantity.delete(plato.getId());
+                        holder.quantityPedido.setText("0");
+                    }else{
+                        selectedPlatosQuantity.put(plato.getId(),quantity);
+                        holder.quantityPedido.setText(quantity.toString());
+                    }
+                }
             }
         });
         holder.increaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO incrementar cantidad
+                int pos = holder.getAdapterPosition();
+                Plato plato = platoDataSet.get(pos);
+                if(selectedPlatos.contains(plato)){
+                    Integer quantity = selectedPlatosQuantity.get(plato.getId());
+                    quantity++;
+                    selectedPlatosQuantity.put(plato.getId(), quantity);
+                    holder.quantityPedido.setText(quantity.toString());
+                }else{
+                    selectedPlatos.add(plato);
+                    selectedPlatosQuantity.put(plato.getId(), 1);
+                    holder.quantityPedido.setText("1");
+                }
             }
         });
     }
@@ -116,5 +153,19 @@ public class PlatoPedidoAdapter extends RecyclerView.Adapter<PlatoPedidoHolder> 
 
     public void getPlatosBySearchResults(String title, double minPrice, double maxPrice) {
         RetrofitRepository.getInstance().getPlatosBySearchResults(title, minPrice, maxPrice, handler);
+    }
+
+    public List<ItemsPedido> getItems(){
+        List<ItemsPedido> listaItems = new ArrayList<>();
+
+        for(Plato p: selectedPlatos){
+            ItemsPedido item = new ItemsPedido();
+            item.setPlato(p);
+            item.setCantidad(selectedPlatosQuantity.get(p.getId()));
+            item.calcularPrecio();
+            listaItems.add(item);
+        }
+
+        return listaItems;
     }
 }

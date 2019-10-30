@@ -1,6 +1,15 @@
 {
   "platos": [
     {
+      "calorias": 879,
+      "descripcion": "ksja",
+      "id": 25,
+      "inOffer": true,
+      "oferta": 0.5,
+      "precio": 64,
+      "titulo": "plato 25"
+    },
+    {
       "calorias": 646,
       "descripcion": "jdud",
       "id": 7664,
@@ -19,15 +28,6 @@
       "titulo": "plato creado con Holder"
     },
     {
-      "calorias": 67,
-      "descripcion": "kilgelman",
-      "id": 4,
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 34.5,
-      "titulo": "jk"
-    },
-    {
       "calorias": 64,
       "descripcion": "udjd",
       "id": 5,
@@ -35,32 +35,6 @@
       "oferta": 0,
       "precio": 646,
       "titulo": "fueu"
-    },
-    {
-      "calorias": 64,
-      "descripcion": "jdjd",
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 25,
-      "titulo": "plato tomy"
-    },
-    {
-      "calorias": 879,
-      "descripcion": "ksja",
-      "id": 25,
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 64,
-      "titulo": "plato 25"
-    },
-    {
-      "calorias": 64,
-      "descripcion": "jdjd",
-      "id": 7666,
-      "inOffer": true,
-      "oferta": 1,
-      "precio": 646,
-      "titulo": "jdus"
     }
   ],
   "pedidos": []

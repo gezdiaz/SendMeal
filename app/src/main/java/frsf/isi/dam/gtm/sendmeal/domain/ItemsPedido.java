@@ -1,14 +1,25 @@
 package frsf.isi.dam.gtm.sendmeal.domain;
 
-public class ItemsPedido {
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
+@Entity()
+public class ItemsPedido {
+    @PrimaryKey(autoGenerate = true) @NonNull @ColumnInfo(name = "ID_ITEMS_PEDIDO")
     private int id;
-    private Pedido pedido;
-    private Plato plato;
+
     private int cantidad;
     private double precio;
+    private Pedido pedido;
+    private Plato plato;
 
     public ItemsPedido() {
+        precio = 0.0;
+        cantidad = 0;
     }
 
     public ItemsPedido(int id, Pedido pedido, Plato plato, int cantidad, double precio) {
@@ -17,6 +28,14 @@ public class ItemsPedido {
         this.plato = plato;
         this.cantidad = cantidad;
         this.precio = precio;
+    }
+
+    public void calcularPrecio(){
+        if(plato != null){
+            precio = plato.getPrecioOferta()*cantidad;
+        }else {
+            precio = 0;
+        }
     }
 
     public int getId() {
@@ -52,6 +71,7 @@ public class ItemsPedido {
     }
 
     public double getPrecio() {
+        calcularPrecio();
         return precio;
     }
 

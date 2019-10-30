@@ -145,12 +145,16 @@ public class RetrofitRepository {
     }
 
     public void deletePlato(Plato plato, final Handler handler){
+        System.out.println("En retrofit se recibió el plato: "+plato);
+        System.out.println("Con id: "+plato.getId());
         Call<Plato> call = platoRest.deletePlato(plato.getId());
         final int id = plato.getId();
+        System.out.println("Ejecuta enqueue");
         call.enqueue(new Callback<Plato>() {
             @Override
             public void onResponse(Call<Plato> call, Response<Plato> response) {
                 if(response.isSuccessful()){
+                    System.out.println("Termina la ejecución correctamente");
                     Message m = new Message();
                     m.what = DELETE_PLATO;
                     m.obj = response.body();

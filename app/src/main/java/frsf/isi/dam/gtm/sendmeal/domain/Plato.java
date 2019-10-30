@@ -39,7 +39,7 @@ public class Plato implements Serializable {
     }
 
     public Double getPrecioOferta(){
-        return precio - (oferta * precio);
+        return precio * (1 - oferta);
     }
 
     public Integer getId() {
