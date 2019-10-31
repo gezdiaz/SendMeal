@@ -95,4 +95,5 @@
     <string name="titleAlertDialogPedidoCreateActivity">¿Estás seguro que deseas volver?</string>
     <string name="pedidoNoEnviadoMsgAlertDialogPedidoCreateActivity">El pedido no será enviado.</string>
     <string name="pedidoNoGuardado">El pedido no será guardado.</string>
+    <string name="databaseSavePedidoError">Se produjo un error al guardar su pedido en la base de datos</string>
 </resources>
