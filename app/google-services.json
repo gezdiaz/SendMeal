@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "693260549028",
+    "firebase_url": "https://sendmeal-dpr.firebaseio.com",
+    "project_id": "sendmeal-dpr",
+    "storage_bucket": "sendmeal-dpr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693260549028:android:418bf08ea914177d8c5f31",
+        "android_client_info": {
+          "package_name": "frsf.isi.dam.gtm.sendmeal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693260549028-bcmlc1om2ddr7ekl63t7ja326183uekh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOT6-t3tg2hCfldQUoRpJlvRBKsJbJcRo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693260549028-bcmlc1om2ddr7ekl63t7ja326183uekh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
