@@ -1,18 +1,22 @@
 package frsf.isi.dam.gtm.sendmeal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import frsf.isi.dam.gtm.sendmeal.dao.RetrofitRepository;
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
 
 public class CreateActivity extends AppCompatActivity {
@@ -20,8 +24,60 @@ public class CreateActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private EditText idDishEdit, dishNameEdit, dishDescriptionEdit, dishPriceEdit, dishCaloriesEdit;
     private Button saveDishBtn;
+
     private boolean[] validations;
-    private int pos = -1;
+    private int id = -1;
+    private ProgressDialog progressDialog;
+    private Plato platoEditado;
+
+    private Handler handler = new Handler(Looper.myLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what){
+                case RetrofitRepository.ALTA_PLATO: {
+                    System.out.println("Se recibió el mensaje ALTA_PLATO");
+                    Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.successToast), Toast.LENGTH_SHORT);
+                    toast.show();
+                    CreateActivity.this.finish();
+                    break;
+                }
+                case RetrofitRepository.UPDATE_PLATO:{
+                    System.out.println("Se recibió el mensaje UPDATE_PLATO");
+                    Toast toast = Toast.makeText(getApplicationContext(),R.string.dishUpdateSuccess,Toast.LENGTH_SHORT);
+                    toast.show();
+                    CreateActivity.this.finish();
+                    break;
+                }
+                case RetrofitRepository.GET_PLATO:{
+                    platoEditado = (Plato) msg.obj;
+                    idDishEdit.setText(platoEditado.getId().toString());
+                    dishNameEdit.setText(platoEditado.getTitulo());
+                    dishDescriptionEdit.setText(platoEditado.getDescripcion());
+                    dishPriceEdit.setText(platoEditado.getPrecioPlato().toString());
+                    dishCaloriesEdit.setText(platoEditado.getCalorias().toString());
+                    for(int i=0; i<validations.length; i++){
+                        validations[i] = true;
+                    }
+                    if(progressDialog.isShowing()){
+                        progressDialog.cancel();
+                    }
+                    break;
+                }
+                case RetrofitRepository.ERROR_UPDATE_PLATO:
+                case RetrofitRepository.ERROR_ALTA_PLATO:{
+                    Toast toast = Toast.makeText(getApplicationContext(),R.string.databaseSaveDishError,Toast.LENGTH_SHORT);
+                    toast.show();
+                    break;
+                }
+                case RetrofitRepository.ERROR_GET_PLATO:{
+                    Toast toast = Toast.makeText(getApplicationContext(),R.string.databaseGetDishError,Toast.LENGTH_SHORT);
+                    toast.show();
+                    finish();
+                    break;
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +98,14 @@ public class CreateActivity extends AppCompatActivity {
         dishCaloriesEdit = findViewById(R.id.dishCaloriesEdit);
         saveDishBtn = findViewById(R.id.saveDishBtn);
 
-        pos = getIntent().getIntExtra("position", -1);
+        id = getIntent().getIntExtra("platoId", -1);
 
-        if(pos >= 0){
-            Plato plato = Plato.platos.get(pos);
-            idDishEdit.setText(plato.getId().toString());
-            dishNameEdit.setText(plato.getTitulo());
-            dishDescriptionEdit.setText(plato.getDescripcion());
-            dishPriceEdit.setText(plato.getPrecio().toString());
-            dishCaloriesEdit.setText(plato.getCalorias().toString());
-            for(int i=0 ; i<validations.length; i++){
-                validations[i] = true;
-            }
+        if(id >= 0){
+            RetrofitRepository.getInstance().getPlatoById(id, handler);
+            progressDialog = ProgressDialog.show(this, getString(R.string.pleaseWait),getString(R.string.loadingDishData));
+            progressDialog.setCancelable(false);
+            idDishEdit.setEnabled(false);
         }
-
 
         idDishEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -139,8 +189,8 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boolean valid = true;
-                Context context = getApplicationContext();
-                Toast toast;
+                final Context context = getApplicationContext();
+                final Toast toast;
 
                 idDishEdit.clearFocus();
                 dishCaloriesEdit.clearFocus();
@@ -160,30 +210,28 @@ public class CreateActivity extends AppCompatActivity {
                     toast = Toast.makeText(context,getString(R.string.errorToast),Toast.LENGTH_SHORT);
                     toast.show();
                 }else {
-                    toast = Toast.makeText(context,getString(R.string.successToast),Toast.LENGTH_SHORT);
-                    toast.show();
-
-                    if(pos >=0){
-                        Plato plato = Plato.platos.get(pos);
-                        plato.setId(Integer.parseInt(idDishEdit.getText().toString()));
-                        plato.setTitulo(dishNameEdit.getText().toString());
-                        plato.setDescripcion(dishDescriptionEdit.getText().toString());
-                        plato.setPrecio(Double.parseDouble(dishPriceEdit.getText().toString()));
-                        plato.setCalorias(Integer.parseInt(dishCaloriesEdit.getText().toString()));
-                        Intent res = new Intent();
-                        res.putExtra("platos", Plato.platos);
-                        setResult(Activity.RESULT_OK, res);
+                    if(id >=0){
+                        platoEditado.setTitulo(dishNameEdit.getText().toString());
+                        platoEditado.setDescripcion(dishDescriptionEdit.getText().toString());
+                        platoEditado.setPrecioPlato(Double.parseDouble(dishPriceEdit.getText().toString()));
+                        platoEditado.setCalorias(Integer.parseInt(dishCaloriesEdit.getText().toString()));
+                        RetrofitRepository.getInstance().updatePlato(platoEditado, handler);
                     }else{
-                        Plato plato = new Plato(
-                                Integer.parseInt(idDishEdit.getText().toString()),
+                        //El id se ignora porque lo pone la base de datos.
+                        final Plato plato = new Plato(
                                 dishNameEdit.getText().toString(),
                                 dishDescriptionEdit.getText().toString(),
                                 Double.parseDouble(dishPriceEdit.getText().toString()),
                                 Integer.parseInt(dishCaloriesEdit.getText().toString())
                         );
-                        Plato.platos.add(plato);
+                        //Plato.platos.add(plato);
+                        plato.setId(null);
+                        RetrofitRepository.getInstance().savePlato(plato, handler);
+                        //se recibe la respuesta en el Handler
+//                        toast.show();
+//                        CreateActivity.this.finish();
                     }
-                    CreateActivity.this.finish();
+
                 }
             }
         });

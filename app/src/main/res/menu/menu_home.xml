@@ -14,4 +14,8 @@
         android:id="@+id/itemListOptionItem"
         android:title="@string/itemListOption"
         android:icon="@drawable/ic_list_icon"/>
+    <item
+        android:id="@+id/newOrderOptionItem"
+        android:title="@string/newOrderOptionItem"
+        android:icon="@drawable/ic_list_icon"/>
 </menu>

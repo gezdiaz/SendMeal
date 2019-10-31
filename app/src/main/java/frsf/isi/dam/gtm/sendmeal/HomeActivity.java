@@ -11,6 +11,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.List;
+
+import frsf.isi.dam.gtm.sendmeal.dao.DBClient;
+import frsf.isi.dam.gtm.sendmeal.domain.ItemPedido;
+import frsf.isi.dam.gtm.sendmeal.domain.Pedido;
+
 public class HomeActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -27,6 +33,13 @@ public class HomeActivity extends AppCompatActivity {
         IntentFilter filtro = new IntentFilter();
         filtro.addAction(NotificationReceiver.OFFERNOTIFICATION);
         getApplication().getApplicationContext().registerReceiver(br,filtro);
+
+        List<Pedido> pedidos = DBClient.getInstance(this).getRoomDB().pedidoDao().getAllPedidos();
+        System.out.println("Pedidos en SQLite: "+ pedidos.toString() );
+        List<ItemPedido> items = DBClient.getInstance(this).getRoomDB().itemPedidoDao().getAllItemsPedido();
+        System.out.println("Items pedido en SQLite:" + items.toString());
+        List<Pedido.PedidoConItems> pedidosConItems = DBClient.getInstance(this).getRoomDB().pedidoDao().getPedidoConItems();
+        System.out.println("Pedidos con Items en SQLite:" + pedidosConItems.toString());
 
     }
 
@@ -50,6 +63,10 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.itemListOptionItem:
                 Intent i3 = new Intent(this, DishViewActivity.class);
                 startActivity(i3);
+                break;
+            case R.id.newOrderOptionItem:
+                Intent i4 = new Intent(this, PedidoCreateActivity.class);
+                startActivity(i4);
                 break;
             default:
                 Toast.makeText(this, "....", Toast.LENGTH_LONG).show();

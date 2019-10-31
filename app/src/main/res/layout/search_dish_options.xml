@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dishNameLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dishNameLbl" />
+
+    <EditText
+        android:id="@+id/dishNameSearchEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/enterDishName"
+        android:inputType="textPersonName"
+        android:maxLength="50"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/dishPriceLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:text="@string/dishPriceLbl" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/minPriceEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/minPriceEdit"
+            android:inputType="numberDecimal"
+            android:maxLength="10"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/maxPriceEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/maxPriceEdit"
+            android:inputType="numberDecimal"
+            android:maxLength="10"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</LinearLayout>

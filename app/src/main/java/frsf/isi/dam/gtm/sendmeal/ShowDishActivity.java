@@ -1,9 +1,9 @@
 package frsf.isi.dam.gtm.sendmeal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,7 +46,7 @@ public class ShowDishActivity extends AppCompatActivity {
             idDishEdit.setText(plato.getId().toString());
             dishNameEdit.setText(plato.getTitulo());
             dishDescriptionEdit.setText(plato.getDescripcion());
-            dishPriceEdit.setText(plato.getPrecio().toString());
+            dishPriceEdit.setText(plato.getPrecioPlato().toString());
             dishCaloriesEdit.setText(plato.getCalorias().toString());
         }
 
@@ -59,12 +59,11 @@ public class ShowDishActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
             case android.R.id.home:
-                Intent goToHomeActivity = new Intent(this,HomeActivity.class);
-                startActivity(goToHomeActivity);
-                return true;
+                onBackPressed();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

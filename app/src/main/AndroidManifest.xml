@@ -8,9 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ShowDishActivity"
-            android:parentActivityName=".HomeActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".PedidoCreateActivity"></activity>
+        <activity android:name=".ShowDishActivity" />
         <activity android:name=".DishViewActivity" />
         <activity android:name=".CreateActivity" />
         <activity android:name=".HomeActivity">
@@ -22,5 +23,8 @@
         </activity>
         <activity android:name=".RegisterActivity" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

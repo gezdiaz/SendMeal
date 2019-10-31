@@ -16,7 +16,7 @@ public class PlatoViewHolder extends RecyclerView.ViewHolder {
     public PlatoViewHolder(@NonNull View itemView) {
         super(itemView);
         dishImageView = itemView.findViewById(R.id.dishImageView);
-        dishNameView = itemView.findViewById(R.id.dishName);
+        dishNameView = itemView.findViewById(R.id.dishNameLbl);
         dishPriceView = itemView.findViewById(R.id.dishPrice);
         offerPriceView = itemView.findViewById(R.id.offerPrice);
         offerBtn = itemView.findViewById(R.id.offerBtn);

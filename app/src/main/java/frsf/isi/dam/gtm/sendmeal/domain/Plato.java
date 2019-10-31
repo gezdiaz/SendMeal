@@ -1,5 +1,7 @@
 package frsf.isi.dam.gtm.sendmeal.domain;
 
+import androidx.room.Ignore;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -9,19 +11,19 @@ public class Plato implements Serializable {
     private Integer id;
     private String titulo;
     private String descripcion;
-    private Double precio, oferta;
+    private Double precioPlato;
+
+    private Double oferta;
     private Integer calorias;
     private boolean inOffer;
-    public static ArrayList<Plato> platos = new ArrayList<Plato>();
 
     public Plato() {
     }
-
-    public Plato(Integer id, String titulo, String descripcion, Double precio, Integer calorias) {
-        this.id = id;
+    @Ignore
+    public Plato(String titulo, String descripcion, Double precioPlato, Integer calorias) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.precio = precio;
+        this.precioPlato = precioPlato;
         this.calorias = calorias;
         this.inOffer = false;
         this.oferta = 0.0;
@@ -37,8 +39,14 @@ public class Plato implements Serializable {
         return inOffer;
     }
 
+    public void setOferta(Double oferta) {
+        this.oferta = oferta;
+    }
+    public Double getOferta(){
+        return oferta;
+    }
     public Double getPrecioOferta(){
-        return precio - (oferta * precio);
+        return precioPlato * (1 - oferta);
     }
 
     public Integer getId() {
@@ -73,12 +81,12 @@ public class Plato implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Double getPrecio() {
-        return precio;
+    public Double getPrecioPlato() {
+        return precioPlato;
     }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
+    public void setPrecioPlato(Double precioPlato) {
+        this.precioPlato = precioPlato;
     }
 
     public Integer getCalorias() {
@@ -97,16 +105,29 @@ public class Plato implements Serializable {
         return Objects.equals(id, plato.id) &&
                 Objects.equals(titulo, plato.titulo) &&
                 Objects.equals(descripcion, plato.descripcion) &&
-                Objects.equals(precio, plato.precio) &&
+                Objects.equals(precioPlato, plato.precioPlato) &&
                 Objects.equals(calorias, plato.calorias);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, titulo, descripcion, precio, calorias);
+        return Objects.hash(id, titulo, descripcion, precioPlato, calorias);
     }
 
-    public Integer getOferta() {
+    public Integer getPorcentajeOferta() {
         return ((Double) (oferta*100)).intValue();
+    }
+
+    @Override
+    public String toString() {
+        return "Plato{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", precioPlato=" + precioPlato +
+                ", oferta=" + oferta +
+                ", calorias=" + calorias +
+                ", inOffer=" + inOffer +
+                '}';
     }
 }
