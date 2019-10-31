@@ -1,49 +1,49 @@
 {
   "platos": [
     {
-      "calorias": 879,
-      "descripcion": "ksja",
-      "id": 25,
+      "calorias": 400,
+      "descripcion": "con ensalada",
+      "id": 7668,
       "inOffer": true,
-      "oferta": 0.5,
-      "precioPlato": 64,
-      "titulo": "plato 250"
+      "oferta": 0.05,
+      "precioPlato": 250,
+      "titulo": "Tatú a la parrilla"
     },
     {
-      "calorias": 646,
-      "descripcion": "jdud",
-      "id": 7664,
+      "calorias": 80,
+      "descripcion": "sin nada, bien económico",
       "inOffer": false,
       "oferta": 0,
-      "precioPlato": 6464,
-      "titulo": "nombre👀🤙😝"
+      "precioPlato": 50,
+      "titulo": "plato de fideos",
+      "id": 7669
     },
     {
-      "calorias": 91,
-      "descripcion": "descripción del plato creado con holder",
-      "id": 2,
+      "calorias": 120,
+      "descripcion": "el más ordinario",
       "inOffer": false,
       "oferta": 0,
-      "precioPlato": 35,
-      "titulo": "plato creado con Holder"
+      "precioPlato": 65,
+      "titulo": "Sanguche de salamin",
+      "id": 7670
     },
     {
-      "calorias": 64,
-      "descripcion": "djjd",
+      "calorias": 250,
+      "descripcion": "con todo lo que quedó del día anterior",
       "inOffer": false,
       "oferta": 0,
-      "precioPlato": 646,
-      "titulo": "jdhs",
-      "id": 7665
+      "precioPlato": 60,
+      "titulo": "tarta de sobra",
+      "id": 7671
     },
     {
-      "calorias": 67,
-      "descripcion": "sjdo",
+      "calorias": 840,
+      "descripcion": "jgg",
       "inOffer": false,
       "oferta": 0,
-      "precioPlato": 13,
-      "titulo": "nombre errores",
-      "id": 7666
+      "precioPlato": 2438,
+      "titulo": "morcilla negra XXL",
+      "id": 7672
     }
   ],
   "pedidos": [
