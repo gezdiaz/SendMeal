@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class PedidoCreateActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private ProgressDialog progressDialog;
     private Button createOrderBtn, sendOrderBtn;
+    private boolean orderCreated, orderSent;
 
     private Handler handler = new Handler(Looper.myLooper()){
         @Override
@@ -73,6 +75,9 @@ public class PedidoCreateActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);// set drawable icon
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        orderCreated = false;
+        orderSent = false;
+
         progressDialog = ProgressDialog.show(this,getString(R.string.pleaseWait),getString(R.string.loadingDishListFromDatabase));
         progressDialog.setCancelable(false);
 
@@ -96,24 +101,32 @@ public class PedidoCreateActivity extends AppCompatActivity {
                 List<ItemsPedido> listItemsPedido = ((PlatoPedidoAdapter) adapter).getItems();
                 Toast t;
                 if(listItemsPedido.isEmpty()){
+                    sendOrderBtn.setEnabled(false);
                     t = Toast.makeText(PedidoCreateActivity.this, R.string.noItemSelected, Toast.LENGTH_LONG);
                     t.show();
+                    orderCreated = false;
                 }else{
                     Pedido pedido = new Pedido(new Date(), EstadoPedido.PENDIENTE, 0,0);
                     pedido.setItemsPedido(listItemsPedido);
                     System.out.println("Se creó el pedido:" + pedido.toString());
                     t = Toast.makeText(PedidoCreateActivity.this,R.string.orderCreated,Toast.LENGTH_LONG);
                     t.show();
+                    sendOrderBtn.setEnabled(true);
+                    orderCreated = true;
+                    orderSent = true;
                     //TODO guardar pedido en ROOM/SQLite.
                 }
             }
         });
 
         sendOrderBtn = findViewById(R.id.sendOrderBtn);
+        sendOrderBtn.setEnabled(false);
         sendOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO hacer lo del mapa y guardar en retrofit (hay que ver si se puede enviar un pedido que todavía no se "creó"
+
+                finish();
             }
         });
     }
@@ -130,7 +143,7 @@ public class PedidoCreateActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                requestFinish();
                 break;
 
             case R.id.menu_search:
@@ -185,6 +198,42 @@ public class PedidoCreateActivity extends AppCompatActivity {
         });
         android.app.AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+
+    private void requestFinish(){
+        if(orderCreated){
+            showAlertDialog(getString(R.string.pedidoNoEnviadoMsgAlertDialogPedidoCreateActivity));
+        }
+        else{
+            showAlertDialog(getString(R.string.pedidoNoGuardado));
+        }
+    }
+
+    private void showAlertDialog(String msgAlertDialog){
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle(R.string.titleAlertDialogPedidoCreateActivity);
+        builder.setMessage(msgAlertDialog);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        android.app.AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    @Override
+    public void onBackPressed(){
+        requestFinish();
     }
 
 }

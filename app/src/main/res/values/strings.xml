@@ -91,5 +91,8 @@
     <string name="createOrderBtn">Crear pedido</string>
     <string name="sendOrderBtn">Enviar pedido</string>
     <string name="noItemSelected">Debe seleccionar al menos un plato para crear un pedido</string>
-    <string name="orderCreated">El pedido ha sido creado exitosamente 😁</string>
+    <string name="orderCreated">El pedido ha sido creado exitosamente</string>
+    <string name="titleAlertDialogPedidoCreateActivity">¿Estás seguro que deseas volver?</string>
+    <string name="pedidoNoEnviadoMsgAlertDialogPedidoCreateActivity">El pedido no será enviado.</string>
+    <string name="pedidoNoGuardado">El pedido no será guardado.</string>
 </resources>
