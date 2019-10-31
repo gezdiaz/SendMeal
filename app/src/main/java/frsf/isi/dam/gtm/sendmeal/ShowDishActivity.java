@@ -1,9 +1,11 @@
 package frsf.isi.dam.gtm.sendmeal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +35,7 @@ public class ShowDishActivity extends AppCompatActivity {
         }
 
         idDishEdit = findViewById(R.id.idDishEdit);
-        dishNameEdit = findViewById(R.id.dishNameSearchEdit);
+        dishNameEdit = findViewById(R.id.dishNameEdit);
         dishDescriptionEdit = findViewById(R.id.dishDescriptionEdit);
         dishPriceEdit = findViewById(R.id.dishPriceEdit);
         dishCaloriesEdit = findViewById(R.id.dishCaloriesEdit);
@@ -53,5 +55,15 @@ public class ShowDishActivity extends AppCompatActivity {
         dishPriceEdit.setEnabled(false);
         dishCaloriesEdit.setEnabled(false);
         saveDishBtn.setVisibility(View.GONE);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -78,7 +78,6 @@ public class CreateActivity extends AppCompatActivity {
                     finish();
                     break;
                 }
-
             }
         }
     };

@@ -5,7 +5,7 @@
       "descripcion": "ksja",
       "id": 25,
       "inOffer": true,
-      "oferta": 0.5,
+      "oferta": 0.1,
       "precio": 64,
       "titulo": "plato 25"
     },
@@ -13,29 +13,95 @@
       "calorias": 646,
       "descripcion": "jdud",
       "id": 7664,
-      "inOffer": false,
-      "oferta": 0,
+      "inOffer": true,
+      "oferta": 0.25,
       "precio": 6464,
       "titulo": "nombre👀🤙😝"
     },
     {
-      "calorias": 91,
-      "descripcion": "descripción del plato creado con holder",
-      "id": 2,
-      "inOffer": false,
-      "oferta": 0,
+      "calorias": 350,
+      "descripcion": "este plato es una prueba",
+      "id": 7665,
+      "inOffer": true,
+      "oferta": 0.3,
       "precio": 35,
-      "titulo": "plato creado con Holder"
-    },
-    {
-      "calorias": 64,
-      "descripcion": "udjd",
-      "id": 5,
-      "inOffer": false,
-      "oferta": 0,
-      "precio": 646,
-      "titulo": "fueu"
+      "titulo": "plato de hoy"
     }
   ],
-  "pedidos": []
+  "pedidos": [
+    {
+      "estado": "ENVIADO",
+      "fecha": "Oct 31, 2019 12:04:51",
+      "id": 1,
+      "itemsPedido": [
+        {
+          "cantidad": 1,
+          "id": 0,
+          "plato": {
+            "calorias": 879,
+            "descripcion": "ksja",
+            "id": 25,
+            "inOffer": true,
+            "oferta": 0.5,
+            "precio": 64,
+            "titulo": "plato 25"
+          },
+          "precio": 32
+        }
+      ],
+      "latitud": 0,
+      "longitud": 0
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Oct 31, 2019 12:05:40",
+      "id": 2,
+      "itemsPedido": [
+        {
+          "cantidad": 2,
+          "id": 0,
+          "plato": {
+            "calorias": 91,
+            "descripcion": "descripción del plato creado con holder",
+            "id": 2,
+            "inOffer": false,
+            "oferta": 0,
+            "precio": 35,
+            "titulo": "plato creado con Holder"
+          },
+          "precio": 70
+        },
+        {
+          "cantidad": 1,
+          "id": 0,
+          "plato": {
+            "calorias": 64,
+            "descripcion": "udjd",
+            "id": 5,
+            "inOffer": false,
+            "oferta": 0,
+            "precio": 646,
+            "titulo": "fueu"
+          },
+          "precio": 646
+        },
+        {
+          "cantidad": 1,
+          "id": 0,
+          "plato": {
+            "calorias": 879,
+            "descripcion": "ksja",
+            "id": 25,
+            "inOffer": true,
+            "oferta": 0.5,
+            "precio": 64,
+            "titulo": "plato 25"
+          },
+          "precio": 32
+        }
+      ],
+      "latitud": 0,
+      "longitud": 0
+    }
+  ]
 }

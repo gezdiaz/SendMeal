@@ -40,7 +40,8 @@ public class PedidoCreateActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private ProgressDialog progressDialog;
     private Button createOrderBtn, sendOrderBtn;
-    private boolean orderCreated, orderSent;
+    private boolean orderCreated;
+    private Pedido pedido;
 
     private Handler handler = new Handler(Looper.myLooper()){
         @Override
@@ -55,9 +56,21 @@ public class PedidoCreateActivity extends AppCompatActivity {
                     }
                     break;
                 }
+                case RetrofitRepository.ALTA_PEDIDO:{
+                    Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.successToast), Toast.LENGTH_SHORT);
+                    toast.show();
+                    PedidoCreateActivity.this.finish();
+                    break;
+                }
                 case RetrofitRepository.ERROR_GETALL_PLATOS:{
                     Toast t = Toast.makeText(PedidoCreateActivity.this, R.string.databaseGetAllDishesError, Toast.LENGTH_LONG);
                     t.show();
+                    finish();
+                    break;
+                }
+                case RetrofitRepository.ERROR_ALTA_PEDIDO:{
+                    Toast toast = Toast.makeText(getApplicationContext(),R.string.databaseSavePedidoError,Toast.LENGTH_SHORT);
+                    toast.show();
                     finish();
                     break;
                 }
@@ -76,7 +89,6 @@ public class PedidoCreateActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         orderCreated = false;
-        orderSent = false;
 
         progressDialog = ProgressDialog.show(this,getString(R.string.pleaseWait),getString(R.string.loadingDishListFromDatabase));
         progressDialog.setCancelable(false);
@@ -106,14 +118,13 @@ public class PedidoCreateActivity extends AppCompatActivity {
                     t.show();
                     orderCreated = false;
                 }else{
-                    Pedido pedido = new Pedido(new Date(), EstadoPedido.PENDIENTE, 0,0);
+                    pedido = new Pedido(new Date(), EstadoPedido.PENDIENTE, 0,0);
                     pedido.setItemsPedido(listItemsPedido);
                     System.out.println("Se creó el pedido:" + pedido.toString());
                     t = Toast.makeText(PedidoCreateActivity.this,R.string.orderCreated,Toast.LENGTH_LONG);
                     t.show();
                     sendOrderBtn.setEnabled(true);
                     orderCreated = true;
-                    orderSent = true;
                     //TODO guardar pedido en ROOM/SQLite.
                 }
             }
@@ -125,7 +136,13 @@ public class PedidoCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //TODO hacer lo del mapa y guardar en retrofit (hay que ver si se puede enviar un pedido que todavía no se "creó"
-
+                if(pedido != null){
+                    pedido.setEstado(EstadoPedido.ENVIADO);
+                    RetrofitRepository.getInstance().savePedido(pedido, handler);
+                    }
+                else{
+                    Toast.makeText(getApplicationContext(),R.string.databaseSavePedidoError, Toast.LENGTH_LONG).show();
+                }
                 finish();
             }
         });
