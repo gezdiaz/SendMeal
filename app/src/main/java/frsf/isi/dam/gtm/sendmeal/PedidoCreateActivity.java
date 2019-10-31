@@ -132,6 +132,7 @@ public class PedidoCreateActivity extends AppCompatActivity {
                     DBClient.getInstance(PedidoCreateActivity.this).getRoomDB().pedidoDao().insertPedido(pedido);
                     System.out.println("Pedido despues de guardarlo en la BD:" + pedido.toString());
                     DBClient.getInstance(PedidoCreateActivity.this).getRoomDB().itemPedidoDao().insertAllItemsPedido(pedido.getItemsPedido());
+                    idPedidoCreado = pedido.getId();
                 }
             }
         });
