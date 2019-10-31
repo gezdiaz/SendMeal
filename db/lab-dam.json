@@ -7,7 +7,7 @@
       "inOffer": true,
       "oferta": 0.5,
       "precio": 64,
-      "titulo": "plato 25"
+      "titulo": "plato 250"
     },
     {
       "calorias": 646,
@@ -29,12 +29,12 @@
     },
     {
       "calorias": 64,
-      "descripcion": "udjd",
-      "id": 5,
+      "descripcion": "djjd",
       "inOffer": false,
       "oferta": 0,
       "precio": 646,
-      "titulo": "fueu"
+      "titulo": "jdhs",
+      "id": 7665
     }
   ],
   "pedidos": []

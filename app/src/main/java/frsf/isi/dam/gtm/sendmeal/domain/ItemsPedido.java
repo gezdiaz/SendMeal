@@ -7,9 +7,9 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity()
+@Entity(tableName = "ITEMS_PEDIDO")
 public class ItemsPedido {
-    @PrimaryKey(autoGenerate = true) @NonNull @ColumnInfo(name = "ID_ITEMS_PEDIDO")
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "ID_ITEMS_PEDIDO")
     private int id;
 
     private int cantidad;

@@ -8,7 +8,7 @@ import androidx.room.Relation;
 import java.util.Date;
 import java.util.List;
 
-@Entity()
+@Entity(tableName = "PEDIDO")
 public class Pedido {
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "ID_PEDIDO")
     private int id;
