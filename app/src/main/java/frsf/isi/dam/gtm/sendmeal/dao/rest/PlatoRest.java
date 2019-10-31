@@ -19,7 +19,7 @@ public interface PlatoRest {
     Call<Plato> getPlatoById(@Path("id") int id);
 
     @GET("platos/")
-    Call<List<Plato>> getPlatosSearchResult(@Query("titulo_like") String titulo,  @Query("precio_gte") double priceMin, @Query("precio_lte") double priceMax);
+    Call<List<Plato>> getPlatosSearchResult(@Query("titulo_like") String titulo,  @Query("precioPlato_gte") double priceMin, @Query("precioPlato_lte") double priceMax);
 
     @POST("platos/")
     Call<Plato> savePlato(@Body Plato p);
