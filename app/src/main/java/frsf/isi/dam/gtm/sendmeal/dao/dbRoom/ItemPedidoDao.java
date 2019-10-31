@@ -8,25 +8,25 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import frsf.isi.dam.gtm.sendmeal.domain.ItemsPedido;
+import frsf.isi.dam.gtm.sendmeal.domain.ItemPedido;
 
 @Dao
 public interface ItemPedidoDao {
-    @Query("SELECT * FROM ITEMS_PEDIDO")
-    List<ItemsPedido> getAllItemsPedido();
+    @Query("SELECT * FROM ITEM_PEDIDO")
+    List<ItemPedido> getAllItemsPedido();
 
-    @Query("SELECT * FROM ITEMS_PEDIDO WHERE ID_ITEMS_PEDIDO=:id")
-    ItemsPedido getItemPedidoById(final int id);
-
-    @Insert
-    void insertItemPedido(ItemsPedido itemsPedido);
+    @Query("SELECT * FROM ITEM_PEDIDO WHERE ID_ITEM_PEDIDO=:id")
+    ItemPedido getItemPedidoById(final int id);
 
     @Insert
-    void insertAllItemsPedido(List<ItemsPedido> itemsPedidos);
+    void insertItemPedido(ItemPedido itemPedido);
+
+    @Insert
+    void insertAllItemsPedido(List<ItemPedido> itemsPedidos);
 
     @Delete
-    void deleteItemPedido(ItemsPedido itemsPedido);
+    void deleteItemPedido(ItemPedido itemPedido);
 
     @Update
-    void updateItemPedido(ItemsPedido itemsPedido);
+    void updateItemPedido(ItemPedido itemPedido);
 }

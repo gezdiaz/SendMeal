@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.util.List;
@@ -12,6 +13,15 @@ import frsf.isi.dam.gtm.sendmeal.domain.Pedido;
 
 @Dao
 public interface PedidoDao {
+
+    @Transaction
+    @Query("SELECT * FROM PEDIDO")
+    List<Pedido.PedidoConItems> getPedidoConItems();
+
+    @Transaction
+    @Query("SELECT * FROM PEDIDO WHERE ID_PEDIDO = :idPedido")
+    Pedido.PedidoConItems getPedidoConItemsByIdPedido(String idPedido);
+
     @Query("SELECT * FROM PEDIDO")
     List<Pedido> getAllPedidos();
 

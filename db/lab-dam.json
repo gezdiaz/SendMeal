@@ -6,7 +6,7 @@
       "id": 25,
       "inOffer": true,
       "oferta": 0.5,
-      "precio": 64,
+      "precioPlato": 64,
       "titulo": "plato 250"
     },
     {
@@ -15,7 +15,7 @@
       "id": 7664,
       "inOffer": false,
       "oferta": 0,
-      "precio": 6464,
+      "precioPlato": 6464,
       "titulo": "nombre👀🤙😝"
     },
     {
@@ -24,7 +24,7 @@
       "id": 2,
       "inOffer": false,
       "oferta": 0,
-      "precio": 35,
+      "precioPlato": 35,
       "titulo": "plato creado con Holder"
     },
     {
@@ -32,7 +32,7 @@
       "descripcion": "djjd",
       "inOffer": false,
       "oferta": 0,
-      "precio": 646,
+      "precioPlato": 646,
       "titulo": "jdhs",
       "id": 7665
     }

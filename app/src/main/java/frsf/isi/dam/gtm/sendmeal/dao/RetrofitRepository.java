@@ -233,6 +233,7 @@ public class RetrofitRepository {
 
             @Override
             public void onFailure(Call<Pedido> call, Throwable t) {
+                System.out.println("Error en save pedido: "+t.getMessage());
                 Message m = new Message();
                 m.what = ERROR_ALTA_PEDIDO;
                 handler.sendMessage(m);
@@ -240,7 +241,7 @@ public class RetrofitRepository {
         });
     }
 
-    public void getPedidoById(int id, final Handler handler) {
+    public void getPedidoById(String id, final Handler handler) {
         Call<Pedido> call = pedidoRest.getPedidoById(id);
         call.enqueue(new Callback<Pedido>() {
             @Override
@@ -312,7 +313,7 @@ public class RetrofitRepository {
             System.out.println("En retrofit se recibió el plato: "+pedido);
             System.out.println("Con id: "+pedido.getId());
             Call<Pedido> call = pedidoRest.deletePedido(pedido.getId());
-            final int id = pedido.getId();
+            final String id = pedido.getId();
             System.out.println("Ejecuta enqueue");
             call.enqueue(new Callback<Pedido>() {
                 @Override
@@ -322,7 +323,6 @@ public class RetrofitRepository {
                         Message m = new Message();
                         m.what = DELETE_PEDIDO;
                         m.obj = response.body();
-                        m.arg1 = id;
                         handler.sendMessage(m);
                     }
                 }

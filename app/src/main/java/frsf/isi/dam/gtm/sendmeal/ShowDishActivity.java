@@ -45,7 +45,7 @@ public class ShowDishActivity extends AppCompatActivity {
             idDishEdit.setText(plato.getId().toString());
             dishNameEdit.setText(plato.getTitulo());
             dishDescriptionEdit.setText(plato.getDescripcion());
-            dishPriceEdit.setText(plato.getPrecio().toString());
+            dishPriceEdit.setText(plato.getPrecioPlato().toString());
             dishCaloriesEdit.setText(plato.getCalorias().toString());
         }
 

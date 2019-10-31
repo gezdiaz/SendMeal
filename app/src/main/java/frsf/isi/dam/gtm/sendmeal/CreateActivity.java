@@ -18,9 +18,6 @@ import android.widget.Toast;
 
 import frsf.isi.dam.gtm.sendmeal.dao.RetrofitRepository;
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CreateActivity extends AppCompatActivity {
 
@@ -56,7 +53,7 @@ public class CreateActivity extends AppCompatActivity {
                     idDishEdit.setText(platoEditado.getId().toString());
                     dishNameEdit.setText(platoEditado.getTitulo());
                     dishDescriptionEdit.setText(platoEditado.getDescripcion());
-                    dishPriceEdit.setText(platoEditado.getPrecio().toString());
+                    dishPriceEdit.setText(platoEditado.getPrecioPlato().toString());
                     dishCaloriesEdit.setText(platoEditado.getCalorias().toString());
                     for(int i=0; i<validations.length; i++){
                         validations[i] = true;
@@ -216,7 +213,7 @@ public class CreateActivity extends AppCompatActivity {
                     if(id >=0){
                         platoEditado.setTitulo(dishNameEdit.getText().toString());
                         platoEditado.setDescripcion(dishDescriptionEdit.getText().toString());
-                        platoEditado.setPrecio(Double.parseDouble(dishPriceEdit.getText().toString()));
+                        platoEditado.setPrecioPlato(Double.parseDouble(dishPriceEdit.getText().toString()));
                         platoEditado.setCalorias(Integer.parseInt(dishCaloriesEdit.getText().toString()));
                         RetrofitRepository.getInstance().updatePlato(platoEditado, handler);
                     }else{

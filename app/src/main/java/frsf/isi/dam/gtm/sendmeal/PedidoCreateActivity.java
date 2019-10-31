@@ -25,9 +25,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import frsf.isi.dam.gtm.sendmeal.dao.DBClient;
 import frsf.isi.dam.gtm.sendmeal.dao.RetrofitRepository;
 import frsf.isi.dam.gtm.sendmeal.domain.EstadoPedido;
-import frsf.isi.dam.gtm.sendmeal.domain.ItemsPedido;
+import frsf.isi.dam.gtm.sendmeal.domain.ItemPedido;
 import frsf.isi.dam.gtm.sendmeal.domain.Pedido;
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
 
@@ -41,7 +42,7 @@ public class PedidoCreateActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private Button createOrderBtn, sendOrderBtn;
     private boolean orderCreated;
-    private Pedido pedido;
+    private String idPedidoCreado;
 
     private Handler handler = new Handler(Looper.myLooper()){
         @Override
@@ -110,7 +111,7 @@ public class PedidoCreateActivity extends AppCompatActivity {
         createOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<ItemsPedido> listItemsPedido = ((PlatoPedidoAdapter) adapter).getItems();
+                List<ItemPedido> listItemsPedido = ((PlatoPedidoAdapter) adapter).getItems();
                 Toast t;
                 if(listItemsPedido.isEmpty()){
                     sendOrderBtn.setEnabled(false);
@@ -118,14 +119,19 @@ public class PedidoCreateActivity extends AppCompatActivity {
                     t.show();
                     orderCreated = false;
                 }else{
-                    pedido = new Pedido(new Date(), EstadoPedido.PENDIENTE, 0,0);
+                    Pedido pedido = new Pedido(new Date(), EstadoPedido.PENDIENTE, 0,0);
+                    System.out.println("Id del pedido recién creado: "+ pedido.getId());
                     pedido.setItemsPedido(listItemsPedido);
+
                     System.out.println("Se creó el pedido:" + pedido.toString());
                     t = Toast.makeText(PedidoCreateActivity.this,R.string.orderCreated,Toast.LENGTH_LONG);
                     t.show();
                     sendOrderBtn.setEnabled(true);
                     orderCreated = true;
                     //TODO guardar pedido en ROOM/SQLite.
+                    DBClient.getInstance(PedidoCreateActivity.this).getRoomDB().pedidoDao().insertPedido(pedido);
+                    System.out.println("Pedido despues de guardarlo en la BD:" + pedido.toString());
+                    DBClient.getInstance(PedidoCreateActivity.this).getRoomDB().itemPedidoDao().insertAllItemsPedido(pedido.getItemsPedido());
                 }
             }
         });
@@ -136,9 +142,12 @@ public class PedidoCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //TODO hacer lo del mapa y guardar en retrofit (hay que ver si se puede enviar un pedido que todavía no se "creó"
-                if(pedido != null){
-                    pedido.setEstado(EstadoPedido.ENVIADO);
-                    RetrofitRepository.getInstance().savePedido(pedido, handler);
+                if(idPedidoCreado != null){
+                    Pedido.PedidoConItems pedidoConItems = DBClient.getInstance(PedidoCreateActivity.this).getRoomDB().pedidoDao().getPedidoConItemsByIdPedido(idPedidoCreado);
+                    pedidoConItems.pedido.setEstado(EstadoPedido.ENVIADO);
+                    pedidoConItems.pedido.setItemsPedido(pedidoConItems.itemsPedido);
+                    RetrofitRepository.getInstance().savePedido(pedidoConItems.pedido, handler);
+
                     }
                 else{
                     Toast.makeText(getApplicationContext(),R.string.databaseSavePedidoError, Toast.LENGTH_LONG).show();

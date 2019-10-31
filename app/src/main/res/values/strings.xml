@@ -44,7 +44,7 @@
     <string name="dishDescriptionLbl">Descripción del plato</string>
     <string name="enterDishDescription">Ingrese la descripción</string>
     <string name="dishPriceLbl">Precio del plato</string>
-    <string name="enterDishPrice">Ingrese el precio</string>
+    <string name="enterDishPrice">Ingrese el precioItem</string>
     <string name="dishCaloriesLbl">Calorías del plato</string>
     <string name="enterDishCalories">Ingrese las calorías</string>
     <string name="saveDishBtn">Guardar</string>
@@ -53,7 +53,7 @@
     <string name="createTitle">Crear nuevo plato</string>
     <string name="invalidDishId">Ingrese un ID válido</string>
     <string name="emptyFieldCreateActivity">Este campo no puede estar vacío</string>
-    <string name="invalidDishPrice">Ingrese un precio válido</string>
+    <string name="invalidDishPrice">Ingrese un precioItem válido</string>
     <string name="invalidDishCalories">Ingrese un valor válido</string>
     <string name="dishPriceListLabel">Precio: </string>
     <string name="dishViewTitle">Platos disponibles</string>

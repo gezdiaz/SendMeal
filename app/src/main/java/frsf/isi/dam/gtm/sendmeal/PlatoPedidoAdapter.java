@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import frsf.isi.dam.gtm.sendmeal.dao.RetrofitRepository;
-import frsf.isi.dam.gtm.sendmeal.domain.ItemsPedido;
+import frsf.isi.dam.gtm.sendmeal.domain.ItemPedido;
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
 
 public class PlatoPedidoAdapter extends RecyclerView.Adapter<PlatoPedidoHolder> {
@@ -72,14 +72,14 @@ public class PlatoPedidoAdapter extends RecyclerView.Adapter<PlatoPedidoHolder> 
 
         holder.dishNamePedido.setText(plato.getTitulo());
         if(plato.getInOffer()){
-            holder.dishPricePedido.setText("$ "+format.format(plato.getPrecio()));
+            holder.dishPricePedido.setText("$ "+format.format(plato.getPrecioPlato()));
             if(!holder.dishPricePedido.getPaint().isStrikeThruText()){
                 holder.dishPricePedido.setPaintFlags(holder.dishPricePedido.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             }
             holder.offerPricePedido.setText("$ " + format.format(plato.getPrecioOferta()));
             holder.offerPricePedido.setVisibility(View.VISIBLE);
         }else{
-            holder.dishPricePedido.setText("$ "+format.format(plato.getPrecio()));
+            holder.dishPricePedido.setText("$ "+format.format(plato.getPrecioPlato()));
             if(holder.dishPricePedido.getPaint().isStrikeThruText()){
                 holder.dishPricePedido.setPaintFlags(holder.dishPricePedido.getPaintFlags() & ~(Paint.STRIKE_THRU_TEXT_FLAG));
             }
@@ -155,11 +155,11 @@ public class PlatoPedidoAdapter extends RecyclerView.Adapter<PlatoPedidoHolder> 
         RetrofitRepository.getInstance().getPlatosBySearchResults(title, minPrice, maxPrice, handler);
     }
 
-    public List<ItemsPedido> getItems(){
-        List<ItemsPedido> listaItems = new ArrayList<>();
+    public List<ItemPedido> getItems(){
+        List<ItemPedido> listaItems = new ArrayList<>();
 
         for(Plato p: selectedPlatos){
-            ItemsPedido item = new ItemsPedido();
+            ItemPedido item = new ItemPedido();
             item.setPlato(p);
             item.setCantidad(selectedPlatosQuantity.get(p.getId()));
             item.calcularPrecio();

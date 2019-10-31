@@ -17,14 +17,14 @@ public interface PedidoRest {
     Call<List<Pedido>> getPedidos();
 
     @GET("pedidos/{id}")
-    Call<Pedido> getPedidoById(@Path("id") int id);
+    Call<Pedido> getPedidoById(@Path("id") String id);
 
     @POST("pedidos/")
     Call<Pedido> savePedido(@Body Pedido p);
 
     @PUT("pedidos/{id}")
-    Call<Pedido> updatePedido(@Path("id") int id, @Body Pedido p);
+    Call<Pedido> updatePedido(@Path("id") String id, @Body Pedido p);
 
     @DELETE("pedidos/{id}")
-    Call<Pedido> deletePedido(@Path("id") int id);
+    Call<Pedido> deletePedido(@Path("id") String id);
 }

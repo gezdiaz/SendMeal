@@ -1,30 +1,57 @@
 package frsf.isi.dam.gtm.sendmeal.domain;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.Relation;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 @Entity(tableName = "PEDIDO")
 public class Pedido {
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "ID_PEDIDO")
-    private int id;
+
+    @PrimaryKey(autoGenerate = false)
+    @NonNull
+    @ColumnInfo(name = "ID_PEDIDO")
+    private String id;
 
     private Date fecha;
     private EstadoPedido estado;
     private double latitud;
     private double longitud;
-    @Relation(parentColumn = "ID_PEDIDO", entityColumn = "ITEM_ITEMS_PEDIDO", entity = ItemsPedido.class)
-    private List<ItemsPedido> itemsPedido;
+
+    public static class PedidoConItems{
+        @Embedded public Pedido pedido;
+        @Relation(parentColumn = "ID_PEDIDO", entityColumn = "ID_PEDIDO_FK", entity = ItemPedido.class)
+        public List<ItemPedido> itemsPedido;
+
+        public PedidoConItems(){}
+
+        @Override
+        public String toString() {
+            return "PedidoConItems{" +
+                    "pedido=" + pedido +
+                    ", itemsPedido=" + itemsPedido +
+                    '}';
+        }
+    }
+
+    @Ignore
+    private List<ItemPedido> itemsPedido;
 
 
     public Pedido() {
-
+        id = UUID.randomUUID().toString();
     }
+    @Ignore
     public Pedido(Date fecha, EstadoPedido estado, double latitud, double longitud) {
+        id = UUID.randomUUID().toString();
         this.fecha = fecha;
         this.estado = estado;
         this.latitud = latitud;
@@ -33,17 +60,17 @@ public class Pedido {
 
     public double getPrecioTotal(){
         double precio = 0.0;
-        for(ItemsPedido i: itemsPedido){
-            precio = precio + i.getPrecio();
+        for(ItemPedido i: itemsPedido){
+            precio = precio + i.getPrecioItem();
         }
         return precio;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -79,13 +106,15 @@ public class Pedido {
         this.longitud = longitud;
     }
 
-    public List<ItemsPedido> getItemsPedido() {
+    public List<ItemPedido> getItemsPedido() {
         return itemsPedido;
     }
 
-    public void setItemsPedido(List<ItemsPedido> itemsPedido) {
+    public void setItemsPedido(List<ItemPedido> itemsPedido) {
         this.itemsPedido = itemsPedido;
-
+        for(ItemPedido i: this.itemsPedido ){
+            i.setIdPedido(this.id);
+        }
     }
 
     @Override
@@ -104,29 +133,19 @@ public class Pedido {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Pedido pedido = (Pedido) o;
-
-        if (id != pedido.id) return false;
-        if (Double.compare(pedido.latitud, latitud) != 0) return false;
-        if (Double.compare(pedido.longitud, longitud) != 0) return false;
-        if (fecha != null ? !fecha.equals(pedido.fecha) : pedido.fecha != null) return false;
-        if (estado != pedido.estado) return false;
-        return itemsPedido != null ? itemsPedido.equals(pedido.itemsPedido) : pedido.itemsPedido == null;
+        return Double.compare(pedido.latitud, latitud) == 0 &&
+                Double.compare(pedido.longitud, longitud) == 0 &&
+                Objects.equals(id, pedido.id) &&
+                Objects.equals(fecha, pedido.fecha) &&
+                estado == pedido.estado &&
+                Objects.equals(itemsPedido, pedido.itemsPedido);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = id;
-        result = 31 * result + (fecha != null ? fecha.hashCode() : 0);
-        result = 31 * result + (estado != null ? estado.hashCode() : 0);
-        temp = Double.doubleToLongBits(latitud);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(longitud);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (itemsPedido != null ? itemsPedido.hashCode() : 0);
-        return result;
+        return Objects.hash(id, fecha, estado, latitud, longitud, itemsPedido);
     }
 }
+
+

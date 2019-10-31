@@ -126,14 +126,14 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
 
         holder.dishNameView.setText(plato.getTitulo());
         if(plato.getInOffer()){
-            holder.dishPriceView.setText("$ "+format.format(plato.getPrecio()));
+            holder.dishPriceView.setText("$ "+format.format(plato.getPrecioPlato()));
             if(!holder.dishPriceView.getPaint().isStrikeThruText()){
                 holder.dishPriceView.setPaintFlags(holder.dishPriceView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             }
             holder.offerPriceView.setText("$ " + format.format(plato.getPrecioOferta()));
             holder.offerPriceView.setVisibility(View.VISIBLE);
         }else{
-            holder.dishPriceView.setText("$ "+format.format(plato.getPrecio()));
+            holder.dishPriceView.setText("$ "+format.format(plato.getPrecioPlato()));
             if(holder.dishPriceView.getPaint().isStrikeThruText()){
                 holder.dishPriceView.setPaintFlags(holder.dishPriceView.getPaintFlags() & ~(Paint.STRIKE_THRU_TEXT_FLAG));
             }
