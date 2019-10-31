@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitRepository {
 
     private static RetrofitRepository instance;
-    private static String SERVER = "http://10.15.158.59:5000";
+    private static String SERVER = "http://10.15.153.240:5000";
 
     public static final int ALTA_PLATO = 1;
     public static final int UPDATE_PLATO = 2;
