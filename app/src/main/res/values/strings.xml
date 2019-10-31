@@ -96,7 +96,6 @@
     <string name="pedidoNoEnviadoMsgAlertDialogPedidoCreateActivity">El pedido no será enviado.</string>
     <string name="pedidoNoGuardado">El pedido no será guardado.</string>
     <string name="databaseSavePedidoError">Se produjo un error al guardar su pedido en la base de datos</string>
-    <string name="notification_content">Toca para ver qué plato está en oferta</string>
     <string name="welcomeLbl">BIENVENIDO</string>
     <string name="toolbarTitleOfferNotificationActivity">Oferta</string>
 </resources>
