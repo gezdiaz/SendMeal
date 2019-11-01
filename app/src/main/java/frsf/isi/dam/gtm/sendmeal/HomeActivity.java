@@ -34,12 +34,12 @@ public class HomeActivity extends AppCompatActivity {
         filtro.addAction(NotificationReceiver.OFFERNOTIFICATION);
         getApplication().getApplicationContext().registerReceiver(br,filtro);
 
-        List<Pedido> pedidos = DBClient.getInstance(this).getRoomDB().pedidoDao().getAllPedidos();
-        System.out.println("Pedidos en SQLite: "+ pedidos.toString() );
-        List<ItemPedido> items = DBClient.getInstance(this).getRoomDB().itemPedidoDao().getAllItemsPedido();
-        System.out.println("Items pedido en SQLite:" + items.toString());
-        List<Pedido.PedidoConItems> pedidosConItems = DBClient.getInstance(this).getRoomDB().pedidoDao().getPedidoConItems();
-        System.out.println("Pedidos con Items en SQLite:" + pedidosConItems.toString());
+//        List<Pedido> pedidos = DBClient.getInstance(this).getRoomDB().pedidoDao().getAllPedidos();
+//        System.out.println("Pedidos en SQLite: "+ pedidos.toString() );
+//        List<ItemPedido> items = DBClient.getInstance(this).getRoomDB().itemPedidoDao().getAllItemsPedido();
+//        System.out.println("Items pedido en SQLite:" + items.toString());
+//        List<Pedido.PedidoConItems> pedidosConItems = DBClient.getInstance(this).getRoomDB().pedidoDao().getPedidoConItems();
+//        System.out.println("Pedidos con Items en SQLite:" + pedidosConItems.toString());
 
     }
 
@@ -53,7 +53,8 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.registerOptionItem:
-                Intent i1 = new Intent(this, RegisterActivity.class);
+                //Intent i1 = new Intent(this, RegisterActivity.class);
+                Intent i1 = new Intent(this, SetLocationActivity.class);
                 startActivity(i1);
                 break;
             case R.id.createItemOptionItem:
