@@ -5,7 +5,7 @@
       "descripcion": "con ensalada",
       "id": 7668,
       "inOffer": true,
-      "oferta": 0.05,
+      "oferta": 0.02,
       "precioPlato": 250,
       "titulo": "Tatú a la parrilla"
     },
@@ -14,18 +14,24 @@
       "descripcion": "sin nada, bien económico",
       "inOffer": false,
       "oferta": 0,
-      "precioPlato": 50,
-      "titulo": "plato de fideos",
-      "id": 7669
+      "precioPlato": 6464,
+      "titulo": "nombre👀🤙😝"
     },
     {
-      "calorias": 120,
-      "descripcion": "el más ordinario",
+      "calorias": 91,
+      "descripcion": "descripción del plato creado con holder",
+      "id": 2,
       "inOffer": false,
       "oferta": 0,
+      "precioPlato": 35,
+      "titulo": "plato creado con Holder"
+      "calorias": 120,
+      "descripcion": "el más ordinario",
+      "id": 7670,
+      "inOffer": true,
+      "oferta": 0.5,
       "precioPlato": 65,
-      "titulo": "Sanguche de salamin",
-      "id": 7670
+      "titulo": "Sanguche de salamin"
     },
     {
       "calorias": 250,
@@ -44,6 +50,141 @@
       "precioPlato": 2438,
       "titulo": "morcilla negra XXL",
       "id": 7672
+    },
+    {
+      "calorias": 80,
+      "descripcion": "buen barato",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 50,
+      "titulo": "Picadillo con galletitas",
+      "id": 7673
+    },
+    {
+      "calorias": 0,
+      "descripcion": "eso man",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 350,
+      "titulo": "Vaso de awa",
+      "id": 7674
+    },
+    {
+      "calorias": 500,
+      "descripcion": "ordinario como canapé de mortadela",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 250,
+      "titulo": "Chorizo de caballo con papas bravas",
+      "id": 7675
+    },
+    {
+      "calorias": 25,
+      "descripcion": "para 100 personas",
+      "id": 7676,
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 25000,
+      "titulo": "Picada \"El gobernador\""
+    },
+    {
+      "calorias": 0,
+      "descripcion": "esto no es mercado libre eh?",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 1200,
+      "titulo": "Carburador de duna usado",
+      "id": 7677
+    },
+    {
+      "calorias": 200,
+      "descripcion": "no seas trolo Man",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 450,
+      "titulo": "Hamburguesa vegana",
+      "id": 7678
+    },
+    {
+      "calorias": 29,
+      "descripcion": "una empanada, pero de carne",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 30,
+      "titulo": "empanada de carne",
+      "id": 7679
+    },
+    {
+      "calorias": 0,
+      "descripcion": "agua de calidad premium para su paladar",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 10,
+      "titulo": "awa caliente pal mate",
+      "id": 7680
+    },
+    {
+      "calorias": 50,
+      "descripcion": "más duro que el maestruli",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 20,
+      "titulo": "guebo duro",
+      "id": 7681
+    },
+    {
+      "calorias": 500,
+      "descripcion": "un kilo",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 250,
+      "titulo": "helado crema del cielo",
+      "id": 7682
+    },
+    {
+      "calorias": 20,
+      "descripcion": "esa que estaba en la heladera",
+      "id": 7683,
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 0,
+      "titulo": "manzana del anexo"
+    },
+    {
+      "calorias": 60,
+      "descripcion": "especial para los viernes de balcón",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 80,
+      "titulo": "Porrón de litro",
+      "id": 7684
+    },
+    {
+      "calorias": 250,
+      "descripcion": "re cool pa caretiar",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 180,
+      "titulo": "sushi de moncholo",
+      "id": 7685
+    },
+    {
+      "calorias": 68,
+      "descripcion": "la de la serie esa que son todos amarillos",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 250,
+      "titulo": "crosti burguer",
+      "id": 7686
+    },
+    {
+      "calorias": 580,
+      "descripcion": "la del dibujito ese",
+      "inOffer": false,
+      "oferta": 0,
+      "precioPlato": 249.99,
+      "titulo": "cangreburguer",
+      "id": 7687
     }
   ],
   "pedidos": [
@@ -120,6 +261,210 @@
             "titulo": "plato 250"
           },
           "precioItem": 64
+        }
+      ],
+      "latitud": 0,
+      "longitud": 0
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Oct 31, 2019 21:08:38",
+      "id": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+      "itemsPedido": [
+        {
+          "cantidad": 15,
+          "id": 6,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 25,
+            "descripcion": "para 100 personas",
+            "id": 7676,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 25000,
+            "titulo": "Picada \"El gobernador\""
+          },
+          "precioItem": 375000
+        },
+        {
+          "cantidad": 10,
+          "id": 7,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 120,
+            "descripcion": "el más ordinario",
+            "id": 7670,
+            "inOffer": true,
+            "oferta": 0.5,
+            "precioPlato": 65,
+            "titulo": "Sanguche de salamin"
+          },
+          "precioItem": 325
+        },
+        {
+          "cantidad": 2,
+          "id": 8,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 400,
+            "descripcion": "con ensalada",
+            "id": 7668,
+            "inOffer": true,
+            "oferta": 0.02,
+            "precioPlato": 250,
+            "titulo": "Tatú a la parrilla"
+          },
+          "precioItem": 490
+        },
+        {
+          "cantidad": 50,
+          "id": 9,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 60,
+            "descripcion": "especial para los viernes de balcón",
+            "id": 7684,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 80,
+            "titulo": "Porrón de litro"
+          },
+          "precioItem": 4000
+        },
+        {
+          "cantidad": 2,
+          "id": 10,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 840,
+            "descripcion": "jgg",
+            "id": 7672,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 2438,
+            "titulo": "morcilla negra XXL"
+          },
+          "precioItem": 4876
+        },
+        {
+          "cantidad": 1,
+          "id": 11,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 0,
+            "descripcion": "eso man",
+            "id": 7674,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 350,
+            "titulo": "Vaso de awa"
+          },
+          "precioItem": 350
+        },
+        {
+          "cantidad": 15,
+          "id": 12,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 29,
+            "descripcion": "una empanada, pero de carne",
+            "id": 7679,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 30,
+            "titulo": "empanada de carne"
+          },
+          "precioItem": 450
+        },
+        {
+          "cantidad": 1,
+          "id": 13,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 80,
+            "descripcion": "sin nada, bien económico",
+            "id": 7669,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 50,
+            "titulo": "plato de fideos"
+          },
+          "precioItem": 50
+        },
+        {
+          "cantidad": 3,
+          "id": 14,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 20,
+            "descripcion": "esa que estaba en la heladera",
+            "id": 7683,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 0,
+            "titulo": "manzana del anexo"
+          },
+          "precioItem": 0
+        },
+        {
+          "cantidad": 1,
+          "id": 15,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 80,
+            "descripcion": "buen barato",
+            "id": 7673,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 50,
+            "titulo": "Picadillo con galletitas"
+          },
+          "precioItem": 50
+        },
+        {
+          "cantidad": 5,
+          "id": 16,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 500,
+            "descripcion": "un kilo",
+            "id": 7682,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 250,
+            "titulo": "helado crema del cielo"
+          },
+          "precioItem": 1250
+        },
+        {
+          "cantidad": 1,
+          "id": 17,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 0,
+            "descripcion": "agua de calidad premium para su paladar",
+            "id": 7680,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 10,
+            "titulo": "awa caliente pal mate"
+          },
+          "precioItem": 10
+        },
+        {
+          "cantidad": 3,
+          "id": 18,
+          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "plato": {
+            "calorias": 500,
+            "descripcion": "ordinario como canapé de mortadela",
+            "id": 7675,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 250,
+            "titulo": "Chorizo de caballo con papas bravas"
+          },
+          "precioItem": 750
         }
       ],
       "latitud": 0,
