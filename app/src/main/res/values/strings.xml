@@ -98,4 +98,6 @@
     <string name="databaseSavePedidoError">Se produjo un error al guardar su pedido en la base de datos</string>
     <string name="welcomeLbl">BIENVENIDO</string>
     <string name="toolbarTitleOfferNotificationActivity">Oferta</string>
+    <string name="databaseGetAllPedidosError">Error al obtener los pedidos de la base de datos.</string>
+    <string name="orderMarkerTitle">Pedido N°</string>
 </resources>

@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitRepository {
 
     private static RetrofitRepository instance;
-    private static String SERVER = "http://10.15.153.240:5000";
+    private static String SERVER = "http://10.15.158.59:5000";
 
     public static final int ALTA_PLATO = 1;
     public static final int UPDATE_PLATO = 2;
@@ -279,6 +279,7 @@ public class RetrofitRepository {
 
                 @Override
                 public void onFailure(Call<List<Pedido>> call, Throwable t) {
+                    System.out.println("Error en getAll pedidos: "+t.getMessage());
                     Message m = Message.obtain();
                     m.what = ERROR_GETALL_PEDIDOS;
                     handler.sendMessage(m);

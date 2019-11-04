@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SetLocationActivity"></activity>
+        <activity android:name=".MapActivity"/>
         <activity android:name=".PedidoCreateActivity" />
         <activity android:name=".ShowDishActivity" />
         <activity android:name=".DishViewActivity" />

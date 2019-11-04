@@ -1,18 +1,23 @@
 package frsf.isi.dam.gtm.sendmeal;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -130,7 +135,7 @@ public class PedidoCreateActivity extends AppCompatActivity {
                     orderCreated = true;
                     //TODO guardar pedido en ROOM/SQLite.
                     DBClient.getInstance(PedidoCreateActivity.this).getRoomDB().pedidoDao().insertPedido(pedido);
-                    System.out.println("Pedido despues de guardarlo en la BD:" + pedido.toString());
+                    //System.out.println("Pedido despues de guardarlo en la BD:" + pedido.toString());
                     DBClient.getInstance(PedidoCreateActivity.this).getRoomDB().itemPedidoDao().insertAllItemsPedido(pedido.getItemsPedido());
                     idPedidoCreado = pedido.getId();
                 }
@@ -144,16 +149,12 @@ public class PedidoCreateActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //TODO hacer lo del mapa y guardar en retrofit (hay que ver si se puede enviar un pedido que todavía no se "creó"
                 if(idPedidoCreado != null){
-                    Pedido.PedidoConItems pedidoConItems = DBClient.getInstance(PedidoCreateActivity.this).getRoomDB().pedidoDao().getPedidoConItemsByIdPedido(idPedidoCreado);
-                    pedidoConItems.pedido.setEstado(EstadoPedido.ENVIADO);
-                    pedidoConItems.pedido.setItemsPedido(pedidoConItems.itemsPedido);
-                    RetrofitRepository.getInstance().savePedido(pedidoConItems.pedido, handler);
-
-                    }
-                else{
+                    Intent getLocationIntent = new Intent(PedidoCreateActivity.this, MapActivity.class);
+                    getLocationIntent.setAction("getLocation");
+                    startActivityForResult(getLocationIntent, MapActivity.GET_LOCATION);
+                }else{
                     Toast.makeText(getApplicationContext(),R.string.databaseSavePedidoError, Toast.LENGTH_LONG).show();
                 }
-                finish();
             }
         });
     }
@@ -165,6 +166,37 @@ public class PedidoCreateActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("onActivityResult de PedidoCreateActivity");
+        if(requestCode == MapActivity.GET_LOCATION){
+            System.out.println("Entra al if");
+            switch (resultCode){
+                case Activity.RESULT_OK:{
+                    Pedido.PedidoConItems pedidoConItems = DBClient.getInstance(this).getRoomDB().pedidoDao().getPedidoConItemsByIdPedido(idPedidoCreado);
+                    pedidoConItems.pedido.setEstado(EstadoPedido.ENVIADO);
+                    pedidoConItems.pedido.setItemsPedido(pedidoConItems.itemsPedido);
+                    Double lat, lon;
+                    lon = data.getDoubleExtra("longitud", 300);
+                    lat = data.getDoubleExtra("latitud", 300);
+                    if(lat!=300 && lon != 300){
+                        pedidoConItems.pedido.setLatitud(lat);
+                        pedidoConItems.pedido.setLongitud(lon);
+                        RetrofitRepository.getInstance().savePedido(pedidoConItems.pedido,handler);
+                        Toast.makeText(this, "Pedido enviado", Toast.LENGTH_LONG).show();
+                        System.out.println("finish()");
+                        PedidoCreateActivity.this.finish();
+                    }else {
+                        Toast.makeText(PedidoCreateActivity.this, "Se produjo un error al seleccionar la ubicación", Toast.LENGTH_LONG).show();
+                    }
+                }
+                case Activity.RESULT_CANCELED:{
+                    Toast.makeText(this, "Se produjo un error al seleccionar la ubicación", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -261,6 +293,7 @@ public class PedidoCreateActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         requestFinish();
+        super.onBackPressed();
     }
 
 }

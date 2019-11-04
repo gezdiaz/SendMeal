@@ -25,6 +25,8 @@
       "oferta": 0,
       "precioPlato": 35,
       "titulo": "plato creado con Holder"
+    },
+    {
       "calorias": 120,
       "descripcion": "el más ordinario",
       "id": 7670,
@@ -469,6 +471,54 @@
       ],
       "latitud": 0,
       "longitud": 0
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Nov 4, 2019 6:36:57 PM",
+      "id": "91b7a9c7-a53f-4d6f-8bdb-1497a5ef6705",
+      "itemsPedido": [
+        {
+          "cantidad": 1,
+          "id": 17,
+          "idPedido": "91b7a9c7-a53f-4d6f-8bdb-1497a5ef6705",
+          "plato": {
+            "calorias": 400,
+            "descripcion": "con ensalada",
+            "id": 7668,
+            "inOffer": true,
+            "oferta": 0.02,
+            "precioPlato": 250,
+            "titulo": "Tatú a la parrilla"
+          },
+          "precioItem": 245
+        }
+      ],
+      "latitud": -31.610602673054334,
+      "longitud": -60.67317891865968
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Nov 4, 2019 6:51:40 PM",
+      "id": "37ff6182-365f-41bc-bc7b-78528ad817cf",
+      "itemsPedido": [
+        {
+          "cantidad": 1,
+          "id": 18,
+          "idPedido": "37ff6182-365f-41bc-bc7b-78528ad817cf",
+          "plato": {
+            "calorias": 400,
+            "descripcion": "con ensalada",
+            "id": 7668,
+            "inOffer": true,
+            "oferta": 0.02,
+            "precioPlato": 250,
+            "titulo": "Tatú a la parrilla"
+          },
+          "precioItem": 245
+        }
+      ],
+      "latitud": -31.619666419478897,
+      "longitud": -60.67779935896397
     }
   ]
 }

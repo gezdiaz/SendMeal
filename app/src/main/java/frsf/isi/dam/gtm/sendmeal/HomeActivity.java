@@ -53,8 +53,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.registerOptionItem:
-                //Intent i1 = new Intent(this, RegisterActivity.class);
-                Intent i1 = new Intent(this, SetLocationActivity.class);
+                Intent i1 = new Intent(this, RegisterActivity.class);
                 startActivity(i1);
                 break;
             case R.id.createItemOptionItem:
@@ -68,6 +67,11 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.newOrderOptionItem:
                 Intent i4 = new Intent(this, PedidoCreateActivity.class);
                 startActivity(i4);
+                break;
+            case R.id.viewOrders:
+                Intent i5 = new Intent(this, MapActivity.class);
+                i5.setAction("showOrders");
+                startActivity(i5);
                 break;
             default:
                 Toast.makeText(this, "....", Toast.LENGTH_LONG).show();
