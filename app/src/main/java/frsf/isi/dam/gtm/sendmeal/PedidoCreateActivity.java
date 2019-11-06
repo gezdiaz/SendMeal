@@ -47,7 +47,7 @@ public class PedidoCreateActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private Button createOrderBtn, sendOrderBtn;
     private boolean orderCreated;
-    private String idPedidoCreado;
+    private int idPedidoCreado;
 
     private Handler handler = new Handler(Looper.myLooper()){
         @Override
@@ -148,7 +148,7 @@ public class PedidoCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //TODO hacer lo del mapa y guardar en retrofit (hay que ver si se puede enviar un pedido que todavía no se "creó"
-                if(idPedidoCreado != null){
+                if(idPedidoCreado != 0){
                     Intent getLocationIntent = new Intent(PedidoCreateActivity.this, MapActivity.class);
                     getLocationIntent.setAction("getLocation");
                     startActivityForResult(getLocationIntent, MapActivity.GET_LOCATION);
@@ -184,15 +184,17 @@ public class PedidoCreateActivity extends AppCompatActivity {
                         pedidoConItems.pedido.setLatitud(lat);
                         pedidoConItems.pedido.setLongitud(lon);
                         RetrofitRepository.getInstance().savePedido(pedidoConItems.pedido,handler);
-                        Toast.makeText(this, "Pedido enviado", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, R.string.orderSent, Toast.LENGTH_LONG).show();
                         System.out.println("finish()");
                         PedidoCreateActivity.this.finish();
                     }else {
-                        Toast.makeText(PedidoCreateActivity.this, "Se produjo un error al seleccionar la ubicación", Toast.LENGTH_LONG).show();
+                        Toast.makeText(PedidoCreateActivity.this, R.string.locationSelectError, Toast.LENGTH_LONG).show();
                     }
+                    break;
                 }
                 case Activity.RESULT_CANCELED:{
-                    Toast.makeText(this, "Se produjo un error al seleccionar la ubicación", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.locationSelectError, Toast.LENGTH_LONG).show();
+                    break;
                 }
             }
         }

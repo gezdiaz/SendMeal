@@ -279,7 +279,7 @@ public class RetrofitRepository {
 
                 @Override
                 public void onFailure(Call<List<Pedido>> call, Throwable t) {
-                    System.out.println("Error en getAll pedidos: "+t.getMessage());
+                    System.out.println("Error en getAll pedidos: "+t.toString());
                     Message m = Message.obtain();
                     m.what = ERROR_GETALL_PEDIDOS;
                     handler.sendMessage(m);
@@ -314,7 +314,7 @@ public class RetrofitRepository {
             System.out.println("En retrofit se recibió el plato: "+pedido);
             System.out.println("Con id: "+pedido.getId());
             Call<Pedido> call = pedidoRest.deletePedido(pedido.getId());
-            final String id = pedido.getId();
+            final int id = pedido.getId();
             System.out.println("Ejecuta enqueue");
             call.enqueue(new Callback<Pedido>() {
                 @Override

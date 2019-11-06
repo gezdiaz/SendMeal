@@ -12,8 +12,9 @@
     {
       "calorias": 80,
       "descripcion": "sin nada, bien económico",
-      "inOffer": false,
-      "oferta": 0,
+      "id": 1,
+      "inOffer": true,
+      "oferta": 0.5,
       "precioPlato": 6464,
       "titulo": "nombre👀🤙😝"
     },
@@ -192,37 +193,13 @@
   "pedidos": [
     {
       "estado": "ENVIADO",
-      "fecha": "Oct 31, 2019 20:04:24",
-      "id": "bab760f9-5af0-4235-a050-ae33bc6c0ff3",
-      "itemsPedido": [
-        {
-          "cantidad": 2,
-          "id": 2,
-          "idPedido": "bab760f9-5af0-4235-a050-ae33bc6c0ff3",
-          "plato": {
-            "calorias": 879,
-            "descripcion": "ksja",
-            "id": 25,
-            "inOffer": true,
-            "oferta": 0.5,
-            "precioPlato": 64,
-            "titulo": "plato 250"
-          },
-          "precioItem": 64
-        }
-      ],
-      "latitud": 0,
-      "longitud": 0
-    },
-    {
-      "estado": "ENVIADO",
-      "fecha": "Oct 31, 2019 20:05:57",
-      "id": "6c36babb-af3c-4501-b04f-5c80f8913b95",
+      "fecha": "Nov 5, 2019 8:25:15 PM",
+      "id": 397664392,
       "itemsPedido": [
         {
           "cantidad": 1,
-          "id": 3,
-          "idPedido": "6c36babb-af3c-4501-b04f-5c80f8913b95",
+          "id": 1,
+          "idPedido": 397664392,
           "plato": {
             "calorias": 91,
             "descripcion": "descripción del plato creado con holder",
@@ -236,47 +213,71 @@
         },
         {
           "cantidad": 2,
-          "id": 4,
-          "idPedido": "6c36babb-af3c-4501-b04f-5c80f8913b95",
+          "id": 2,
+          "idPedido": 397664392,
           "plato": {
-            "calorias": 646,
-            "descripcion": "jdud",
-            "id": 7664,
+            "calorias": 250,
+            "descripcion": "con todo lo que quedó del día anterior",
+            "id": 7671,
             "inOffer": false,
             "oferta": 0,
-            "precioPlato": 6464,
-            "titulo": "nombre👀🤙😝"
+            "precioPlato": 60,
+            "titulo": "tarta de sobra"
           },
-          "precioItem": 12928
+          "precioItem": 120
         },
         {
-          "cantidad": 2,
-          "id": 5,
-          "idPedido": "6c36babb-af3c-4501-b04f-5c80f8913b95",
+          "cantidad": 1,
+          "id": 3,
+          "idPedido": 397664392,
           "plato": {
-            "calorias": 879,
-            "descripcion": "ksja",
-            "id": 25,
+            "calorias": 400,
+            "descripcion": "con ensalada",
+            "id": 7668,
             "inOffer": true,
-            "oferta": 0.5,
-            "precioPlato": 64,
-            "titulo": "plato 250"
+            "oferta": 0.02,
+            "precioPlato": 250,
+            "titulo": "Tatú a la parrilla"
           },
-          "precioItem": 64
+          "precioItem": 245
         }
       ],
-      "latitud": 0,
-      "longitud": 0
+      "latitud": -31.620743617533957,
+      "longitud": -60.67867744714021
     },
     {
       "estado": "ENVIADO",
-      "fecha": "Oct 31, 2019 21:08:38",
-      "id": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+      "fecha": "Nov 5, 2019 8:25:41 PM",
+      "id": 1113571017,
+      "itemsPedido": [
+        {
+          "cantidad": 5,
+          "id": 4,
+          "idPedido": 1113571017,
+          "plato": {
+            "calorias": 91,
+            "descripcion": "descripción del plato creado con holder",
+            "id": 2,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 35,
+            "titulo": "plato creado con Holder"
+          },
+          "precioItem": 175
+        }
+      ],
+      "latitud": -31.605666278924602,
+      "longitud": -60.691593289375305
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Nov 5, 2019 8:26:02 PM",
+      "id": 1758214259,
       "itemsPedido": [
         {
           "cantidad": 15,
-          "id": 6,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "id": 5,
+          "idPedido": 1758214259,
           "plato": {
             "calorias": 25,
             "descripcion": "para 100 personas",
@@ -287,26 +288,83 @@
             "titulo": "Picada \"El gobernador\""
           },
           "precioItem": 375000
-        },
+        }
+      ],
+      "latitud": -31.657924284330203,
+      "longitud": -60.710476376116276
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Nov 5, 2019 8:37:43 PM",
+      "id": 370550295,
+      "itemsPedido": [
         {
-          "cantidad": 10,
+          "cantidad": 3,
           "id": 7,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "idPedido": 370550295,
           "plato": {
-            "calorias": 120,
-            "descripcion": "el más ordinario",
-            "id": 7670,
+            "calorias": 400,
+            "descripcion": "con ensalada",
+            "id": 7668,
             "inOffer": true,
-            "oferta": 0.5,
-            "precioPlato": 65,
-            "titulo": "Sanguche de salamin"
+            "oferta": 0.02,
+            "precioPlato": 250,
+            "titulo": "Tatú a la parrilla"
           },
-          "precioItem": 325
-        },
+          "precioItem": 735
+        }
+      ],
+      "latitud": -31.606911252610267,
+      "longitud": -60.68500947207213
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Nov 5, 2019 8:38:09 PM",
+      "id": -888781352,
+      "itemsPedido": [
         {
           "cantidad": 2,
           "id": 8,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "idPedido": -888781352,
+          "plato": {
+            "calorias": 0,
+            "descripcion": "eso man",
+            "id": 7674,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 350,
+            "titulo": "Vaso de awa"
+          },
+          "precioItem": 700
+        }
+      ],
+      "latitud": -31.61037424781978,
+      "longitud": -60.68560894578695
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Nov 5, 2019 8:39:48 PM",
+      "id": -1856883705,
+      "itemsPedido": [
+        {
+          "cantidad": 11,
+          "id": 9,
+          "idPedido": -1856883705,
+          "plato": {
+            "calorias": 91,
+            "descripcion": "descripción del plato creado con holder",
+            "id": 2,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 35,
+            "titulo": "plato creado con Holder"
+          },
+          "precioItem": 385
+        },
+        {
+          "cantidad": 2,
+          "id": 10,
+          "idPedido": -1856883705,
           "plato": {
             "calorias": 400,
             "descripcion": "con ensalada",
@@ -317,56 +375,20 @@
             "titulo": "Tatú a la parrilla"
           },
           "precioItem": 490
-        },
+        }
+      ],
+      "latitud": -31.63574971928374,
+      "longitud": -60.70266846567392
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Nov 5, 2019 8:41:23 PM",
+      "id": -1225254952,
+      "itemsPedido": [
         {
-          "cantidad": 50,
-          "id": 9,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
-          "plato": {
-            "calorias": 60,
-            "descripcion": "especial para los viernes de balcón",
-            "id": 7684,
-            "inOffer": false,
-            "oferta": 0,
-            "precioPlato": 80,
-            "titulo": "Porrón de litro"
-          },
-          "precioItem": 4000
-        },
-        {
-          "cantidad": 2,
-          "id": 10,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
-          "plato": {
-            "calorias": 840,
-            "descripcion": "jgg",
-            "id": 7672,
-            "inOffer": false,
-            "oferta": 0,
-            "precioPlato": 2438,
-            "titulo": "morcilla negra XXL"
-          },
-          "precioItem": 4876
-        },
-        {
-          "cantidad": 1,
+          "cantidad": 12,
           "id": 11,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
-          "plato": {
-            "calorias": 0,
-            "descripcion": "eso man",
-            "id": 7674,
-            "inOffer": false,
-            "oferta": 0,
-            "precioPlato": 350,
-            "titulo": "Vaso de awa"
-          },
-          "precioItem": 350
-        },
-        {
-          "cantidad": 15,
-          "id": 12,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "idPedido": -1225254952,
           "plato": {
             "calorias": 29,
             "descripcion": "una empanada, pero de carne",
@@ -376,111 +398,99 @@
             "precioPlato": 30,
             "titulo": "empanada de carne"
           },
-          "precioItem": 450
+          "precioItem": 360
         },
         {
-          "cantidad": 1,
+          "cantidad": 10,
+          "id": 12,
+          "idPedido": -1225254952,
+          "plato": {
+            "calorias": 400,
+            "descripcion": "con ensalada",
+            "id": 7668,
+            "inOffer": true,
+            "oferta": 0.02,
+            "precioPlato": 250,
+            "titulo": "Tatú a la parrilla"
+          },
+          "precioItem": 2450
+        },
+        {
+          "cantidad": 2,
           "id": 13,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "idPedido": -1225254952,
           "plato": {
             "calorias": 80,
             "descripcion": "sin nada, bien económico",
-            "id": 7669,
+            "id": 1,
             "inOffer": false,
             "oferta": 0,
-            "precioPlato": 50,
-            "titulo": "plato de fideos"
+            "precioPlato": 6464,
+            "titulo": "nombre👀🤙😝"
           },
-          "precioItem": 50
-        },
+          "precioItem": 12928
+        }
+      ],
+      "latitud": -31.62244318401914,
+      "longitud": -60.70403572171926
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Nov 5, 2019 8:43:19 PM",
+      "id": -1972937063,
+      "itemsPedido": [
         {
-          "cantidad": 3,
+          "cantidad": 13,
           "id": 14,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "idPedido": -1972937063,
           "plato": {
-            "calorias": 20,
-            "descripcion": "esa que estaba en la heladera",
-            "id": 7683,
-            "inOffer": false,
-            "oferta": 0,
-            "precioPlato": 0,
-            "titulo": "manzana del anexo"
+            "calorias": 400,
+            "descripcion": "con ensalada",
+            "id": 7668,
+            "inOffer": true,
+            "oferta": 0.02,
+            "precioPlato": 250,
+            "titulo": "Tatú a la parrilla"
           },
-          "precioItem": 0
-        },
+          "precioItem": 3185
+        }
+      ],
+      "latitud": -31.62625817376456,
+      "longitud": -60.69975525140762
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Nov 5, 2019 8:44:48 PM",
+      "id": -2121487273,
+      "itemsPedido": [
         {
-          "cantidad": 1,
+          "cantidad": 4,
           "id": 15,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
+          "idPedido": -2121487273,
           "plato": {
             "calorias": 80,
-            "descripcion": "buen barato",
-            "id": 7673,
-            "inOffer": false,
-            "oferta": 0,
-            "precioPlato": 50,
-            "titulo": "Picadillo con galletitas"
+            "descripcion": "sin nada, bien económico",
+            "id": 1,
+            "inOffer": true,
+            "oferta": 0.5,
+            "precioPlato": 6464,
+            "titulo": "nombre👀🤙😝"
           },
-          "precioItem": 50
-        },
+          "precioItem": 12928
+        }
+      ],
+      "latitud": -31.616000483753428,
+      "longitud": -60.68557173013687
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Nov 5, 2019 8:55:20 PM",
+      "id": -538269113,
+      "itemsPedido": [
         {
-          "cantidad": 5,
+          "cantidad": 1,
           "id": 16,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
-          "plato": {
-            "calorias": 500,
-            "descripcion": "un kilo",
-            "id": 7682,
-            "inOffer": false,
-            "oferta": 0,
-            "precioPlato": 250,
-            "titulo": "helado crema del cielo"
-          },
-          "precioItem": 1250
-        },
-        {
-          "cantidad": 1,
-          "id": 17,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
-          "plato": {
-            "calorias": 0,
-            "descripcion": "agua de calidad premium para su paladar",
-            "id": 7680,
-            "inOffer": false,
-            "oferta": 0,
-            "precioPlato": 10,
-            "titulo": "awa caliente pal mate"
-          },
-          "precioItem": 10
-        },
-        {
-          "cantidad": 3,
-          "id": 18,
-          "idPedido": "bdfde308-bc81-4793-bcca-49d2d2c38a42",
-          "plato": {
-            "calorias": 500,
-            "descripcion": "ordinario como canapé de mortadela",
-            "id": 7675,
-            "inOffer": false,
-            "oferta": 0,
-            "precioPlato": 250,
-            "titulo": "Chorizo de caballo con papas bravas"
-          },
-          "precioItem": 750
-        }
-      ],
-      "latitud": 0,
-      "longitud": 0
-    },
-    {
-      "estado": "ENVIADO",
-      "fecha": "Nov 4, 2019 6:36:57 PM",
-      "id": "91b7a9c7-a53f-4d6f-8bdb-1497a5ef6705",
-      "itemsPedido": [
-        {
-          "cantidad": 1,
-          "id": 17,
-          "idPedido": "91b7a9c7-a53f-4d6f-8bdb-1497a5ef6705",
+          "idPedido": -538269113,
           "plato": {
             "calorias": 400,
             "descripcion": "con ensalada",
@@ -493,32 +503,32 @@
           "precioItem": 245
         }
       ],
-      "latitud": -31.610602673054334,
-      "longitud": -60.67317891865968
+      "latitud": -31.620182322674157,
+      "longitud": -60.68840011954308
     },
     {
       "estado": "ENVIADO",
-      "fecha": "Nov 4, 2019 6:51:40 PM",
-      "id": "37ff6182-365f-41bc-bc7b-78528ad817cf",
+      "fecha": "Nov 5, 2019 9:09:26 PM",
+      "id": 943998939,
       "itemsPedido": [
         {
           "cantidad": 1,
-          "id": 18,
-          "idPedido": "37ff6182-365f-41bc-bc7b-78528ad817cf",
+          "id": 17,
+          "idPedido": 943998939,
           "plato": {
-            "calorias": 400,
-            "descripcion": "con ensalada",
-            "id": 7668,
+            "calorias": 80,
+            "descripcion": "sin nada, bien económico",
+            "id": 1,
             "inOffer": true,
-            "oferta": 0.02,
-            "precioPlato": 250,
-            "titulo": "Tatú a la parrilla"
+            "oferta": 0.5,
+            "precioPlato": 6464,
+            "titulo": "nombre👀🤙😝"
           },
-          "precioItem": 245
+          "precioItem": 3232
         }
       ],
-      "latitud": -31.619666419478897,
-      "longitud": -60.67779935896397
+      "latitud": -31.61240549954928,
+      "longitud": -60.681537352502346
     }
   ]
 }

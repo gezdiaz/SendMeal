@@ -19,7 +19,7 @@ public class Pedido {
     @PrimaryKey(autoGenerate = false)
     @NonNull
     @ColumnInfo(name = "ID_PEDIDO")
-    private String id;
+    private int id;
 
     private Date fecha;
     private EstadoPedido estado;
@@ -47,11 +47,11 @@ public class Pedido {
 
 
     public Pedido() {
-        id = UUID.randomUUID().toString();
+        id = UUID.randomUUID().toString().hashCode();
     }
     @Ignore
     public Pedido(Date fecha, EstadoPedido estado, double latitud, double longitud) {
-        id = UUID.randomUUID().toString();
+        id = UUID.randomUUID().toString().hashCode();
         this.fecha = fecha;
         this.estado = estado;
         this.latitud = latitud;
@@ -66,11 +66,11 @@ public class Pedido {
         return precio;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

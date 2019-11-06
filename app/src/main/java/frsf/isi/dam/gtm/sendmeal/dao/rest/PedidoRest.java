@@ -23,8 +23,8 @@ public interface PedidoRest {
     Call<Pedido> savePedido(@Body Pedido p);
 
     @PUT("pedidos/{id}")
-    Call<Pedido> updatePedido(@Path("id") String id, @Body Pedido p);
+    Call<Pedido> updatePedido(@Path("id") int id, @Body Pedido p);
 
     @DELETE("pedidos/{id}")
-    Call<Pedido> deletePedido(@Path("id") String id);
+    Call<Pedido> deletePedido(@Path("id") int id);
 }

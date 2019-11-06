@@ -100,4 +100,6 @@
     <string name="toolbarTitleOfferNotificationActivity">Oferta</string>
     <string name="databaseGetAllPedidosError">Error al obtener los pedidos de la base de datos.</string>
     <string name="orderMarkerTitle">Pedido N°</string>
+    <string name="orderSent">Pedido Enviado</string>
+    <string name="locationSelectError">Se produjo un error al seleccionar la ubicación.</string>
 </resources>

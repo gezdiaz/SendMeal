@@ -13,7 +13,7 @@ public class ItemPedido {
 
     private int cantidad;
     private double precioItem;
-    @ColumnInfo(name = "ID_PEDIDO_FK") private String idPedido;
+    @ColumnInfo(name = "ID_PEDIDO_FK") private int idPedido;
     @Embedded() private Plato plato;
 
     public ItemPedido() {
@@ -36,11 +36,11 @@ public class ItemPedido {
         }
     }
 
-    public String getIdPedido() {
+    public int getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(String idPedido) {
+    public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
 

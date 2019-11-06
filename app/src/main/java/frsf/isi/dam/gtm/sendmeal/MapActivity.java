@@ -27,7 +27,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -87,7 +86,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             statesSpinner.setVisibility(View.GONE);
         }else{
             if(getIntent().getAction().equals("showOrders")){
-                System.out.println("Entra al if");
                 RetrofitRepository.getInstance().getPedidos(handler);
                 progressDialog = ProgressDialog.show(this,getString(R.string.pleaseWait),"Cargando pedidos de la base de datos");
                 progressDialog.setCancelable(false);
@@ -110,6 +108,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 });
             }
         }
+        //Esto se debería hacer antes de pedir los pedidos de la base de datos.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.setLocationMapFragment);
         mapFragment.getMapAsync(this);
     }
@@ -140,23 +139,38 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         address.setPosition(latLng);
                     } else {
                         address = map.addMarker(new MarkerOptions().position(latLng)
-                                .draggable(true));
+                                .draggable(true)
+                                .title("Enviar pedido"));
                     }
                 }
             });
-            System.out.println("SetOnMarkerClickListener");
-            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//                @Override
+//                public boolean onMarkerClick(Marker marker) {
+//                    Intent result = new Intent(MapActivity.this, PedidoCreateActivity.class);
+//                    Double lat = marker.getPosition().latitude, lon = marker.getPosition().longitude;
+//                    result.putExtra("longitud", lon);
+//                    result.putExtra("latitud", lat);
+//                    MapActivity.this.setResult(Activity.RESULT_OK, result);
+//                    MapActivity.this.finish();
+//                    return true;
+//                }
+//            });
+            map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                 @Override
-                public boolean onMarkerClick(Marker marker) {
+                public void onInfoWindowClick(Marker marker) {
                     Intent result = new Intent(MapActivity.this, PedidoCreateActivity.class);
                     Double lat = marker.getPosition().latitude, lon = marker.getPosition().longitude;
                     result.putExtra("longitud", lon);
                     result.putExtra("latitud", lat);
                     MapActivity.this.setResult(Activity.RESULT_OK, result);
                     MapActivity.this.finish();
-                    return true;
                 }
             });
+        }else{
+            if(actionReceived == SHOW_ORDERS) {
+                map.setInfoWindowAdapter(new PedidoInfoWindowAdapter(getLayoutInflater()));
+            }
         }
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -173,7 +187,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         for(Pedido p: pedidos){
             map.addMarker(new MarkerOptions().position(new LatLng(p.getLatitud(),p.getLongitud()))
                                              .title(getString(R.string.orderMarkerTitle)+" "+p.getId())
-                                             .snippet(p.getEstado().name()+"\n"+"$ "+p.getPrecioTotal())
+                                             .snippet(p.getEstado().name()+"-"+"$ "+p.getPrecioTotal())
                                              .icon(BitmapDescriptorFactory.defaultMarker(getMarkerColor(p.getEstado()))));
         }
     }
@@ -192,7 +206,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case 9999: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

@@ -20,7 +20,7 @@ public interface PedidoDao {
 
     @Transaction
     @Query("SELECT * FROM PEDIDO WHERE ID_PEDIDO = :idPedido")
-    Pedido.PedidoConItems getPedidoConItemsByIdPedido(String idPedido);
+    Pedido.PedidoConItems getPedidoConItemsByIdPedido(int idPedido);
 
     @Query("SELECT * FROM PEDIDO")
     List<Pedido> getAllPedidos();
