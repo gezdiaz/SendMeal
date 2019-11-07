@@ -1,17 +1,28 @@
 package frsf.isi.dam.gtm.sendmeal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.util.List;
+import java.util.Set;
 
 import frsf.isi.dam.gtm.sendmeal.dao.DBClient;
 import frsf.isi.dam.gtm.sendmeal.domain.ItemPedido;
@@ -32,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
         NotificationReceiver br = new NotificationReceiver();
         IntentFilter filtro = new IntentFilter();
         filtro.addAction(NotificationReceiver.OFFERNOTIFICATION);
-        getApplication().getApplicationContext().registerReceiver(br,filtro);
+        getApplication().getApplicationContext().registerReceiver(br, filtro);
 
 //        List<Pedido> pedidos = DBClient.getInstance(this).getRoomDB().pedidoDao().getAllPedidos();
 //        System.out.println("Pedidos en SQLite: "+ pedidos.toString() );
@@ -41,6 +52,47 @@ public class HomeActivity extends AppCompatActivity {
 //        List<Pedido.PedidoConItems> pedidosConItems = DBClient.getInstance(this).getRoomDB().pedidoDao().getPedidoConItems();
 //        System.out.println("Pedidos con Items en SQLite:" + pedidosConItems.toString());
 
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                if (!task.isSuccessful()) {
+                    Log.w("token", "getInstanceId failed", task.getException());
+                    return;
+                }
+
+                // Get new Instance ID token
+                String token = task.getResult().getToken();
+
+                Pedido.token = token;
+                SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("token", token);
+                editor.apply();
+                // Log and toast
+                String msg = "El token es: " + token;
+                Log.d("token", msg);
+            }
+        });
+        FirebaseMessaging.getInstance().subscribeToTopic("pedidos")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Se suscribió al tema";
+                        if (!task.isSuccessful()) {
+                            msg = "Se produjo un error al suscribirse";
+                        }
+                        Log.d("topic", msg);
+                        Toast.makeText(HomeActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        if (getIntent().getExtras() != null) {
+            Set<String> claves = getIntent().getExtras().keySet();
+            Log.d("APP_MSG", "RECIBO DATOS EN ACTIVIDAD PRINCIPAL");
+            for (String k : claves) {
+                Log.d("APP_MSG", k + ": " + getIntent().getExtras().get(k).toString());
+            }
+        }
     }
 
     @Override

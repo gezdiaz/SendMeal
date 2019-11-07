@@ -16,6 +16,8 @@ import java.util.UUID;
 @Entity(tableName = "PEDIDO")
 public class Pedido {
 
+    public static String token;
+
     @PrimaryKey(autoGenerate = false)
     @NonNull
     @ColumnInfo(name = "ID_PEDIDO")

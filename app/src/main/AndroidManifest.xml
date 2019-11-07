@@ -11,8 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+        android:minSdkVersion="18"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MapActivity"/>
+        <activity android:name=".MapActivity" />
+
         <activity android:name=".PedidoCreateActivity" />
         <activity android:name=".ShowDishActivity" />
         <activity android:name=".DishViewActivity" />
@@ -25,17 +27,28 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCuYHwH_F4qzlVLJYDJWIR5FZWS_eN5loA" />
+        <service
+            android:name=".PushNotificationService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_fastfood"/>
     </application>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

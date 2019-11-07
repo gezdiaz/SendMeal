@@ -13,10 +13,10 @@
       "calorias": 80,
       "descripcion": "sin nada, bien económico",
       "id": 1,
-      "inOffer": true,
-      "oferta": 0.5,
+      "inOffer": false,
+      "oferta": 0,
       "precioPlato": 6464,
-      "titulo": "nombre👀🤙😝"
+      "titulo": "nombre👀🤙😝👌🏽"
     },
     {
       "calorias": 91,
@@ -529,6 +529,45 @@
       ],
       "latitud": -31.61240549954928,
       "longitud": -60.681537352502346
+    },
+    {
+      "estado": "ENVIADO",
+      "fecha": "Nov 6, 2019 1:53:16 PM",
+      "id": -563397857,
+      "itemsPedido": [
+        {
+          "cantidad": 1,
+          "id": 18,
+          "idPedido": -563397857,
+          "plato": {
+            "calorias": 400,
+            "descripcion": "con ensalada",
+            "id": 7668,
+            "inOffer": true,
+            "oferta": 0.02,
+            "precioPlato": 250,
+            "titulo": "Tatú a la parrilla"
+          },
+          "precioItem": 245
+        },
+        {
+          "cantidad": 2,
+          "id": 19,
+          "idPedido": -563397857,
+          "plato": {
+            "calorias": 500,
+            "descripcion": "un kilo",
+            "id": 7682,
+            "inOffer": false,
+            "oferta": 0,
+            "precioPlato": 250,
+            "titulo": "helado crema del cielo"
+          },
+          "precioItem": 500
+        }
+      ],
+      "latitud": -31.605938975272643,
+      "longitud": -60.69124929606914
     }
   ]
 }
