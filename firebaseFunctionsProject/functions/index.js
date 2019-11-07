@@ -10,18 +10,17 @@ admin.initializeApp();
     response.send("Hello from Firebase!");
  });
 
- exports.sendNotification = functions.https.onRequest((request, response) => {
+ exports.sendNotification = functions.https.onCall((data, context) => {
     console.log("Entra a la funcion")
     const message = {
         notification: {
-            title: 'You have been invited to a trip.',
+            title: data.text,
             body: 'Tap here to check it out!'
         },
         topic: "pedidos"
     };
     
     console.log("Envía el mensaje");
-    response.send(message);
     return admin.messaging().send(message)
             .then(function(response){
                 console.log('Notification sent successfully:',response);
@@ -31,3 +30,24 @@ admin.initializeApp();
                 console.log('Notification sent failed:',error);
             });
  });
+
+ exports.sendNotification2 = functions.database.ref("Pedidos")
+    .onWrite(event => {
+        var request = event.data.val();
+
+        var payload = {
+            data:{
+                pedidoId: request.pedidoId
+            }
+        };
+
+        admin.messaging().sendToTopic("pedidos", payload)
+        .then(function(response){
+            console.log("Successfully sent message: ", response);
+            return 0;
+        })
+        .catch(function(error){
+            console.log("Error sending message: ", error);
+        })
+
+    })

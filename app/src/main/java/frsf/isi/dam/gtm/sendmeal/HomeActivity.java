@@ -15,13 +15,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import frsf.isi.dam.gtm.sendmeal.dao.DBClient;
@@ -86,6 +91,8 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
 
+        sendNotification("desde la app");
+
         if (getIntent().getExtras() != null) {
             Set<String> claves = getIntent().getExtras().keySet();
             Log.d("APP_MSG", "RECIBO DATOS EN ACTIVIDAD PRINCIPAL");
@@ -130,5 +137,29 @@ public class HomeActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private Task<String> sendNotification(String text) {
+        // Create the arguments to the callable function.
+        Map<String, Object> data = new HashMap<>();
+        data.put("text", text);
+        data.put("push", true);
+
+        FirebaseFunctions mFunctions;// ...
+        mFunctions = FirebaseFunctions.getInstance();
+
+        return mFunctions
+                .getHttpsCallable("sendNotification")
+                .call(data)
+                .continueWith(new Continuation<HttpsCallableResult, String>() {
+                    @Override
+                    public String then(@NonNull Task<HttpsCallableResult> task) throws Exception {
+                        // This continuation runs on either success or failure, but if the task
+                        // has failed then getResult() will throw an Exception which will be
+                        // propagated down.
+                        String result = (String) task.getResult().getData();
+                        return result;
+                    }
+                });
     }
 }
