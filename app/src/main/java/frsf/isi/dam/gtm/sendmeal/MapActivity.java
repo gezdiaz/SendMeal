@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -31,6 +32,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.List;
 
@@ -43,13 +46,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     public static final int GET_LOCATION = 1;
     public static final int SHOW_ORDERS = 2;
+    public static final int ALL_STATES = 0;
 
     private GoogleMap map;
     private Marker address;
     private int actionReceived;
     private Spinner statesSpinner;
-    private ArrayAdapter<EstadoPedido> estadoPedidoArrayAdapter;
-    private EstadoPedido[] listaEstados;
+    private ArrayAdapter<String> estadoPedidoArrayAdapter;
+    private String[] listaEstados;
     private List<Marker> markerList;
     private List<Pedido> pedidos;
     private ProgressDialog progressDialog;
@@ -61,7 +65,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             switch (msg.what){
                 case RetrofitRepository.GETALL_PEDIDOS:{
                     pedidos = (List<Pedido>) msg.obj;
-                    mostrarPedidos();
+                    mostrarPedidos(ALL_STATES);
                     if(progressDialog.isShowing()){
                         progressDialog.cancel();
                     }
@@ -97,9 +101,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 statesSpinner.setVisibility(View.VISIBLE);
                 statesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        EstadoPedido estadoSeleccionado = listaEstados[i];
-
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int posicionSeleccionada, long l) {
+                        map.clear();
+                        if(pedidos != null) {
+                            mostrarPedidos(posicionSeleccionada);
+                        }
                     }
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
@@ -183,12 +189,31 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-    private void mostrarPedidos() {
-        for(Pedido p: pedidos){
-            map.addMarker(new MarkerOptions().position(new LatLng(p.getLatitud(),p.getLongitud()))
-                                             .title(getString(R.string.orderMarkerTitle)+" "+p.getId())
-                                             .snippet(p.getEstado().name()+"-"+"$ "+p.getPrecioTotal())
-                                             .icon(BitmapDescriptorFactory.defaultMarker(getMarkerColor(p.getEstado()))));
+    private void mostrarPedidos(int posicionSeleccionada) {
+        //Debimos repetir el for debido a que existe incompatibilidad entre el EstadoPedido seleccionado y
+        // la situacion en que no selecciona ningun estado, donde mostramos todos los pedidos en el mapa.
+
+        EstadoPedido estadoSeleccionado;
+        PolylineOptions lineaPedidoEnEnvioOpt = new PolylineOptions();
+        lineaPedidoEnEnvioOpt.color(Color.MAGENTA);
+
+        if(posicionSeleccionada == 0){
+            for (Pedido p: pedidos) {
+                addMarker(p);
+            }
+        }else {
+            estadoSeleccionado = EstadoPedido.valueOf(listaEstados[posicionSeleccionada]);
+            for (Pedido p: pedidos) {
+                if (p.getEstado().equals(estadoSeleccionado)) {
+                    addMarker(p);
+                    if(estadoSeleccionado.equals(EstadoPedido.EN_ENVIO)){
+                        lineaPedidoEnEnvioOpt.add(new LatLng(p.getLatitud(), p.getLongitud()));
+                    }
+                }
+            }
+
+            map.addPolyline(lineaPedidoEnEnvioOpt);
+
         }
     }
 
@@ -199,7 +224,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             case ACEPTADO: color = BitmapDescriptorFactory.HUE_BLUE; break;
             case RECHAZADO: color = BitmapDescriptorFactory.HUE_RED; break;
             case EN_PREPARACION: color = BitmapDescriptorFactory.HUE_ORANGE; break;
-            case EN_ENVIO: color = BitmapDescriptorFactory.HUE_YELLOW; break;
+            case EN_ENVIO: color = BitmapDescriptorFactory.HUE_MAGENTA; break;
             case ENTREGADO: color = BitmapDescriptorFactory.HUE_GREEN; break;
         }
         return color;
@@ -214,6 +239,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
             }
         }
+    }
+
+    private void addMarker(Pedido p){
+        map.addMarker(new MarkerOptions().position(new LatLng(p.getLatitud(), p.getLongitud()))
+                .title(getString(R.string.orderMarkerTitle) + " " + p.getId())
+                .snippet(p.getEstado().name() + "-" + "$ " + p.getPrecioTotal())
+                .icon(BitmapDescriptorFactory.defaultMarker(getMarkerColor(p.getEstado()))));
     }
 
 }
