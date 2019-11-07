@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ShowNewOrderStateActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/newOrderStateToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="@string/newOrderState" />
+
+    <TextView
+        android:id="@+id/idStatePedidoLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/idPedidoLbl" />
+
+    <TextView
+        android:id="@+id/statePedidoLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/orderStateLbl" />
+
+    <TextView
+        android:id="@+id/totalPriceLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/totalPriceLbl" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pedidoRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/fila_plato_pedido_state"/>
+</LinearLayout>
