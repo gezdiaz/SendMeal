@@ -102,4 +102,9 @@
     <string name="orderMarkerTitle">Pedido N°</string>
     <string name="orderSent">Pedido Enviado</string>
     <string name="locationSelectError">Se produjo un error al seleccionar la ubicación.</string>
+    <string name="newOrderState">Estado del pedido</string>
+    <string name="quantityDishLbl">Cantidad</string>
+    <string name="idPedidoLbl">ID pedido</string>
+    <string name="orderStateLbl">Estado del pedido</string>
+    <string name="totalPriceLbl">Precio total</string>
 </resources>

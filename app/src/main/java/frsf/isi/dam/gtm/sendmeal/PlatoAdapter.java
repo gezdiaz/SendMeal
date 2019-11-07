@@ -268,7 +268,6 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoViewHolder> {
     }
 
 
-    //TODO hecho por Tomy. arreglar
     public void getPlatosBySearchResults(String title, double priceMin, double priceMax){
 
         RetrofitRepository.getInstance().getPlatosBySearchResults(title, priceMin, priceMax, handler);
