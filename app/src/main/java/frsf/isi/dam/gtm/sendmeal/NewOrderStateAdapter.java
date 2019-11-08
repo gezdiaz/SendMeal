@@ -38,9 +38,9 @@ public class NewOrderStateAdapter extends RecyclerView.Adapter<OrderStateHolder>
 
         final ItemPedido itemPedido = itemPedidoViewDataSet.get(position);
 
-        holder.dishNameLbl.setText(holder.dishNameLbl.getText().toString() + ": " + itemPedido.getPlato().getTitulo());
-        holder.quantityDishLbl.setText(holder.quantityDishLbl.getText().toString() + ": " + itemPedido.getCantidad());
-        holder.priceDishLbl.setText(holder.priceDishLbl.getText().toString() + ": " + (itemPedido.getPlato().getPrecioPlato()*itemPedido.getPlato().getOferta()));
+        holder.dishNameLbl.setText(activity.getString(R.string.dishNameLbl) + ": " + itemPedido.getPlato().getTitulo());
+        holder.quantityDishLbl.setText(activity.getString(R.string.amount) + ": " + itemPedido.getCantidad());
+        holder.priceDishLbl.setText(activity.getString(R.string.dishPriceLbl) + ": $" + itemPedido.getPrecioItem());
 
     }
 

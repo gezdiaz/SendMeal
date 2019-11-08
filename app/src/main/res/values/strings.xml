@@ -107,4 +107,7 @@
     <string name="idPedidoLbl">ID pedido</string>
     <string name="orderStateLbl">Estado del pedido</string>
     <string name="totalPriceLbl">Precio total</string>
+    <string name="databaseGetPedidoError">Se produjo un error al obtener el pedido de la base de datos.</string>
+    <string name="loadingOrderData">Cargando datos del pedido</string>
+    <string name="amount">Cantidad</string>
 </resources>

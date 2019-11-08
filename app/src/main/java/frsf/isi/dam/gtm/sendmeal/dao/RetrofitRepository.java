@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitRepository {
 
     private static RetrofitRepository instance;
-    private static String SERVER = "http://10.15.156.87:5000";
+    private static String SERVER = "http://192.168.0.13:5000";
 
     public static final int ALTA_PLATO = 1;
     public static final int UPDATE_PLATO = 2;
@@ -241,7 +241,7 @@ public class RetrofitRepository {
         });
     }
 
-    public void getPedidoById(String id, final Handler handler) {
+    public void getPedidoById(int id, final Handler handler) {
         Call<Pedido> call = pedidoRest.getPedidoById(id);
         call.enqueue(new Callback<Pedido>() {
             @Override

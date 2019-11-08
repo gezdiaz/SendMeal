@@ -17,7 +17,7 @@ public interface PedidoRest {
     Call<List<Pedido>> getPedidos();
 
     @GET("pedidos/{id}")
-    Call<Pedido> getPedidoById(@Path("id") String id);
+    Call<Pedido> getPedidoById(@Path("id") int id);
 
     @POST("pedidos/")
     Call<Pedido> savePedido(@Body Pedido p);

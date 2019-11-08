@@ -87,11 +87,8 @@ public class HomeActivity extends AppCompatActivity {
                             msg = "Se produjo un error al suscribirse";
                         }
                         Log.d("topic", msg);
-                        Toast.makeText(HomeActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
-
-        sendNotification("desde la app");
 
         if (getIntent().getExtras() != null) {
             Set<String> claves = getIntent().getExtras().keySet();
@@ -139,27 +136,5 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }
 
-    private Task<String> sendNotification(String text) {
-        // Create the arguments to the callable function.
-        Map<String, Object> data = new HashMap<>();
-        data.put("text", text);
-        data.put("push", true);
 
-        FirebaseFunctions mFunctions;// ...
-        mFunctions = FirebaseFunctions.getInstance();
-
-        return mFunctions
-                .getHttpsCallable("sendNotification")
-                .call(data)
-                .continueWith(new Continuation<HttpsCallableResult, String>() {
-                    @Override
-                    public String then(@NonNull Task<HttpsCallableResult> task) throws Exception {
-                        // This continuation runs on either success or failure, but if the task
-                        // has failed then getResult() will throw an Exception which will be
-                        // propagated down.
-                        String result = (String) task.getResult().getData();
-                        return result;
-                    }
-                });
-    }
 }

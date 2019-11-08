@@ -1,5 +1,7 @@
 package frsf.isi.dam.gtm.sendmeal.domain;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
@@ -8,13 +10,16 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.Relation;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import frsf.isi.dam.gtm.sendmeal.PushNotificationService;
+
 @Entity(tableName = "PEDIDO")
-public class Pedido {
+public class Pedido implements Serializable {
 
     public static String token;
 
@@ -28,7 +33,7 @@ public class Pedido {
     private double latitud;
     private double longitud;
 
-    public static class PedidoConItems{
+    public static class PedidoConItems implements Serializable{
         @Embedded public Pedido pedido;
         @Relation(parentColumn = "ID_PEDIDO", entityColumn = "ID_PEDIDO_FK", entity = ItemPedido.class)
         public List<ItemPedido> itemsPedido;
@@ -89,6 +94,9 @@ public class Pedido {
     }
 
     public void setEstado(EstadoPedido estado) {
+        if(this.estado != null){
+            PushNotificationService.sendPushNotification(String.valueOf(this.id), this.estado.name(), estado.name());
+        }
         this.estado = estado;
     }
 
