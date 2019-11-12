@@ -67,12 +67,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     pedidos = (List<Pedido>) msg.obj;
                     mostrarPedidos(ALL_STATES);
                     if(progressDialog.isShowing()){
-                        progressDialog.cancel();
+                        progressDialog.dismiss();
                     }
                     break;
                 }
                 case RetrofitRepository.ERROR_GETALL_PEDIDOS:{
                     Toast.makeText(MapActivity.this, R.string.databaseGetAllPedidosError, Toast.LENGTH_LONG).show();
+                    progressDialog.cancel();
                     finish();
                     break;
                 }

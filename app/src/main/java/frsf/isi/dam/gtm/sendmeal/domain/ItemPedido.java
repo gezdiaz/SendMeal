@@ -14,16 +14,21 @@ public class ItemPedido {
     private int cantidad;
     private double precioItem;
     @ColumnInfo(name = "ID_PEDIDO_FK") private int idPedido;
-    @Embedded() private Plato plato;
+
+    private int idPlato;
+    private String tituloPlato;
+    transient private Plato plato;
 
     public ItemPedido() {
         precioItem = 0.0;
         cantidad = 0;
     }
+
     @Ignore
-    public ItemPedido(int id, Plato plato, int cantidad, double precioItem) {
+    public ItemPedido(int id, int idPlato, String tituloPlato, int cantidad, double precioItem) {
         this.id = id;
-        this.plato = plato;
+        this.idPlato = idPlato;
+        this.tituloPlato = tituloPlato;
         this.cantidad = cantidad;
         this.precioItem = precioItem;
     }
@@ -31,9 +36,23 @@ public class ItemPedido {
     public void calcularPrecio(){
         if(plato != null){
             precioItem = plato.getPrecioOferta()*cantidad;
-        }else {
-            precioItem = 0;
         }
+    }
+
+    public String getTituloPlato() {
+        return tituloPlato;
+    }
+
+    public void setTituloPlato(String tituloPlato) {
+        this.tituloPlato = tituloPlato;
+    }
+
+    public int getIdPlato() {
+        return idPlato;
+    }
+
+    public void setIdPlato(int idPlato) {
+        this.idPlato = idPlato;
     }
 
     public int getIdPedido() {
@@ -58,6 +77,8 @@ public class ItemPedido {
 
     public void setPlato(Plato plato) {
         this.plato = plato;
+        this.tituloPlato = plato.getTitulo();
+        this.idPlato = plato.getId();
     }
 
     public int getCantidad() {
@@ -84,6 +105,7 @@ public class ItemPedido {
                 ", cantidad=" + cantidad +
                 ", precioItem=" + precioItem +
                 ", idPedido=" + idPedido +
+                ", idPlato=" + idPlato +
                 ", plato=" + plato +
                 '}';
     }

@@ -1,19 +1,27 @@
 package frsf.isi.dam.gtm.sendmeal;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import frsf.isi.dam.gtm.sendmeal.dao.RetrofitRepository;
@@ -21,14 +29,20 @@ import frsf.isi.dam.gtm.sendmeal.domain.Plato;
 
 public class CreateActivity extends AppCompatActivity {
 
+    private int REQUEST_IMAGE_CAPTURE = 1;
+
     private Toolbar toolbar;
     private EditText idDishEdit, dishNameEdit, dishDescriptionEdit, dishPriceEdit, dishCaloriesEdit;
-    private Button saveDishBtn;
+    private Button saveDishBtn, takePictureBtn;
+    private ImageView platoImage;
 
     private boolean[] validations;
     private int id = -1;
     private ProgressDialog progressDialog;
     private Plato platoEditado;
+    private boolean tookPicture = false, save = true;
+    private Bitmap image;
+
 
     private Handler handler = new Handler(Looper.myLooper()){
         @Override
@@ -97,6 +111,8 @@ public class CreateActivity extends AppCompatActivity {
         dishPriceEdit = findViewById(R.id.dishPriceEdit);
         dishCaloriesEdit = findViewById(R.id.dishCaloriesEdit);
         saveDishBtn = findViewById(R.id.saveDishBtn);
+        takePictureBtn = findViewById(R.id.takePictueBtn);
+        platoImage = findViewById(R.id.platoImage);
 
         id = getIntent().getIntExtra("platoId", -1);
 
@@ -185,6 +201,16 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
+        takePictureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if(takePictureIntent.resolveActivity(getPackageManager()) != null){
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
+
         saveDishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,7 +223,6 @@ public class CreateActivity extends AppCompatActivity {
                 dishDescriptionEdit.clearFocus();
                 dishNameEdit.clearFocus();
                 dishPriceEdit.clearFocus();
-
                 saveDishBtn.requestFocus();
 
                 for (boolean b: validations){
@@ -210,28 +235,55 @@ public class CreateActivity extends AppCompatActivity {
                     toast = Toast.makeText(context,getString(R.string.errorToast),Toast.LENGTH_SHORT);
                     toast.show();
                 }else {
-                    if(id >=0){
-                        platoEditado.setTitulo(dishNameEdit.getText().toString());
-                        platoEditado.setDescripcion(dishDescriptionEdit.getText().toString());
-                        platoEditado.setPrecioPlato(Double.parseDouble(dishPriceEdit.getText().toString()));
-                        platoEditado.setCalorias(Integer.parseInt(dishCaloriesEdit.getText().toString()));
-                        RetrofitRepository.getInstance().updatePlato(platoEditado, handler);
-                    }else{
-                        //El id se ignora porque lo pone la base de datos.
-                        final Plato plato = new Plato(
-                                dishNameEdit.getText().toString(),
-                                dishDescriptionEdit.getText().toString(),
-                                Double.parseDouble(dishPriceEdit.getText().toString()),
-                                Integer.parseInt(dishCaloriesEdit.getText().toString())
-                        );
-                        //Plato.platos.add(plato);
-                        plato.setId(null);
-                        RetrofitRepository.getInstance().savePlato(plato, handler);
-                        //se recibe la respuesta en el Handler
-//                        toast.show();
-//                        CreateActivity.this.finish();
+                    if(!tookPicture){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(CreateActivity.this);
+                        builder.setTitle(R.string.noImageAlert);
+                        builder.setMessage(R.string.noImageAlertMessage);
+                        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                save = true;
+                            }
+                        });
+                        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                save = false;
+                            }
+                        });
+                        builder.create().show();
                     }
-
+                    if (save) {
+                        if(id >=0){
+                            platoEditado.setTitulo(dishNameEdit.getText().toString());
+                            platoEditado.setDescripcion(dishDescriptionEdit.getText().toString());
+                            platoEditado.setPrecioPlato(Double.parseDouble(dishPriceEdit.getText().toString()));
+                            platoEditado.setCalorias(Integer.parseInt(dishCaloriesEdit.getText().toString()));
+                            if(tookPicture){
+                                platoEditado.setImage(image);
+                            }
+                            RetrofitRepository.getInstance().updatePlato(platoEditado, handler);
+                        }else{
+                            //El id se ignora porque lo pone la base de datos.
+                            final Plato plato = new Plato(
+                                    dishNameEdit.getText().toString(),
+                                    dishDescriptionEdit.getText().toString(),
+                                    Double.parseDouble(dishPriceEdit.getText().toString()),
+                                    Integer.parseInt(dishCaloriesEdit.getText().toString())
+                            );
+                            //Plato.platos.add(plato);
+                            plato.setId(null);
+                            if(!tookPicture){
+                                plato.setImage(BitmapFactory.decodeResource(context.getResources(),R.drawable.hamburger));
+                            }else{
+                                plato.setImage(image);
+                            }
+                            RetrofitRepository.getInstance().savePlato(plato, handler);
+                            //se recibe la respuesta en el Handler
+    //                        toast.show();
+    //                        CreateActivity.this.finish();
+                        }
+                    }
                 }
             }
         });
@@ -249,5 +301,16 @@ public class CreateActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            if(data != null && data.getExtras() != null){
+                image = (Bitmap) data.getExtras().get("data");
+                platoImage.setImageBitmap(image);
+                tookPicture = true;
+            }
+        }
     }
 }

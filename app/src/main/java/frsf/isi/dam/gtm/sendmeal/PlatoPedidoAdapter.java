@@ -87,7 +87,11 @@ public class PlatoPedidoAdapter extends RecyclerView.Adapter<PlatoPedidoHolder> 
             holder.offerPricePedido.setVisibility(View.INVISIBLE);
         }
 
-        holder.dishImagePedido.setImageResource(R.drawable.hamburger);
+        if(plato.getImageBase64() != null){
+            holder.dishImagePedido.setImageBitmap(plato.getImage());
+        }else{
+            holder.dishImagePedido.setImageResource(R.drawable.hamburger);
+        }
 
         if(plato.getInOffer()){
             holder.offerImagePedido.setVisibility(View.VISIBLE);

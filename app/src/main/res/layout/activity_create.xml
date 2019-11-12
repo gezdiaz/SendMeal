@@ -142,24 +142,35 @@
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="334dp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="122dp"
-                android:layout_weight="0">
+            <Button
+                android:id="@+id/takePictueBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_weight="0"
+                android:gravity="center|center_vertical"
+                android:text="@string/takePictureBtn" />
 
-                <Button
-                    android:id="@+id/saveDishBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/saveDishBtn"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_conversion_absoluteHeight="48dp"
-                    tools:layout_conversion_absoluteWidth="107dp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/platoImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0"
+                android:visibility="visible"
+                app:srcCompat="@drawable/hamburger" />
+
+            <Button
+                android:id="@+id/saveDishBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/saveDishBtn"
+                android:textSize="18sp"
+                tools:layout_conversion_absoluteHeight="48dp"
+                tools:layout_conversion_absoluteWidth="107dp" />
 
         </LinearLayout>
     </ScrollView><![CDATA[

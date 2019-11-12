@@ -110,4 +110,7 @@
     <string name="databaseGetPedidoError">Se produjo un error al obtener el pedido de la base de datos.</string>
     <string name="loadingOrderData">Cargando datos del pedido</string>
     <string name="amount">Cantidad</string>
+    <string name="takePictureBtn">Tomar foto</string>
+    <string name="noImageAlert">No seleccionó ninguna imagen</string>
+    <string name="noImageAlertMessage">¿Está seguro que desea guardar el plato sin imagen?</string>
 </resources>
