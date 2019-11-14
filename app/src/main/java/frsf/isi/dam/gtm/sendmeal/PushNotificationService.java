@@ -91,7 +91,6 @@ public class PushNotificationService extends FirebaseMessagingService {
     }
 
     private void sendNotification(int idPedido, String estadoAnterior, String nuevoEstado) {
-        //TODO ir a la actividad ver pedido.
         Intent intent = new Intent(this, ShowNewOrderStateActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("idPedido", idPedido);

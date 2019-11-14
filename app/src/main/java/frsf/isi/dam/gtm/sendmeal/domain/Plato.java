@@ -71,6 +71,7 @@ public class Plato implements Serializable {
     public Double getOferta(){
         return oferta;
     }
+
     public Double getPrecioOferta(){
         return precioPlato * (1 - oferta);
     }

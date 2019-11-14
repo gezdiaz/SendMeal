@@ -328,11 +328,9 @@ public class RegisterActivity extends AppCompatActivity {
                 toast.show();
             }
         });
-
-
-
     }
-    private Boolean emailIsValid(String email){
+
+    public Boolean emailIsValid(String email){
         if(email.contains("@") && (email.indexOf("@") != 0) && (email.substring(email.indexOf("@")).length() > 3)){
             return true;
         }else{
@@ -341,7 +339,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     //Metodo para validar la fecha de la tarjeta con el dato directo del editText
-    private Boolean dateIsValid(Integer enteredMonth, Integer enteredYear, Calendar currentDate){
+    public Boolean dateIsValid(Integer enteredMonth, Integer enteredYear, Calendar currentDate){
         Boolean result = false;
 
         if (((enteredYear + 2000) == currentDate.get(Calendar.YEAR))) {
