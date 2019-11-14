@@ -59,7 +59,7 @@
                 android:inputType="textPassword" />
 
             <TextView
-                android:id="@+id/repeatPaswordLbl"
+                android:id="@+id/repeatPasswordLbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/repeatPassword"

@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ShowNewOrderStateActivity"></activity>
+        <activity android:name=".ShowNewOrderStateActivity"/>
         <activity android:name=".MapActivity" />
         <activity android:name=".PedidoCreateActivity" />
         <activity android:name=".ShowDishActivity" />

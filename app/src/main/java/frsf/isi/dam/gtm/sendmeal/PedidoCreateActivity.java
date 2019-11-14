@@ -7,7 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -17,7 +16,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -99,7 +97,7 @@ public class PedidoCreateActivity extends AppCompatActivity {
         progressDialog = ProgressDialog.show(this,getString(R.string.pleaseWait),getString(R.string.loadingDishListFromDatabase));
         progressDialog.setCancelable(false);
 
-        recyclerViewPedido = findViewById(R.id.reciclerViewPedido);
+        recyclerViewPedido = findViewById(R.id.recyclerViewPedido);
         recyclerViewPedido.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);

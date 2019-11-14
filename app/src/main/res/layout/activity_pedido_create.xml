@@ -12,19 +12,17 @@
         android:id="@+id/createPedidoToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/reciclerViewPedido"
-        android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:title="@string/newOrderOptionItem"></androidx.appcompat.widget.Toolbar>
+        app:title="@string/newOrderOptionItem" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reciclerViewPedido"
+        android:id="@+id/recyclerViewPedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        tools:listitem="@layout/fila_plato_pedido"></androidx.recyclerview.widget.RecyclerView>
+        tools:listitem="@layout/fila_plato_pedido" />
 
     <LinearLayout
         android:id="@+id/linearLayoutPedidoOpciones"

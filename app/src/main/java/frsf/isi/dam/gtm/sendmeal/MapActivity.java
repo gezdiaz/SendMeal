@@ -192,7 +192,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void mostrarPedidos(int posicionSeleccionada) {
         //Debimos repetir el for debido a que existe incompatibilidad entre el EstadoPedido seleccionado y
-        // la situacion en que no selecciona ningun estado, donde mostramos todos los pedidos en el mapa.
+        // la situación en que no selecciona ningún estado, donde mostramos todos los pedidos en el mapa.
 
         EstadoPedido estadoSeleccionado;
         PolylineOptions lineaPedidoEnEnvioOpt = new PolylineOptions();

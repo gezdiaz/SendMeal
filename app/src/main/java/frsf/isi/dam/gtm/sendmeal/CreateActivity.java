@@ -111,7 +111,7 @@ public class CreateActivity extends AppCompatActivity {
         dishPriceEdit = findViewById(R.id.dishPriceEdit);
         dishCaloriesEdit = findViewById(R.id.dishCaloriesEdit);
         saveDishBtn = findViewById(R.id.saveDishBtn);
-        takePictureBtn = findViewById(R.id.takePictueBtn);
+        takePictureBtn = findViewById(R.id.takePictureBtn);
         platoImage = findViewById(R.id.platoImage);
 
         id = getIntent().getIntExtra("platoId", -1);

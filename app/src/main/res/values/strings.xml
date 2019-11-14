@@ -18,8 +18,8 @@
     <string name="premiumAccount">Premium</string>
     <string name="fullAccount">Full</string>
     <string name="initialCredit">Crédito Inicial</string>
-    <string name="notSendNotifBtn">No enviar notificacoines al mail</string>
-    <string name="sendNotifBtn">Enviar notificacoines al mail</string>
+    <string name="notSendNotifBtn">No enviar notificaciones al mail</string>
+    <string name="sendNotifBtn">Enviar notificaciones al mail</string>
     <string name="isSeller">Es vendedor</string>
     <string name="CBUAlias">Alias CBU</string>
     <string name="CBU">CBU</string>
@@ -85,7 +85,7 @@
     <string name="databaseGetDishError">Se produjo un error al obtener el plato de la base de datos.</string>
     <string name="databaseGetAllDishesError">Se produjo un error al obtener los platos de la base de datos.</string>
     <string name="loadingDishListFromDatabase">Cargando lista de platos de la base de datos.</string>
-    <string name="databaseDeleteDishError">Se produjo un error al intentar eleiminar el plato de la base de datos.</string>
+    <string name="databaseDeleteDishError">Se produjo un error al intentar eliminar el plato de la base de datos.</string>
     <string name="dishDeleteSuccess">El plato fue eliminado correctamente de la base de datos.</string>
     <string name="newOrderOptionItem">Nuevo pedido</string>
     <string name="createOrderBtn">Crear pedido</string>

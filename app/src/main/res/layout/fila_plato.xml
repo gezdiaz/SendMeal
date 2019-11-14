@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="125dp"
             android:layout_alignBottom="@id/dishImageView"
-            android:background="@drawable/gradiet_overlay"
+            android:background="@drawable/gradient_overlay"
             android:orientation="vertical">
 
             <TextView

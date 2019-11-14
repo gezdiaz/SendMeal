@@ -16,7 +16,7 @@ public class Converters {
         return date == null ? null : date.getTime();
     }
     @TypeConverter
-    public static EstadoPedido estadofromString(String name){
+    public static EstadoPedido estadoFromString(String name){
         return name == null ? null : EstadoPedido.valueOf(name);
     }
     @TypeConverter
