@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import frsf.isi.dam.gtm.sendmeal.domain.Plato;
 
@@ -16,7 +17,8 @@ public class ShowDishActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private EditText idDishEdit, dishNameEdit, dishDescriptionEdit, dishPriceEdit, dishCaloriesEdit;
-    private Button saveDishBtn;
+    private Button saveDishBtn, takePictureBtn;
+    private ImageView platoImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,10 @@ public class ShowDishActivity extends AppCompatActivity {
         dishPriceEdit = findViewById(R.id.dishPriceEdit);
         dishCaloriesEdit = findViewById(R.id.dishCaloriesEdit);
         saveDishBtn = findViewById(R.id.saveDishBtn);
+        takePictureBtn = findViewById(R.id.takePictureBtn);
+        platoImage = findViewById(R.id.platoImage);
+
+        takePictureBtn.setVisibility(View.GONE);
 
         if(plato != null){
             idDishEdit.setText(plato.getId().toString());
@@ -48,6 +54,7 @@ public class ShowDishActivity extends AppCompatActivity {
             dishDescriptionEdit.setText(plato.getDescripcion());
             dishPriceEdit.setText(plato.getPrecioPlato().toString());
             dishCaloriesEdit.setText(plato.getCalorias().toString());
+            platoImage.setImageBitmap(plato.getImage());
         }
 
         idDishEdit.setEnabled(false);

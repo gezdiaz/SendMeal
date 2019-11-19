@@ -35,6 +35,7 @@ public class CreateActivity extends AppCompatActivity {
     private EditText idDishEdit, dishNameEdit, dishDescriptionEdit, dishPriceEdit, dishCaloriesEdit;
     private Button saveDishBtn, takePictureBtn;
     private ImageView platoImage;
+    private AlertDialog noImageDialog;
 
     private boolean[] validations;
     private int id = -1;
@@ -92,6 +93,10 @@ public class CreateActivity extends AppCompatActivity {
             }
         }
     };
+
+    public AlertDialog getNoImageDialog() {
+        return noImageDialog;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -242,51 +247,56 @@ public class CreateActivity extends AppCompatActivity {
                         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                save = true;
+                                saveDish();
                             }
                         });
                         builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                save = false;
                             }
                         });
-                        builder.create().show();
+                        noImageDialog = builder.create();
+                        noImageDialog.show();
+                    }else{
+                        saveDish();
                     }
-                    if (save) {
-                        if(id >=0){
-                            platoEditado.setTitulo(dishNameEdit.getText().toString());
-                            platoEditado.setDescripcion(dishDescriptionEdit.getText().toString());
-                            platoEditado.setPrecioPlato(Double.parseDouble(dishPriceEdit.getText().toString()));
-                            platoEditado.setCalorias(Integer.parseInt(dishCaloriesEdit.getText().toString()));
-                            if(tookPicture){
-                                platoEditado.setImage(image);
-                            }
-                            RetrofitRepository.getInstance().updatePlato(platoEditado, handler);
-                        }else{
-                            //El id se ignora porque lo pone la base de datos.
-                            final Plato plato = new Plato(
-                                    dishNameEdit.getText().toString(),
-                                    dishDescriptionEdit.getText().toString(),
-                                    Double.parseDouble(dishPriceEdit.getText().toString()),
-                                    Integer.parseInt(dishCaloriesEdit.getText().toString())
-                            );
-                            //Plato.platos.add(plato);
-                            plato.setId(null);
-                            if(!tookPicture){
-                                plato.setImage(BitmapFactory.decodeResource(context.getResources(),R.drawable.hamburger));
-                            }else{
-                                plato.setImage(image);
-                            }
-                            RetrofitRepository.getInstance().savePlato(plato, handler);
-                            //se recibe la respuesta en el Handler
-    //                        toast.show();
-    //                        CreateActivity.this.finish();
-                        }
-                    }
+
                 }
             }
         });
+    }
+
+    private void saveDish() {
+        Context context = getApplicationContext();
+        if(id >=0){
+            platoEditado.setTitulo(dishNameEdit.getText().toString());
+            platoEditado.setDescripcion(dishDescriptionEdit.getText().toString());
+            platoEditado.setPrecioPlato(Double.parseDouble(dishPriceEdit.getText().toString()));
+            platoEditado.setCalorias(Integer.parseInt(dishCaloriesEdit.getText().toString()));
+            if(tookPicture){
+                platoEditado.setImage(image);
+            }
+            RetrofitRepository.getInstance().updatePlato(platoEditado, handler);
+        }else{
+            //El id se ignora porque lo pone la base de datos.
+            final Plato plato = new Plato(
+                    dishNameEdit.getText().toString(),
+                    dishDescriptionEdit.getText().toString(),
+                    Double.parseDouble(dishPriceEdit.getText().toString()),
+                    Integer.parseInt(dishCaloriesEdit.getText().toString())
+            );
+            //Plato.platos.add(plato);
+            plato.setId(null);
+            if(!tookPicture){
+                plato.setImage(BitmapFactory.decodeResource(context.getResources(),R.drawable.hamburger));
+            }else{
+                plato.setImage(image);
+            }
+            RetrofitRepository.getInstance().savePlato(plato, handler);
+            //se recibe la respuesta en el Handler
+//                        toast.show();
+//                        CreateActivity.this.finish();
+        }
     }
 
 
